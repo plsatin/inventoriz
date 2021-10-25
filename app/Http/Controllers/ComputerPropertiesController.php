@@ -87,7 +87,7 @@ class ComputerPropertiesController extends Controller
             $wmiclass = WmiClass::findOrFail($class);
             $wmiproperty = WmiProperty::findOrFail($property);
 
-            $property = ComputerProperties::whereBelongsTo($computer)
+            $property = ComputerProperties::query()->whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
                     ->whereBelongsTo($wmiproperty);
             $property->update($request->all());
