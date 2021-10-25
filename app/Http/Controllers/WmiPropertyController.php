@@ -27,7 +27,6 @@ class WmiPropertyController extends Controller
 
             $wmiClass = WmiClass::findOrFail($id);
             //// $products = Offer::find($id)->products;
-            $property = new WmiProperty;
             $classProperties = WmiProperty::wmiClass()->get();
 
 
