@@ -47,9 +47,9 @@ class ComputerPropertiesController extends Controller
             $wmiproperty = WmiProperty::findOrFail($property);
 
             $property = new ComputerProperties;
-            $property->computer = $computer;
-            $property->wimclass = $wmiclass;
-            $property->wmiproperty = $wmiproperty;
+            $property->computer() = $computer;
+            $property->wimclass() = $wmiclass;
+            $property->wmiproperty() = $wmiproperty;
             $property->value = $request->input('value');
             $property->instance_id = $request->input('instance_id');
 
