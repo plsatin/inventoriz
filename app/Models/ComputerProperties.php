@@ -37,4 +37,6 @@ class ComputerProperties extends Model
     }
 
 
+
+
 }
