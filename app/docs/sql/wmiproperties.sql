@@ -1,6 +1,6 @@
 -- Заполнение таблицы wmiproperties
 
-INSERT INTO `tbInventoryProperty` (`id`, `wmiclass_id`, `name`, `property_type`, `description`) VALUES
+INSERT INTO `wmiproperties` (`id`, `wmiclass_id`, `name`, `property_type`, `description`) VALUES
 (1,	11,	'DeviceID',	'String',	''),
 (2,	11,	'Architecture',	'UInt16',	''),
 (3,	11,	'MaxClockSpeed',	'UInt32',	''),
