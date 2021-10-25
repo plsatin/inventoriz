@@ -87,12 +87,12 @@ class ComputerPropertiesController extends Controller
             $wmiclass = WmiClass::findOrFail($class);
             $wmiproperty = WmiProperty::findOrFail($property);
 
-            $property = ComputerProperties::query()->whereBelongsTo($computer)
+            $property = ComputerProperties::whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
                     ->whereBelongsTo($wmiproperty);
-            $property->update($request->all());
+            // $property->update($request->all());
 
-            // dd($property);
+            dd($property);
             // $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Updated Successfully'));
             return response()->json($property, 200);
         } catch (\Exception $e) {
