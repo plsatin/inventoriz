@@ -49,10 +49,10 @@ class ComputerPropertiesController extends Controller
             {
                 $classProperties = ComputerProperties::where('computer_id', $computer->id)
                     ->where('wmiclass_id', $class->id)
-                        // ->leftJoin('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmimproperties.id')
+                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmimproperties.id')
                             ->get();
 
-                    $computerClasses[$classCount]->properties = $classProperties;
+                $computerClasses[$classCount]->properties = $classProperties;
                 $classCount ++;
             }
 
