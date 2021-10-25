@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class WmiClass extends Model
 {
-    protected $table = "classes";
+    protected $table = "wmiclasses";
 
     /**
      * The attributes that are mass assignable.
