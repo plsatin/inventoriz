@@ -27,6 +27,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfClass']);
+    $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertiesOfClass']);
     // $router->post('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@create']);
     // $router->delete('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@delete']);
     // $router->put('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@update']);

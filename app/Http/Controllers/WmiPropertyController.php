@@ -38,6 +38,18 @@ class WmiPropertyController extends Controller
     }
 
 
+    public function showOnePropertiesOfClass($id, $property)
+    {
+        try {
+            $wmiClass = WmiClass::findOrFail($id);
+            $classProperty = WmiProperty::where('wmiclass_id', $wmiClass->id)->findOrFail($property);
+
+            return response()->json($classProperty, 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
+    }
 
 
 
