@@ -17,7 +17,7 @@ class CreateComputersTable extends Migration
             $table->increments('id');
             $table->string('computertargetid')->unique();
             $table->string('name');
-            $table->dateTime('last_inventory_report');
+            $table->dateTime('last_inventory_report')->nullable();
             // $table->dateTime('last_software_report');
             // $table->dateTime('last_updates_report');
             $table->timestamps();

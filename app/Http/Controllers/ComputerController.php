@@ -29,10 +29,10 @@ class ComputerController extends Controller
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
                     $computers = Computer::where('name', $computerName)->where('computertargetid', $computerTargetId)->get();
-                else {
+                } else {
                     $computers = Computer::where('name', $computerName)->get();
                 }
-            else {
+            } else {
                 $computers = Computer::all();
             }
 
