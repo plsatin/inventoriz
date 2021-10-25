@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use DB;
-
+use Eloquent;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call('UsersTableSeeder');
 
-        \Eloquent::unguard();
+        Eloquent::unguard();
 
         $pathWmiclasses = 'app/docs/sql/wmiclasses.sql';
         DB::unprepared(file_get_contents($pathWmiclasses));
