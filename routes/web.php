@@ -21,6 +21,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
     $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
+
     // $router->post('v1/wmiclasses', ['uses' => 'WmiClassController@create']);
     // $router->delete('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@delete']);
     // $router->put('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@update']);

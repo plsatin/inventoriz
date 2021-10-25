@@ -20,7 +20,7 @@ class WmiProperty extends Model
 
 
 
-    public function wmiClass()
+    public function parent()
     {
         return $this->belongsTo(WmiClass::class);
     }

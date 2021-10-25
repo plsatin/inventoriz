@@ -19,7 +19,7 @@ class WmiClass extends Model
     // public $timestamps = false;
 
 
-    public function wmiProperties()
+    public function properties()
     {
         return $this->hasMany(WmiProperty::class);
     }
