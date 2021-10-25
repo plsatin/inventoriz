@@ -26,7 +26,7 @@ class ComputerProperties extends Model
         return $this->belongsTo(Computer::class, 'computer_id');
     }
 
-    public function wimclass()
+    public function wmiclass()
     {
         return $this->belongsTo(WmiClass::class, 'wmiclass_id');
     }
