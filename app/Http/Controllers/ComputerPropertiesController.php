@@ -91,6 +91,8 @@ class ComputerPropertiesController extends Controller
                 ->whereBelongsTo($wmiclass)
                     ->whereBelongsTo($wmiproperty)->update($request->all());
 
+            dd($property);
+
             return response()->json($property, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
