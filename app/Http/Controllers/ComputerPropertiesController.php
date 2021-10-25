@@ -90,11 +90,11 @@ class ComputerPropertiesController extends Controller
             $property = ComputerProperties::whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
                     ->whereBelongsTo($wmiproperty);
-            // $property->update($request->all());
+            $property->update($request->all());
 
-            dd($property);
-            // $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Updated Successfully'));
-            return response()->json($property, 200);
+            // dd($property);
+            $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Updated Successfully'));
+            return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 404);
