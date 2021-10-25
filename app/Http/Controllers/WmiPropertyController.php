@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\WmiClass;
 use App\Models\WmiProperty;
 
-class WmiProperty extends Controller
+class WmiPropertyController extends Controller
 {
     /**
      * Create a new controller instance.
