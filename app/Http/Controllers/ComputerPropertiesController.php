@@ -43,24 +43,18 @@ class ComputerPropertiesController extends Controller
             $computer = Computer::findOrFail($id);
             $computerClasses = WmiClass::query()->get();
 
-
-            // $computerProperties = [];
             $classCount = 0;
 
             foreach ($computerClasses as $class)
             {
                 $classProperties = ComputerProperties::where('computer_id', $computer->id)
-                    ->where('wmiclass_id', $class->id)->get();
+                    ->where('wmiclass_id', $class->id)
+                        ->leftJoin('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmimproperties.id')
+                            ->select('description')
+                                ->get();
 
                     $computerClasses[$classCount]->properties = $classProperties;
-                // foreach ($classProperties as $properties)
-                // {
-
-
-                // }
-                
                 $classCount ++;
-                // array_push($computerProperties, $classProperties);
             }
 
 
