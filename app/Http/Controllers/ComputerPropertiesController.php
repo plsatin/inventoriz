@@ -30,7 +30,20 @@ class ComputerPropertiesController extends Controller
             $computer = Computer::findOrFail($id);
             $computerProperties = $computer->properties()->get();
 
-            return response()->json($classProperties, 200);
+            return response()->json($computerProperties, 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
+            return response()->json($computerProperties, 404);
+        }
+    }
+
+    public function showAllPropertiesOfComputerWithClasses($id)
+    {
+        try {
+            $computer = Computer::findOrFail($id);
+            $computerProperties = $computer->properties()->get();
+
+            return response()->json($computerProperties, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($computerProperties, 404);
