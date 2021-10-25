@@ -37,6 +37,24 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+    public function showOnePropertiesOfComputer($id, $class, $property)
+    {
+        try {
+
+            $computer = Computer::findOrFail($id);
+            $wmiclass = WmiClass::findOrFail($class);
+            $wmiproperty = WmiProperty::findOrFail($property);
+
+            $property = ComputerProperties::whereBelongsTo($computer)
+            ->whereBelongsTo($wmiclass)
+                ->whereBelongsTo($wmiproperty)->first();
+
+            return response()->json($property, 201);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
+    }
 
     public function create(Request $request, $id, $class, $property)
     {
