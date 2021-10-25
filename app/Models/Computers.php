@@ -3,9 +3,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WmiProperty extends Model
+class Computer extends Model
 {
-    protected $table = "wmiproperties";
+    protected $table = "computers";
 
     /**
      * The attributes that are mass assignable.
@@ -13,19 +13,16 @@ class WmiProperty extends Model
      * @var array
      */
     protected $fillable = [
-        'wmiclass_id', 'name', 'title', 'description', 'property_type', 'icon',
+        'computertargetid', 'name', 'last_inventory_report',
     ];
 
     // public $timestamps = false;
 
 
-
-    public function wmiclass()
+    public function properties()
     {
-        return $this->belongsTo(WmiClass::class, 'wmiclass_id');
+        return $this->hasMany(ComputerProperties::class, 'computer_id');
     }
-
-
 
 
 }
