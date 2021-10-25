@@ -33,7 +33,7 @@ class ComputerPropertiesController extends Controller
             return response()->json($computerProperties, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
-            return response()->json($computerProperties, 404);
+            return response()->json($responseObject, 404);
         }
     }
 
@@ -41,12 +41,13 @@ class ComputerPropertiesController extends Controller
     {
         try {
             $computer = Computer::findOrFail($id);
-            $computerProperties = $computer->properties()->get();
+            $computerProperties = ComputerProperties::where('computer_id', $computer->id)->get();
+            $computer->properties = $computerProperties;
 
-            return response()->json($computerProperties, 200);
+            return response()->json($computer, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
-            return response()->json($computerProperties, 404);
+            return response()->json($responseObject, 404);
         }
     }
 
