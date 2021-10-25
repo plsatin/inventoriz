@@ -62,13 +62,16 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $class, $property)
     {
         try {
-            Post::whereBelongsTo($user)
             $computer = Computer::findOrFail($id);
-            $property = ComputerProperties::findOrFail($id);
-            $property->update($request->all());
+            $wmiclass = WmiClass::findOrFail($class);
+            $wmiproperty = WmiProperty::findOrFail($property);
+
+            $property = ComputerProperties::whereBelongsTo($computer)
+                ->whereBelongsTo($wmiclass)
+                    ->whereBelongsTo($wmiproperty)->update($request->all());
 
             return response()->json($property, 200);
         } catch (\Exception $e) {
@@ -77,13 +80,17 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function delete($id, $pid)
+    public function delete($id, $class, $property)
     {
         try {
 
             $computer = Computer::findOrFail($id);
+            $wmiclass = WmiClass::findOrFail($class);
+            $wmiproperty = WmiProperty::findOrFail($property);
 
-            ComputerProperties::findOrFail($id)->delete();
+            $property = ComputerProperties::whereBelongsTo($computer)
+                ->whereBelongsTo($wmiclass)
+                    ->whereBelongsTo($wmiproperty)->delete();
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));
             return response()->json($responseObject, 200);
