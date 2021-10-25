@@ -53,7 +53,7 @@ class ComputerPropertiesController extends Controller
             $property->value = $request->input('value');
             $property->instance_id = $request->input('instance_id');
 
-            $property->create();
+            $property->save();
 
             return response()->json($property, 201);
         } catch (\Exception $e) {
