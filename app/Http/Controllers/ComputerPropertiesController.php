@@ -48,8 +48,8 @@ class ComputerPropertiesController extends Controller
             foreach ($computerClasses as $class)
             {
                 $classProperties = ComputerProperties::where('computer_id', $computer->id)
-                    ->where('wmiclass_id', $class->id)
-                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmimproperties.id')
+                    ->where('computer_properties.wmiclass_id', $class->id)
+                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
 
                 $computerClasses[$classCount]->properties = $classProperties;
