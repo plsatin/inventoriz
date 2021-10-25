@@ -14,7 +14,13 @@ class CreateClassesTable extends Migration
     public function up()
     {
         Schema::create('classes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name');
+            $table->string('namespace')->default('root\cimv2');
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('icon')->nullable();
+            $table->integer('enabled')->default(1);
             $table->timestamps();
         });
     }
@@ -29,3 +35,16 @@ class CreateClassesTable extends Migration
         Schema::dropIfExists('classes');
     }
 }
+
+
+/*
+
+ClassID	int	 
+Name	varchar(256)	 
+Namespace	varchar(256) [root\cimv2]	 
+Title	varchar(256)	 
+Description	longtext	 
+Icon	varchar(256)	 
+Enabled	int [1]	 
+
+*/

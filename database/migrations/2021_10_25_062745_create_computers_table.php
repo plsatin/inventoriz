@@ -14,7 +14,12 @@ class CreateComputersTable extends Migration
     public function up()
     {
         Schema::create('computers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('computertargetid')->unique();
+            $table->string('name');
+            $table->dateTime('last_inventory_report');
+            // $table->dateTime('last_software_report');
+            // $table->dateTime('last_updates_report');
             $table->timestamps();
         });
     }
@@ -29,3 +34,16 @@ class CreateComputersTable extends Migration
         Schema::dropIfExists('computers');
     }
 }
+
+
+
+/*
+
+id	int Автоматическое приращение	 
+ComputerTargetId	varchar(255)	 
+Name	varchar(256)	 
+LastReportedInventoryTime	datetime NULL	 
+LastReportedSoftInventoryTime	datetime NULL	 
+LastReportedUpdatesInventoryTime	datetime NULL
+
+*/
