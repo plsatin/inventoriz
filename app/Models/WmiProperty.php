@@ -22,7 +22,7 @@ class WmiProperty extends Model
 
     public function wmiClass()
     {
-        return $this->belongsTo(Wmiclass::class);
+        return $this->belongsTo(WmiClass::class);
     }
 
 
