@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\WmiClass;
 use App\Models\WmiProperty;
+use App\Models\Computer;
+use App\Models\ComputerProperties;
+
 
 class ComputerController extends Controller
 {
