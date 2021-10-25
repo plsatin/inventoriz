@@ -26,8 +26,7 @@ class WmiPropertyController extends Controller
         try {
 
             $wmiClass = WmiClass::findOrFail($id);
-            //// $products = Offer::find($id)->products;
-            $classProperties = WmiProperty::wmiClass()->get();
+            $classProperties = WmiProperty::query()->::where('wmiclass_id', $wmiClass->id)->get();
 
 
             return response()->json($classProperties, 200);
