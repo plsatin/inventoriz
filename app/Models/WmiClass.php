@@ -21,7 +21,7 @@ class WmiClass extends Model
 
     public function wmiProperties()
     {
-        return $this->hasMany(Wmiproperty::class);
+        return $this->hasMany(WmiProperty::class);
     }
 
 
