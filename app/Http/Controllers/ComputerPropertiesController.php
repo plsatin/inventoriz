@@ -43,7 +43,7 @@ class ComputerPropertiesController extends Controller
 
             $computer = Computer::findOrFail($id);
             $wmiclass = WmiClass::findOrFail($class);
-            $wmiproperty = WmiProperty::findOrFail($property);
+            $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
 
             $property = ComputerProperties::query()->whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
