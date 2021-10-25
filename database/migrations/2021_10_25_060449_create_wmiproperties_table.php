@@ -23,7 +23,7 @@ class CreateWmipropertiesTable extends Migration
             $table->string('icon')->nullable();
             $table->timestamps();
 
-            $table->foreign('wmiclass_id')->references('id')->on('wmiclasses');
+            $table->foreign('wmiclass_id')->references('id')->on('wmiclasses')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

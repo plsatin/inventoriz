@@ -27,7 +27,7 @@ class WmiPropertyController extends Controller
 
             $wmiClass = WmiClass::findOrFail($id);
             // $classProperties = WmiProperty::query()->where('wmiclass_id', $wmiClass->id)->get();
-            $classProperties = $wmiClass::properties()->get();
+            $classProperties = $wmiClass->properties()->get();
 
 
             return response()->json($classProperties, 200);

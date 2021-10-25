@@ -22,9 +22,9 @@ class CreateComputerPropertiesTable extends Migration
             $table->integer('instance_id')->default(1);
             $table->timestamps();
 
-            $table->foreign('computer_id')->references('id')->on('computers')->onDelete('cascade');
-            $table->foreign('wmiclass_id')->references('id')->on('wmiclasses')->onDelete('cascade');
-            $table->foreign('wmiproperty_id')->references('id')->on('wmiproperties')->onDelete('cascade');
+            $table->foreign('computer_id')->references('id')->on('computers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('wmiclass_id')->references('id')->on('wmiclasses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('wmiproperty_id')->references('id')->on('wmiproperties')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }
