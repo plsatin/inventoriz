@@ -21,14 +21,27 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
     $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
+    // $router->post('v1/classes', ['uses' => 'WmiClassController@create']);
+    // $router->delete('v1/classes/{id}', ['uses' => 'WmiClassController@delete']);
+    // $router->put('v1/classes/{id}', ['uses' => 'WmiClassController@update']);
 
-    // $router->post('v1/wmiclasses', ['uses' => 'WmiClassController@create']);
-    // $router->delete('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@delete']);
-    // $router->put('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@update']);
 
     $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfClass']);
+    // $router->post('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@create']);
+    // $router->delete('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@delete']);
+    // $router->put('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@update']);
+
+    
+    $router->get('v1/computers',  ['uses' => 'ComputerController@showSomeComputers']);
+    $router->get('v1/computers/{id}', ['uses' => 'ComputerController@showOneComputer']);
+    $router->post('v1/computers', ['uses' => 'ComputerController@create']);
+    $router->delete('v1/computers/{id}', ['uses' => 'ComputerController@delete']);
+    $router->put('v1/computers/{id}', ['uses' => 'ComputerController@update']);
 
 
-
+    $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputer']);
+    $router->post('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@create']);
+    $router->delete('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@delete']);
+    $router->put('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@update']);
 
 });

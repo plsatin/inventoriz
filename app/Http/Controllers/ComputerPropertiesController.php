@@ -24,11 +24,8 @@ class ComputerPropertiesController extends Controller
     public function showAllPropertiesOfComputer($id)
     {
         try {
-
             $computer = Computer::findOrFail($id);
-            // $classProperties = WmiProperty::query()->where('wmiclass_id', $wmiClass->id)->get();
             $computerProperties = $computer->properties()->get();
-
 
             return response()->json($classProperties, 200);
         } catch (\Exception $e) {
@@ -38,11 +35,22 @@ class ComputerPropertiesController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function create(Request $request, $id, $class, $property)
     {
         try {
 
-            $property = ComputerProperties::create($request->all());
+            $computer = Computer::findOrFail($id);
+            $wmiclass = WmiClass::findOrFail($class);
+            $wmiproperty = WmiProperty::findOrFail($property);
+
+            $property = new ComputerProperties;
+            $property->computer = $computer;
+            $property->wimclass = $wmiclass;
+            $property->wmiproperty = $wmiproperty;
+            $property->value = $request->input('value');
+            $property->instance_id = $request->input('instance_id');
+
+            $property->create();
 
             return response()->json($property, 201);
         } catch (\Exception $e) {
@@ -51,9 +59,11 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
         try {
+            Post::whereBelongsTo($user)
+            $computer = Computer::findOrFail($id);
             $property = ComputerProperties::findOrFail($id);
             $property->update($request->all());
 
@@ -64,9 +74,12 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($id, $pid)
     {
         try {
+
+            $computer = Computer::findOrFail($id);
+
             ComputerProperties::findOrFail($id)->delete();
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));

@@ -43,10 +43,11 @@ class WmiPropertyController extends Controller
 
 /* Для этих функций маршруты отключены */
 
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
         try {
-            $wmiProperty = WmiProperty::create($request->all());
+            $wmiClass = WmiClass::findOrFail($id);
+            $wmiProperty = $wmiClass->properties()->create($request->all());
 
             return response()->json($wmiProperty, 201);
         } catch (\Exception $e) {
@@ -55,10 +56,11 @@ class WmiPropertyController extends Controller
         }
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id, $property)
     {
         try {
-            $wmiProperty = WmiProperty::findOrFail($id);
+            $wmiClass = WmiClass::findOrFail($id);
+            $wmiProperty = $wmiClass->properties()->findOrFail($property);
             $wmiProperty->update($request->all());
 
             return response()->json($wmiProperty, 200);
@@ -68,10 +70,12 @@ class WmiPropertyController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($id, $property)
     {
         try {
-            WmiProperty::findOrFail($id)->delete();
+            $wmiClass = WmiClass::findOrFail($id);
+            $wmiProperty = $wmiClass->properties()->findOrFail($property);
+            $wmiProperty->delete();
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));
             return response()->json($responseObject, 200);
