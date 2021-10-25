@@ -13,17 +13,17 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('wmiproperties', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('class_id');
+            $table->unsignedInteger('wmiclass_id');
             $table->string('name');
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
-            $table->string('type', 50)->nullable();
+            $table->string('property_type', 50)->nullable();
             $table->string('icon')->nullable();
             $table->timestamps();
 
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->foreign('wmiclass_id')->references('id')->on('wmiclasses');
         });
     }
 
@@ -34,7 +34,7 @@ class CreatePropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('wmiproperties');
     }
 }
 

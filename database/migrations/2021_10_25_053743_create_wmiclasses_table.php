@@ -13,7 +13,7 @@ class CreateClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('wmiclasses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('namespace')->default('root\cimv2');
@@ -32,7 +32,7 @@ class CreateClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('wmiclasses');
     }
 }
 
