@@ -48,7 +48,7 @@ class ComputerPropertiesController extends Controller
 
             $property = new ComputerProperties;
             $property->computer_id = $computer->id;
-            $property->wimclass_id = $wmiclass->id;
+            $property->wmiclass_id = $wmiclass->id;
             $property->wmiproperty_id = $wmiproperty->id;
             $property->value = $request->input('value');
             $property->instance_id = $request->input('instance_id');
