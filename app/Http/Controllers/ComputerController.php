@@ -36,7 +36,12 @@ class ComputerController extends Controller
                     $computers = Computer::where('name', $computerName)->get();
                 }
             } else {
-                $computers = Computer::all();
+                if ($request->filled('computertargetid')) {
+                    $computerTargetId = $request->get('computertargetid');
+                    $computers = Computer::where('computertargetid', $computerTargetId)->get();
+                } else {
+                    $computers = Computer::all();
+                }
             }
 
             return response()->json($computers);
