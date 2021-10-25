@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\WmiClass;
 use App\Models\WmiProperty;
 
+
 class WmiPropertyController extends Controller
 {
     /**

@@ -20,6 +20,9 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
+    $router->get('v1/',  ['uses' => 'InfoController@apiVersion']);
+   
+
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
     $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
     // $router->post('v1/classes', ['uses' => 'WmiClassController@create']);
