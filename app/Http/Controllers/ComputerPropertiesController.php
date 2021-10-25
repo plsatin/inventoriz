@@ -89,8 +89,7 @@ class ComputerPropertiesController extends Controller
 
             $property = ComputerProperties::whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
-                    ->whereBelongsTo($wmiproperty);
-            $property->update($request->all());
+                    ->whereBelongsTo($wmiproperty)->update($request->all());
 
             // dd($property);
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Updated Successfully'));
