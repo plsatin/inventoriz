@@ -19,13 +19,13 @@ $router->get('/', function () use ($router) {
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('v1/classes',  ['uses' => 'WmiclassController@showAllWmiClasses']);
-    $router->get('v1/classes/{id}', ['uses' => 'WmiclassController@showOneClass']);
-    // $router->post('v1/wmiclasses', ['uses' => 'WmiclassController@create']);
-    // $router->delete('v1/wmiclasses/{id}', ['uses' => 'WmiclassController@delete']);
-    // $router->put('v1/wmiclasses/{id}', ['uses' => 'WmiclassController@update']);
+    $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
+    $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
+    // $router->post('v1/wmiclasses', ['uses' => 'WmiClassController@create']);
+    // $router->delete('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@delete']);
+    // $router->put('v1/wmiclasses/{id}', ['uses' => 'WmiClassController@update']);
 
-    $router->get('v1/classes/{id}/properties', ['uses' => 'WmipropertyController@showAllPropertiesOfClass']);
+    $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfClass']);
 
 
 
