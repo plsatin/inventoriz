@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
     $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
     // $router->post('v1/classes', ['uses' => 'WmiClassController@create']);
@@ -27,7 +28,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfClass']);
-    $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertiesOfClass']);
+    $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertyOfClass']);
     // $router->post('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@create']);
     // $router->delete('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@delete']);
     // $router->put('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@update']);
@@ -41,7 +42,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputer']);
-    $router->get('v1/computers/{id}/properties/{class}/{property}',  ['uses' => 'ComputerPropertiesController@showOnePropertiesOfComputer']);
+    $router->get('v1/computers/{id}/properties/{class}/{property}',  ['uses' => 'ComputerPropertiesController@showOnePropertyOfComputer']);
     $router->post('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@create']);
     $router->delete('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@delete']);
     $router->put('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@update']);

@@ -37,7 +37,7 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function showOnePropertiesOfComputer($id, $class, $property)
+    public function showOnePropertyOfComputer($id, $class, $property)
     {
         try {
 

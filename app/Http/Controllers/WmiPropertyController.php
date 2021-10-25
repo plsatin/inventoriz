@@ -38,7 +38,7 @@ class WmiPropertyController extends Controller
     }
 
 
-    public function showOnePropertiesOfClass($id, $property)
+    public function showOnePropertyOfClass($id, $property)
     {
         try {
             $wmiClass = WmiClass::findOrFail($id);
