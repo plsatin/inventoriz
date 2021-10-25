@@ -47,7 +47,7 @@ class ComputerPropertiesController extends Controller
 
             $property = ComputerProperties::query()->whereBelongsTo($computer)
                 ->whereBelongsTo($wmiclass)
-                    ->whereBelongsTo($wmiproperty)->first();
+                    ->whereBelongsTo($wmiproperty)->firstOrFail();
 
             return response()->json($property, 201);
         } catch (\Exception $e) {
