@@ -18,22 +18,11 @@ $(document).ready(function () {
     // $.ajaxSetup({ async: false });
 
 
-    $("#tree").fancytree({
-        checkbox: false,
-        selectMode: 3,
-        source: {
-            url:
-            "/api/v1/computers/6/properties"
-        },
-
-        // activate: function(event, data) {
-        //     $("#statusLine").text(event.type + ": " + data.node);
-        // },
-        // select: function(event, data) {
-        //     $("#statusLine").text(
-        //     event.type + ": " + data.node.isSelected() + " " + data.node
-        //     );
-        // }
+    $(function(){
+      // using default options
+      $("#tree").fancytree({
+        source: {url: "/api/v1/computers/6/properties"}
+      });
     });
 
 
