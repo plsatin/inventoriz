@@ -47,10 +47,30 @@ class ComputerPropertiesController extends Controller
 
             foreach ($computerClasses as $class)
             {
-                $classProperties = ComputerProperties::where('computer_id', $computer->id)
-                    ->where('computer_properties.wmiclass_id', $class->id)
+                select instance_id from computer_properties where computer_id = 5 and wmiclass_id = 10 group by instance_id;
+
+                $classPropertiesInstance = ComputerProperties::select('instance_id')->where('computer_id', $computer->id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->groupBy(instance_id)
+                        ->get();
+
+                $instanceId = 0;
+                $classProperties = [];
+
+                foreach ($classPropertiesInstance as $instance) {
+
+                    $classPropertiesInstance = ComputerProperties::where('computer_id', $computer->id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id'. $instance->instance_id)
                         ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
+                    
+                    $classProperties[$instanceId]->id = $instance->instance_id;
+                    $classProperties[$instanceId]->properties = $classPropertiesInstance;
+                    $classProperties[$instanceId]->parent_id =  $class->id;
+
+                    $instanceId ++;
+
+                }
+
 
                 $computerClasses[$classCount]->properties = $classProperties;
                 $classCount ++;
