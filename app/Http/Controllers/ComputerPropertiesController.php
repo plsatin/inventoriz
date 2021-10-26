@@ -83,7 +83,7 @@ class ComputerPropertiesController extends Controller
 
                 }
 
-
+                $computerClasses[$classCount]->icon = '/assets/img/icons/' + $computerClasses[$classCount]->icon
                 $computerClasses[$classCount]->children = $classProperties;
                 $classCount ++;
             }
