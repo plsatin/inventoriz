@@ -61,7 +61,7 @@ class InfoController extends Controller
             // return response()->json($responseObject, 404);
 
             $page_title = '404 | Страница не найдена';
-            return abort(404);
+            return abort(404)->with('page_title', $page_title);
 
         }
 
