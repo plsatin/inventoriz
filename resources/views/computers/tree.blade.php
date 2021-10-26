@@ -74,11 +74,12 @@ $(document).ready(function () {
 
         function createJSTree(jsondata) {            
             $('#tree').jstree({
-                'core': {
-                    'data': jsondata
-                }
+                "json_data" : {
+                    "data" : jsondata
+                },
+                "plugins" : [ "themes", "json_data", "ui" ]
             });
-        }
+        });
 
 
     $.ajaxSetup({ async: true });
