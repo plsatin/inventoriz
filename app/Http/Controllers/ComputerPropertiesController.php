@@ -67,7 +67,10 @@ class ComputerPropertiesController extends Controller
                             
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
-                    $classProperties[$instanceId]['name'] =  $classPropertiesInstanceName->name;
+                    if($classPropertiesInstanceName->name) {
+                        $classProperties[$instanceId]['name'] =  $classPropertiesInstanceName->name;
+                    }
+
                     $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
 
                     $instanceId ++;
