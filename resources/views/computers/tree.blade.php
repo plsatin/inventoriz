@@ -17,41 +17,41 @@
 $(document).ready(function () {
     $.ajaxSetup({ async: false });
 
-// $('#tree').jstree({
-//     'core': {
-//         'data': {
-//             'url': "/api/v1/computers/6/properties",
-//             'type': 'GET',
-//             'dataType': 'JSON',
-//             'contentType':'application/json',
-//             'data': function (node) {
-//                 console.log(node);
-//                 return { 'id' : node.id };
-//             }
-//         }
-//     }
-// });
-
-
-    var jsonTreeData;
-
-
-    $.ajax({
-        type: "GET",
-        url: "/api/v1/computers/6/properties",
-        success: function (data) {
-            jsonTreeData = data;
-
+$('#tree').jstree({
+    'core': {
+        'data': {
+            'url': "/api/v1/classes/6/properties",
+            'type': 'GET',
+            'dataType': 'JSON',
+            'contentType':'application/json',
+            'data': function (node) {
+                console.log(node);
+                return { 'id' : node.id };
+            }
         }
-    });
+    }
+});
 
-    console.log(jsonTreeData);
 
-    $('#tree').jstree({ 'core' : {
-        'data' : [
-            jsonTreeData,
-        ]
-    } });
+    // var jsonTreeData;
+
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/api/v1/computers/6/properties",
+    //     success: function (data) {
+    //         jsonTreeData = data;
+
+    //     }
+    // });
+
+    // console.log(jsonTreeData);
+
+    // $('#tree').jstree({ 'core' : {
+    //     'data' : [
+    //         jsonTreeData,
+    //     ]
+    // } });
 
 
 
