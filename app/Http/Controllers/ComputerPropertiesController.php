@@ -66,7 +66,7 @@ class ComputerPropertiesController extends Controller
                             ->orWhere('computer_id', $computer->id)
                                 ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
                                 ->where('wmiproperties.name', 'Caption')
-                                    // ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                                    ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                                         ->first();
 
                     
