@@ -78,7 +78,7 @@ $(document).ready(function () {
             "json_data" : {
                 "data" : jsondata
             },
-            "plugins" : [ "themes", "json_data", "ui" ]
+            "plugins" : [ "json_data" ]
         });
     }
 
