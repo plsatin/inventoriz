@@ -38,11 +38,11 @@ class ComputerPropertiesController extends Controller
         }
     }
 
-    public function showAllPropertiesOfComputerWithClasses($id)
+    public function showAllPropertiesOfComputerTree($id)
     {
         try {
             $computer = Computer::findOrFail($id);
-            $computerClasses = WmiClass::query()->get();
+            $computerClasses = WmiClass::select('name', 'namespace', 'title', 'description AS iconTooltip', 'icon')->get();
 
             $classCount = 0;
 
@@ -57,10 +57,14 @@ class ComputerPropertiesController extends Controller
 
                 foreach ($classPropertiesInstance as $instance) {
 
-                    $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id', 'computer_properties.wmiproperty_id', 'computer_properties.value', DB::raw("CONCAT(wmiproperties.name, ':  ', computer_properties.value) AS title"), 'computer_properties.instance_id', 'wmiproperties.name AS name',)->where('computer_id', $computer->id)
-                    ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
-                            ->get();
+                    $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id',
+                     'computer_properties.wmiproperty_id', 'computer_properties.value',
+                      DB::raw("CONCAT(wmiproperties.name, ':  ', computer_properties.value) AS title"),
+                       'computer_properties.instance_id', 'wmiproperties.name AS name', 'wmiproperties.description AS iconTooltip')
+                        ->where('computer_id', $computer->id)
+                        ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
+                            ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                                ->get();
                     $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
                         ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
                         ->where('wmiproperties.name', 'Name')

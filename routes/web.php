@@ -48,7 +48,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     // $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputer']);
-    $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputerWithClasses']);
+    $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputerTree']);
     $router->get('v1/computers/{id}/properties/{class}/{property}',  ['uses' => 'ComputerPropertiesController@showOnePropertyOfComputer']);
     $router->post('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@create']);
     $router->delete('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@delete']);
