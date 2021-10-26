@@ -23,6 +23,7 @@ $('#tree').jstree({
             'dataType': 'JSON',
             'contentType':'application/json',
             'data': function (node) {
+                console.log(node);
                 return { 'id' : node.id };
             }
         }
