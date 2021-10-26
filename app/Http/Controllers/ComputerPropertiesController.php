@@ -60,9 +60,14 @@ class ComputerPropertiesController extends Controller
                     ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
                         ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
-                    
+                    $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
+                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')->where('name', 'Name');
+                            ->first();
+                            
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
+                    $classProperties[$instanceId]['name'] =  $classPropertiesInstanceName->name;
                     $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
 
                     $instanceId ++;
