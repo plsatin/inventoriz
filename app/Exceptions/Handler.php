@@ -48,10 +48,10 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    // public function render($request, Throwable $exception)
-    // {
-    //     return parent::render($request, $exception);
-    // }
+    public function render($request, Throwable $exception)
+    {
+        return parent::render($request, $exception);
+    }
 
 
     public function render($request, Exception $e) // Для 404
