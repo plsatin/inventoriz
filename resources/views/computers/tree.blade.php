@@ -62,6 +62,7 @@ $(document).ready(function () {
             url: "/api/v1/computers/6/properties",
             dataType: "json",
             success: function (json) {
+                console.log(json);
                 createJSTree(json);
             },
 
