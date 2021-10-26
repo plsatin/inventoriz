@@ -77,19 +77,19 @@ class ComputerPropertiesController extends Controller
                         $classProperties[$instanceId]['name'] =  $classPropertiesInstanceName->value;
                     }
 
-                    $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
+                    $classProperties[$instanceId]['children'] = $classPropertiesInstance;
 
                     $instanceId ++;
 
                 }
 
 
-                $computerClasses[$classCount]->properties = $classProperties;
+                $computerClasses[$classCount]->children = $classProperties;
                 $classCount ++;
             }
 
 
-            $computer->properties = $computerClasses;
+            $computer->children = $computerClasses;
 
             return response()->json($computer, 200);
         } catch (\Exception $e) {
