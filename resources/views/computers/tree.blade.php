@@ -21,6 +21,7 @@ $(document).ready(function () {
     $(function(){
       // using default options
       $("#tree").fancytree({
+        tooltip: true,
         source: {url: "/api/v1/computers/6/properties"},
 
         // postProcess: function(event, data) {
