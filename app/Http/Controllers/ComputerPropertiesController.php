@@ -73,6 +73,7 @@ class ComputerPropertiesController extends Controller
 
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
+                    $classProperties[$instanceId]['icon'] = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
                     if($classPropertiesInstanceName) {
                         $classProperties[$instanceId]['title'] =  $classPropertiesInstanceName->value;
                     }
