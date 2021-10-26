@@ -11,10 +11,10 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/jstree.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/ui.fancytree.css') }}">
     
     <script type="text/javascript" src="{{ url('/assets/js/jquery-3.3.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('/assets/js/jstree.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('/assets/js/jquery.fancytree-all.js') }}"></script>
 
   </head>
   <body>

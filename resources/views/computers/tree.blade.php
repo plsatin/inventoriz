@@ -8,14 +8,36 @@
 
 
 <div class="computer-tree" id="tree"></div>
-
+<div id="statusline"></div>
 
 
 
 
 <script>
 $(document).ready(function () {
-    $.ajaxSetup({ async: false });
+    // $.ajaxSetup({ async: false });
+
+
+    $("#tree").fancytree({
+        checkbox: true,
+        selectMode: 3,
+        source: {
+            url:
+            "/api/v1/computers/6/properties"
+        },
+
+        activate: function(event, data) {
+            $("#statusLine").text(event.type + ": " + data.node);
+        },
+        select: function(event, data) {
+            $("#statusLine").text(
+            event.type + ": " + data.node.isSelected() + " " + data.node
+            );
+        }
+    });
+
+
+
 
     // $('#tree').jstree({
     //     'core': {
@@ -35,22 +57,23 @@ $(document).ready(function () {
 
 
 
-    var jsonTreeData;
-    $.ajax({
-        type: "GET",
-        url: "/api/v1/computers/6/properties",
-        success: function (data) {
-            jsonTreeData = data;
+    // var jsonTreeData;
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/api/v1/computers/6/properties",
+    //     success: function (data) {
+    //         jsonTreeData = data;
 
-        }
-    });
+    //     }
+    // });
 
-    console.log(jsonTreeData);
+    // console.log(jsonTreeData);
 
-    $('#tree').jstree({ 'core' : {
-        'data' :             jsonTreeData,
-        
-    } });
+    // $('#tree').jstree({ 'core' : {
+    //     'data' : [
+    //         jsonTreeData,
+    //     ]
+    // } });
 
 
 
@@ -79,7 +102,7 @@ $(document).ready(function () {
     // }
 
 
-    $.ajaxSetup({ async: true });
+    // $.ajaxSetup({ async: true });
 });
 
 </script>
