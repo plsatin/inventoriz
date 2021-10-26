@@ -61,9 +61,9 @@ class ComputerPropertiesController extends Controller
                         // ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
                     
-                    $classProperties[$instanceId]->id = $instance->instance_id;
-                    $classProperties[$instanceId]->properties = $classPropertiesInstance;
-                    $classProperties[$instanceId]->parent_id =  $class->id;
+                    $classProperties[$instanceId]['id'] = $instance->instance_id;
+                    $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
+                    $classProperties[$instanceId]['parent_id'] =  $class->id;
 
                     $instanceId ++;
 
