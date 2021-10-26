@@ -47,9 +47,9 @@ class InfoController extends Controller
         // if ($request->input('computer') != '') {
             $computerName = $request->input('computer');
 
-            dd($computerName );
             $computer = Computer::query()->where('name', $computerName)->first();
-    
+            dd($computer);
+
     
             $page_title = 'Диспетчер устройств: ' . $computerName;
             return view('computers.tree')->with('page_title', $page_title);
