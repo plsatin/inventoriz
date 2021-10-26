@@ -56,30 +56,30 @@ $(document).ready(function () {
 
 
     $(function () {
-            $.ajax({
-                async: true,
-                type: "GET",
-                url: "/api/v1/computers/6/properties",
-                dataType: "json",
-                success: function (json) {
-                    createJSTree(json);
-                },
+        $.ajax({
+            async: true,
+            type: "GET",
+            url: "/api/v1/computers/6/properties",
+            dataType: "json",
+            success: function (json) {
+                createJSTree(json);
+            },
 
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });            
-        });
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });            
+    });
 
-        function createJSTree(jsondata) {            
-            $('#tree').jstree({
-                "json_data" : {
-                    "data" : jsondata
-                },
-                "plugins" : [ "themes", "json_data", "ui" ]
-            });
+    function createJSTree(jsondata) {            
+        $('#tree').jstree({
+            "json_data" : {
+                "data" : jsondata
+            },
+            "plugins" : [ "themes", "json_data", "ui" ]
         });
+    }
 
 
     $.ajaxSetup({ async: true });
