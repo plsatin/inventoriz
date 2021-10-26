@@ -48,7 +48,7 @@ class ComputerPropertiesController extends Controller
             foreach ($computerClasses as $class)
             {
                 $classPropertiesInstance = ComputerProperties::select('instance_id')->where('computer_id', $computer->id)
-                    ->where('computer_properties.wmiclass_id', $class->id)->groupBy(instance_id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->groupBy('instance_id')
                         ->get();
 
                 $instanceId = 0;
