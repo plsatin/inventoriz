@@ -9,6 +9,7 @@ use App\Models\WmiProperty;
 use App\Models\Computer;
 use App\Models\ComputerProperties;
 
+use DB;
 
 class ComputerPropertiesController extends Controller
 {
@@ -56,7 +57,7 @@ class ComputerPropertiesController extends Controller
 
                 foreach ($classPropertiesInstance as $instance) {
 
-                    $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id', 'computer_properties.wmiproperty_id', 'computer_properties.value AS title', 'computer_properties.instance_id', 'wmiproperties.name AS name',)->where('computer_id', $computer->id)
+                    $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id', 'computer_properties.wmiproperty_id', 'computer_properties.value', DB::raw("CONCAT(wmiproperties.name AS name,':  ',computer_properties.value) AS title"), 'computer_properties.instance_id', 'wmiproperties.name AS name',)->where('computer_id', $computer->id)
                     ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
                         ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
