@@ -19,21 +19,21 @@ $(document).ready(function () {
 
 
     $("#tree").fancytree({
-        checkbox: true,
+        checkbox: false,
         selectMode: 3,
         source: {
             url:
             "/api/v1/computers/6/properties"
         },
 
-        activate: function(event, data) {
-            $("#statusLine").text(event.type + ": " + data.node);
-        },
-        select: function(event, data) {
-            $("#statusLine").text(
-            event.type + ": " + data.node.isSelected() + " " + data.node
-            );
-        }
+        // activate: function(event, data) {
+        //     $("#statusLine").text(event.type + ": " + data.node);
+        // },
+        // select: function(event, data) {
+        //     $("#statusLine").text(
+        //     event.type + ": " + data.node.isSelected() + " " + data.node
+        //     );
+        // }
     });
 
 
