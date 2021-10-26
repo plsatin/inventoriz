@@ -45,17 +45,17 @@ class InfoController extends Controller
     public function showComputerTree(Request $request)
     {
         try {
-            if ($request->input('computer') != '') {
+            // if ($request->input('computer') != '') {
                 $computerName = $request->input('computer');
 
                 $computer = Computer::query()->where('name', $computerName)->firstOrFail();
         
                 $page_title = 'Диспетчер устройств: ' . $computerName;
                 return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
-            } else {
+            // } else {
 
-                return abort(404);
-            }
+            //     return abort(404);
+            // }
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 404);
