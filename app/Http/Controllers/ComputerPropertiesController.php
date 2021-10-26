@@ -62,8 +62,9 @@ class ComputerPropertiesController extends Controller
                             ->get();
                     $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
                     ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')->where('wmiproperties.name', 'Name')
-                            ->first();
+                        ->where('wmiproperties.name', 'Name')
+                            ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                                ->first();
 
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
