@@ -27,16 +27,12 @@
     <section class="container">
         <div class="page-content">
 
-
         @yield('title')
         @yield('title-meta')
         @yield('content')
 
-
-
       </div>
     </section>
-
 
     <section class="page-footer">
         <footer>

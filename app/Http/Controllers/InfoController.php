@@ -44,8 +44,16 @@ class InfoController extends Controller
      */
     public function showComputerTree(Request $request)
     {
-        $page_title = 'Добро пожаловать!';
-        return view('computers.tree')->with('page_title', $page_title);
+        if ($request->input('computer') != '') {
+            $computerName = $request->input('computer');
+            $computer = Computer::query()->where('name', $computerName)->first();
+    
+    
+            $page_title = 'Диспетчер устройств: ' . $computerName;
+            return view('computers.tree')->with('page_title', $page_title);
+        } else {
+            return abort(404);
+        }
     }
 
 
