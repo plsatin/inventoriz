@@ -17,20 +17,20 @@
 $(document).ready(function () {
     $.ajaxSetup({ async: false });
 
-$('#tree').jstree({
-    'core': {
-        'data': {
-            'url': "/api/v1/classes/6/properties",
-            'type': 'GET',
-            'dataType': 'JSON',
-            'contentType':'application/json',
-            'data': function (node) {
-                console.log(node);
-                return { 'id' : node.id };
-            }
-        }
-    }
-});
+    // $('#tree').jstree({
+    //     'core': {
+    //         'data': {
+    //             'url': "/api/v1/computers/6/properties",
+    //             'type': 'GET',
+    //             'dataType': 'JSON',
+    //             'contentType':'application/json',
+    //             'data': function (node) {
+    //                 console.log(node);
+    //                 return { 'id' : node.id };
+    //             }
+    //         }
+    //     }
+    // });
 
 
     // var jsonTreeData;
@@ -54,6 +54,31 @@ $('#tree').jstree({
     // } });
 
 
+
+    $(function () {
+            $.ajax({
+                async: true,
+                type: "GET",
+                url: "/api/v1/computers/6/properties",
+                dataType: "json",
+                success: function (json) {
+                    createJSTree(json);
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });            
+        });
+
+        function createJSTree(jsondata) {            
+            $('#tree').jstree({
+                'core': {
+                    'data': jsondata
+                }
+            });
+        }
 
 
     $.ajaxSetup({ async: true });
