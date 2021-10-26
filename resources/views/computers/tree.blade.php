@@ -22,34 +22,36 @@ $(document).ready(function () {
       // using default options
       $("#tree").fancytree({
         source: {url: "/api/v1/computers/6/properties"},
-        postProcess: function(event, data) {
+        // postProcess: function(event, data) {
 
-        data = $.map(name, function(o){
-            return o && {title: o.name + ': ' + o.title};
-        });
+        // data = $.map(name, function(o){
+        //     return o && {title: o.name + ': ' + o.title};
+        // });
 
-        console.log(data);
+        // console.log(data);
 
-        //   // Convert incoming ITIS format to native Fancytree
-        //   var response = data.response;
-        //   data.node.info(response);
-        //   switch( response.class ) {
-        //   case "gov.usgs.itis.itis_service.metadata.SvcKingdomNameList":
-        //     data.result = $.map(response.kingdomNames, function(o){
-        //       return o && {title: o.kingdomName, key: o.tsn, folder: true, lazy: true};
-        //     });
-        //     break;
-        //   case "gov.usgs.itis.itis_service.data.SvcHierarchyRecordList":
-        //     data.result = $.map(response.hierarchyList, function(o){
-        //       return o && {title: o.taxonName, key: o.tsn, folder: true, lazy: true};
-        //     });
-        //     break;
-        //   default:
-        //     $.error("Unsupported class: " + response.class);
-        //   }
+        // //   // Convert incoming ITIS format to native Fancytree
+        // //   var response = data.response;
+        // //   data.node.info(response);
+        // //   switch( response.class ) {
+        // //   case "gov.usgs.itis.itis_service.metadata.SvcKingdomNameList":
+        // //     data.result = $.map(response.kingdomNames, function(o){
+        // //       return o && {title: o.kingdomName, key: o.tsn, folder: true, lazy: true};
+        // //     });
+        // //     break;
+        // //   case "gov.usgs.itis.itis_service.data.SvcHierarchyRecordList":
+        // //     data.result = $.map(response.hierarchyList, function(o){
+        // //       return o && {title: o.taxonName, key: o.tsn, folder: true, lazy: true};
+        // //     });
+        // //     break;
+        // //   default:
+        // //     $.error("Unsupported class: " + response.class);
+        // //   }
+
+        // }
 
 
-        }
+
 
       });
     });
