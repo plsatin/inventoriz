@@ -93,14 +93,20 @@ class ComputerPropertiesController extends Controller
             $wmiclass = WmiClass::findOrFail($class);
             $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
 
-            $property = new ComputerProperties;
-            $property->computer_id = $computer->id;
-            $property->wmiclass_id = $wmiclass->id;
-            $property->wmiproperty_id = $wmiproperty->id;
-            $property->value = $request->input('value');
-            $property->instance_id = $request->input('instance_id');
+            // $property = new ComputerProperties;
+            // $property->computer_id = $computer->id;
+            // $property->wmiclass_id = $wmiclass->id;
+            // $property->wmiproperty_id = $wmiproperty->id;
+            // $property->value = $request->input('value');
+            // $property->instance_id = $request->input('instance_id');
 
-            $property->save();
+            // $property->save();
+
+            $property = ComputerProperties::updateOrCreate(
+                ['computer_id' => $computer->id, 'wmiclass_id' => $wmiclass->id, 'wmiproperty_id' => $wmiproperty->id, , 'instance_id' => $request->input('instance_id')],
+                ['value' => $request->input('value')]
+            );
+
 
             return response()->json($property, 201);
         } catch (\Exception $e) {
