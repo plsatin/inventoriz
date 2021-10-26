@@ -47,8 +47,6 @@ class ComputerPropertiesController extends Controller
 
             foreach ($computerClasses as $class)
             {
-                select instance_id from computer_properties where computer_id = 5 and wmiclass_id = 10 group by instance_id;
-
                 $classPropertiesInstance = ComputerProperties::select('instance_id')->where('computer_id', $computer->id)
                     ->where('computer_properties.wmiclass_id', $class->id)->groupBy(instance_id)
                         ->get();
