@@ -53,7 +53,7 @@ class InfoController extends Controller
             return view('computers.tree')->with('page_title', $page_title);
         } else {
             $page_title = '404 | Страница не найдена';
-            return abort(404)->with('page_title', $page_title);
+            return abort(404);
         }
     }
 
