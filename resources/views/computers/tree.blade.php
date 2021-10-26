@@ -22,7 +22,11 @@ $(document).ready(function () {
       // using default options
       $("#tree").fancytree({
         tooltip: true,
+        iconTooltip: function(event, data) {
+            return data.typeInfo.iconTooltip;
+        },
         source: {url: "/api/v1/computers/6/properties"},
+
 
         // postProcess: function(event, data) {
 
