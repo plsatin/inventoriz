@@ -45,6 +45,8 @@ $(document).ready(function () {
         }
     });
 
+    console.log(jsonTreeData);
+
     $('#tree').jstree({ 'core' : {
         'data' : [
             jsonTreeData,
