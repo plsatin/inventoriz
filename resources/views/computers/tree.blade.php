@@ -22,7 +22,14 @@ $(document).ready(function () {
       // using default options
       $("#tree").fancytree({
         source: {url: "/api/v1/computers/6/properties"},
-        // postProcess: function(event, data) {
+        postProcess: function(event, data) {
+
+        data = $.map(name, function(o){
+            return o && {title: o.name + ': ' + o.title};
+        });
+
+        console.log(data);
+
         //   // Convert incoming ITIS format to native Fancytree
         //   var response = data.response;
         //   data.node.info(response);
