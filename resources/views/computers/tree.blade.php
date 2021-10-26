@@ -33,51 +33,50 @@ $(document).ready(function () {
     // });
 
 
-    // var jsonTreeData;
 
 
-    // $.ajax({
-    //     type: "GET",
-    //     url: "/api/v1/computers/6/properties",
-    //     success: function (data) {
-    //         jsonTreeData = data;
+    var jsonTreeData;
+    $.ajax({
+        type: "GET",
+        url: "/api/v1/computers/6/properties",
+        success: function (data) {
+            jsonTreeData = data;
 
-    //     }
-    // });
-
-    // console.log(jsonTreeData);
-
-    // $('#tree').jstree({ 'core' : {
-    //     'data' : [
-    //         jsonTreeData,
-    //     ]
-    // } });
-
-
-
-    $(function () {
-        $.ajax({
-            async: true,
-            type: "GET",
-            url: "/api/v1/computers/6/properties",
-            dataType: "json",
-            success: function (json) {
-                console.log(json);
-                createJSTree(json);
-            },
-
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });            
+        }
     });
 
-    function createJSTree(jsondata) {            
-        $('#tree').jstree({
-                "data" : jsondata,
-        });
-    }
+    console.log(jsonTreeData);
+
+    $('#tree').jstree({ 'core' : {
+        'data' :             jsonTreeData,
+        
+    } });
+
+
+
+    // $(function () {
+    //     $.ajax({
+    //         async: true,
+    //         type: "GET",
+    //         url: "/api/v1/computers/6/properties",
+    //         dataType: "json",
+    //         success: function (json) {
+    //             console.log(json);
+    //             createJSTree(json);
+    //         },
+
+    //         error: function (xhr, ajaxOptions, thrownError) {
+    //             alert(xhr.status);
+    //             alert(thrownError);
+    //         }
+    //     });            
+    // });
+
+    // function createJSTree(jsondata) {            
+    //     $('#tree').jstree({
+    //             "data" : jsondata,
+    //     });
+    // }
 
 
     $.ajaxSetup({ async: true });
