@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title')
 <div class="page-header">
-  <h1><!-- {{ $page_title ?? '' }} --></h1>
+  <h1>{{ $page_title ?? '' }}</h1>
 </div>
 @endsection
 @section('content')
