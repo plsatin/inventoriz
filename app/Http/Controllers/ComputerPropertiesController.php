@@ -42,7 +42,7 @@ class ComputerPropertiesController extends Controller
     {
         try {
             $computer = Computer::findOrFail($id);
-            $computerClasses = WmiClass::select('name', 'namespace', 'title', 'description AS iconTooltip', 'icon')->get();
+            $computerClasses = WmiClass::query()->get();
 
             $classCount = 0;
 
@@ -87,6 +87,7 @@ class ComputerPropertiesController extends Controller
                     $instanceId ++;
                 }
 
+                $computerClasses[$classCount]->iconTooltip = $computerClasses[$classCount]['description'];
                 $computerClasses[$classCount]->icon = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
                 $computerClasses[$classCount]->children = $classProperties;
                 $classCount ++;
