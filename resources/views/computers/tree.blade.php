@@ -18,7 +18,7 @@
 $('#tree').jstree({
     'core': {
         'data': {
-            'url': "/api/v1/computers/6/properties",
+            'url': "/api/v1/computers/6",
             'type': 'GET',
             'dataType': 'JSON',
             'contentType':'application/json',
