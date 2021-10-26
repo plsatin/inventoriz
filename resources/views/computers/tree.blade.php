@@ -76,7 +76,7 @@ $(document).ready(function () {
     function createJSTree(jsondata) {            
         $('#tree').jstree({
             "json_data" : {
-                "data" : jsondata
+                "data" : [jsondata]
             }
         });
     }
