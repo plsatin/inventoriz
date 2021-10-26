@@ -46,6 +46,8 @@ class InfoController extends Controller
     {
         // if ($request->input('computer') != '') {
             $computerName = $request->input('computer');
+
+            dd($computerName );
             $computer = Computer::query()->where('name', $computerName)->first();
     
     
