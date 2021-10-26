@@ -62,8 +62,8 @@ class ComputerPropertiesController extends Controller
                             ->get();
                     
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
-                    $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
+                    $classProperties[$instanceId]['properties'] = $classPropertiesInstance;
 
                     $instanceId ++;
 
