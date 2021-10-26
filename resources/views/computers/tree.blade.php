@@ -77,8 +77,7 @@ $(document).ready(function () {
         $('#tree').jstree({
             "json_data" : {
                 "data" : jsondata
-            },
-            "plugins" : [ "json_data" ]
+            }
         });
     }
 
