@@ -45,7 +45,7 @@ class InfoController extends Controller
     public function showComputerTree(Request $request)
     {
         $page_title = 'Добро пожаловать!';
-        return view('computers.tree')>with('page_title', $page_title);
+        return view('computers.tree')->with('page_title', $page_title);
     }
 
 
