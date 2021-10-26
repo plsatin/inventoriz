@@ -58,7 +58,7 @@ class ComputerPropertiesController extends Controller
 
                     $classPropertiesInstance = ComputerProperties::where('computer_id', $computer->id)
                     ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                        // ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                             ->get();
                     $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
                         ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
@@ -66,7 +66,7 @@ class ComputerPropertiesController extends Controller
                             ->orWhere('computer_id', $computer->id)
                                 ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
                                 ->where('wmiproperties.name', 'Caption')
-                                    ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                                    // ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
                                         ->first();
 
                     
@@ -74,13 +74,12 @@ class ComputerPropertiesController extends Controller
                     $classProperties[$instanceId]['id'] = $instance->instance_id;
                     $classProperties[$instanceId]['parent_id'] =  $class->id;
                     if($classPropertiesInstanceName) {
-                        $classProperties[$instanceId]['name'] =  $classPropertiesInstanceName->value;
+                        $classProperties[$instanceId]['title'] =  $classPropertiesInstanceName->value;
                     }
 
                     $classProperties[$instanceId]['children'] = $classPropertiesInstance;
 
                     $instanceId ++;
-
                 }
 
                 $computerClasses[$classCount]->icon = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
