@@ -53,16 +53,12 @@ class InfoController extends Controller
                 $page_title = 'Диспетчер устройств: ' . $computerName;
                 return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
             } else {
-                $page_title = '404 | Страница не найдена';
+
                 return abort(404);
             }
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            // return response()->json($responseObject, 404);
-
-            $page_title = '404 | Страница не найдена';
-            return abort(404)->with('page_title', $page_title);
-
+            return response()->json($responseObject, 404);
         }
 
     }
