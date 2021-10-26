@@ -37,6 +37,17 @@ class InfoController extends Controller
     }
 
 
+    /**
+     * Диспетчер устройств в виде дерева
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showComputerTree(Request $request)
+    {
+        $page_title = 'Добро пожаловать!';
+        return view('computers.tree')>with('page_title', $page_title);
+    }
+
 
 
 

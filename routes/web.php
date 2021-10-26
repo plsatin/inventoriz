@@ -18,6 +18,9 @@ $router->get('/', function () use ($router) {
 });
 
 
+$router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
+
+
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('v1/',  ['uses' => 'InfoController@apiVersion']);

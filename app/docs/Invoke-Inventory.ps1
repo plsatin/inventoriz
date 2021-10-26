@@ -5,7 +5,7 @@
  .DESCRIPTION
  
  .EXAMPLE
-.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -Verbose
 
  .LINK
   https://webnote.satin-pl.com
@@ -119,11 +119,8 @@ foreach ($class in $wmiClasses) {
     $Win32ClassName = $class.name
 
     if ($class.enabled -eq 1) {
-
-        Write-Host $Win32ClassName
-
+        Write-Verbose $Win32ClassName
         $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
-
         $InstanceId = 0
 
         if ($computerClassI) {
@@ -158,17 +155,9 @@ foreach ($class in $wmiClasses) {
         }
 
 
-    }
+    } ## if $class.enabled
 
 }
-
-
-
-
-
-
-
-
 
 
 
