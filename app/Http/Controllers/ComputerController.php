@@ -31,16 +31,16 @@ class ComputerController extends Controller
                 $computerName = $request->get('name');
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('name', $computerName)->where('computertargetid', $computerTargetId)->get();
+                    $computers = Computer::where('name', $computerName)->where('computertargetid', $computerTargetId)->orderBy('name')->get();
                 } else {
-                    $computers = Computer::where('name', $computerName)->get();
+                    $computers = Computer::where('name', $computerName)->orderBy('name')->get();
                 }
             } else {
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('computertargetid', $computerTargetId)->get();
+                    $computers = Computer::where('computertargetid', $computerTargetId)->orderBy('name')->get();
                 } else {
-                    $computers = Computer::all();
+                    $computers = Computer::query()->orderBy('name')->all();
                 }
             }
 
