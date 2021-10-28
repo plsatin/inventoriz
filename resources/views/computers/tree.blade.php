@@ -131,9 +131,7 @@ var computerName;
             },
             source: {url: '/api/v1/computers/'+computerName+'/properties'},
         });
-
-
-    });
+    }
   
 
 
