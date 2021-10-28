@@ -10,18 +10,12 @@ class JsonFileController extends Controller
 
 	public function jsonFileDownload()
     {
-        $data = json_encode(['Text One', 'Text Two', 'Text Three']);
-
-
-
-
-
-
+        $wmiClasses = json_encode(WmiClass::all());
 
 
 
         $jsongFile = time() . '_file.json';
-        File::put(public_path('/upload/json/'.$jsongFile), $data);
+        File::put(public_path('/upload/json/'.$jsongFile), $wmiClasses);
         return Response::download(public_path('/upload/jsonfile/'.$jsongFile));
 	}
 

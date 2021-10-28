@@ -24,10 +24,10 @@ $router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Информация о версии API
-    $router->get('v1/',  ['uses' => 'InfoController@apiVersion']);
+    $router->get('v1/',  ['uses' => 'InfoController@getApiVersion']);
    
     // Запрос на скачивание json-файла с классами и их свойствами
-    $router->get('json-file-download', ['uses' => 'JsonFileController@jsonFileDownload']);
+    $router->get('download/classes-json', ['uses' => 'JsonFileController@jsonFileDownload']);
 
 
 
