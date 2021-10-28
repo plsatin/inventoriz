@@ -114,7 +114,7 @@ var computerId;
 
             $("[id^='computer-id_']").click(function () {
                 var objData = $(this);
-                computerName = $(this).text;
+                computerName = $(this).text();
                 console.log(computerName);
                 computerId = (objData[0].id).replace('computer-id_', '');
                 console.log(computerId);
