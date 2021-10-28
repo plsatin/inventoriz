@@ -40,7 +40,7 @@ class ComputerController extends Controller
                     $computerTargetId = $request->get('computertargetid');
                     $computers = Computer::where('computertargetid', $computerTargetId)->orderBy('name')->get();
                 } else {
-                    $computers = Computer::query()->orderBy('name')->all();
+                    $computers = Computer::query()->orderBy('name')->get();
                 }
             }
 
