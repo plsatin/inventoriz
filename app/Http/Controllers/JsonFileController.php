@@ -27,7 +27,7 @@ class JsonFileController extends Controller
     public function propertiesJsonFileDownload()
     {
         try {
-            $id = 0;
+            // $id = 0;
 
             $wmiClass = WmiClass::findOrFail($id);
             // $classProperties = WmiProperty::query()->where('wmiclass_id', $wmiClass->id)->get();
