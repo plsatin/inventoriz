@@ -66,6 +66,9 @@
     }
 }
 
+.list-computers li span {
+    cursor: pointer;
+}
 
 </style>
 
@@ -102,7 +105,7 @@ var computerName;
             var htmlComputerList = '<ul>';
 
             for (var computer in data) {
-                htmlComputerList = htmlComputerList + '<li id="computer-id_' + data[computer].name + ' ">' + data[computer].name + '</li>';
+                htmlComputerList = htmlComputerList + '<li><span id="computer-id_' + data[computer].name + '">' + data[computer].name + '</span></li>';
             }
             htmlComputerList = htmlComputerList + '</ul>';
             $("#list-computers").html(htmlComputerList);
@@ -117,7 +120,7 @@ var computerName;
     $("[id^='computer-id_']").click(function () {
         var objData = $(this);
         console.log(objData);
-        computerName = (objData.id).replace('computer-id_', '');
+        computerName = ($(this).id).replace('computer-id_', '');
         console.log(computerName);
         $('#header-devmng').html('Устройства компьютера: ' + computerName);
         renderComputerTree(computerName);
