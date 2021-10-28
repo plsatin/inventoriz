@@ -95,6 +95,7 @@
 <script>
 $(document).ready(function () {
 var computerName;
+var computerId;
 
 
     $.ajax({
@@ -105,7 +106,7 @@ var computerName;
             var htmlComputerList = '<ul>';
 
             for (var computer in data) {
-                htmlComputerList = htmlComputerList + '<li><span id="computer-id_' + data[computer].name + '">' + data[computer].name + '</span></li>';
+                htmlComputerList = htmlComputerList + '<li><span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span></li>';
             }
             htmlComputerList = htmlComputerList + '</ul>';
             $("#list-computers").html(htmlComputerList);
@@ -113,11 +114,12 @@ var computerName;
 
             $("[id^='computer-id_']").click(function () {
                 var objData = $(this);
-                console.log(objData);
-                computerName = (objData[0].id).replace('computer-id_', '');
+                computerName = $(this).text;
                 console.log(computerName);
+                computerId = (objData[0].id).replace('computer-id_', '');
+                console.log(computerId);
                 $('#header-devmng').html('Устройства компьютера: ' + computerName);
-                renderComputerTree(computerName);
+                renderComputerTree(computerId);
             });
 
 
