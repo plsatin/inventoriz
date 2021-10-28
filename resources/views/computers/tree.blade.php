@@ -13,27 +13,61 @@
   box-sizing: border-box;
 }
 
-/* Create two equal columns that floats next to each other */
-.column {
+/* .column {
   float: left;
-  width: 25%;
   min-width: 300px;
   padding: 10px;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+.left {
+    width: calc(50% - 100px);
+}
+
+.right {
+    width: calc(50% - 100px);
+}
+
+
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
   }
-}</style>
+} */
+
+
+
+
+.row {
+    width: 100%;
+}
+.right, .left {
+    width:100%;
+}
+@media (min-width: 48em) {
+    .right {
+        width: 70%;
+        float:left;
+    }
+    .left {
+        width: 30%;
+        float:left;
+    }
+
+    .row {
+        content:"";
+        display: table;
+        clear: both;
+    }
+}
+
+
+</style>
 
 
 
