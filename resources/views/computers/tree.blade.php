@@ -134,15 +134,7 @@ var computerName;
 
 
     });
-
-    
-    function getProductRating(product_1c_code, objLikeDislike) {
-        $.getJSON('http://portal.rezhcable.ru/intra/buillon/api/product/rating/' + product_1c_code, function (data) {
-            $(objLikeDislike).thumbs('setLikes', data.data[0].product_like);
-            $(objLikeDislike).thumbs('setDislikes', data.data[0].product_dislike);
-        });
-    }
-
+  
 
 
 
