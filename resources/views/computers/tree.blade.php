@@ -116,7 +116,9 @@ var computerName;
 
     $("[id^='computer-id_']").click(function () {
         var objData = $(this);
+        console.log(objData);
         computerName = (objData.id).replace('computer-id_', '');
+        console.log(computerName);
         $('#header-devmng').html('Устройства компьютера: ' + computerName);
         renderComputerTree(computerName);
     });
