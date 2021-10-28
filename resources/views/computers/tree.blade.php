@@ -102,7 +102,7 @@ var computerName;
             var htmlComputerList = '<ul>';
 
             for (var computer in data) {
-                htmlComputerList = htmlComputerList + '<li>' + computer.name + '</li>';
+                htmlComputerList = htmlComputerList + '<li>' + data[computer].name + '</li>';
             }
             htmlComputerList = htmlComputerList + '</ul>';
             $("#list-computers").html(htmlComputerList);
