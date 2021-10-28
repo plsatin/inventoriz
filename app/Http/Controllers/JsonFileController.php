@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\WmiClass;
+use App\Models\WmiProperty;
+
 use Response;
 use View;
 use File;
