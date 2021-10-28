@@ -74,7 +74,7 @@
 <div class="row">
     <div class="column left">
         <h2>Список компьютеров</h2>
-        <p>Some text..</p>
+        <div id="list-computers"></div>
     </div>
     <div class="column right">
         <h2 id="header-devmng">Диспетчер устройств</h2>
@@ -91,23 +91,58 @@
 
 <script>
 $(document).ready(function () {
-var computerName = "{{ $computer->id }}";
+var computerName;
 
-    $(function(){
-        $("#tree").fancytree({
+
+    $.ajax({
+        type: "GET",
+        url: '/api/v1/computers',
+        success: function (data) {
+            // console.log(data);
+            var htmlComputerList = '<ul>';
+
+            for (var computer in data) {
+                htmlComputerList = htmlComputerList + '<li>' + computer.name + '</li>'';
+            }
+            htmlComputerList = htmlComputerList + '</ul>';
+            $("#list-computers").html(htmlComputerList);
+
+        },
+        error: function (jqXHR, text, error) {
+            console.log(error);
+        }
+    });
+
+
+    $("[id^='computer-id_']").click(function () {
+        var objData = $(this);
+        computerName = (objData.id).replace('computer-id_', '');
+        $('#header-devmng').html('Устройства компьютера: ' + computerName);
+        renderComputerTree(computerName);
+    });
+
+
+
+    function renderComputerTree(computerName){
+        $('#tree').fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            source: {url: "/api/v1/computers/"+computerName+"/properties"},
+            source: {url: '/api/v1/computers/'+computerName+'/properties'},
         });
 
 
     });
 
     
+    function getProductRating(product_1c_code, objLikeDislike) {
+        $.getJSON('http://portal.rezhcable.ru/intra/buillon/api/product/rating/' + product_1c_code, function (data) {
+            $(objLikeDislike).thumbs('setLikes', data.data[0].product_like);
+            $(objLikeDislike).thumbs('setDislikes', data.data[0].product_dislike);
+        });
+    }
 
-    // $("#header-devmng").html("Диспетчер устройств " + data.name);
 
 
 
