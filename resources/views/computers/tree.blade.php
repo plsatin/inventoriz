@@ -22,7 +22,7 @@
 
 .left {
     width: 25%;
-    min-width: 30px;
+    min-width: 300px;
 }
 
 .right {
