@@ -63,11 +63,15 @@ var computerName;
         $("#tree").fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
-                console.log(data);
+                // console.log(data);
                 return data.typeInfo.iconTooltip;
 
             },
             source: {url: "/api/v1/computers/{{ $computer->id }}/properties"},
+            function(event, data) {
+                console.log(data);
+                
+            },
         });
 
 
