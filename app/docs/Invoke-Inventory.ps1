@@ -127,7 +127,13 @@ foreach ($class in $wmiClasses) {
                 break
             }
             "Win32_Product" {
-                $computerClassI = Get-WMIObject -Class $Win32ClassName -ComputerName $ComputerName | Sort-Object InstallDate –Descending
+                $computerClassI = Get-WMIObject -Class Win32_Product -ComputerName $ComputerName | Sort-Object InstallDate –Descending
+                break
+            }
+            "Win32_PNPEntity" {
+                $computerClassI = Get-WmiObject -Class Win32_PNPEntity -ComputerName $ComputerName -ErrorAction Stop | 
+                    Where-Object{$_.ConfigManagerErrorCode -ne 0} | 
+                    Select-Object Name, DeviceID, ConfigManagerErrorCode
                 break
             }
             default {
@@ -161,8 +167,6 @@ foreach ($class in $wmiClasses) {
                         $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
                         $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
                         $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
-
-
 
                         $recordCount ++
                 }
