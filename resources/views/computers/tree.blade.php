@@ -18,16 +18,17 @@
 <script>
 $(document).ready(function () {
 var computerName = "{{ $computer->name }}";
+var computerId = "{{ $computer->id }}";
 
-    renderComputerTree(computerName);
+    renderComputerTree(computerId);
 
-    function renderComputerTree(computerName){
+    function renderComputerTree(computerId){
         $('#tree').fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            source: {url: '/api/v1/computers/'+computerName+'/properties'},
+            source: {url: '/api/v1/computers/'+computerId+'/properties'},
         });
     }
 
