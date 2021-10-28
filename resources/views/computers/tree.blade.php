@@ -57,21 +57,15 @@
 
 <script>
 $(document).ready(function () {
-var computerName;
+var computerName = "{{ $computer->id }}";
 
     $(function(){
         $("#tree").fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
-                // console.log(data);
                 return data.typeInfo.iconTooltip;
-
             },
-            source: {url: "/api/v1/computers/{{ $computer->id }}/properties"},
-            function(event, data) {
-                console.log(data);
-                
-            },
+            source: {url: "/api/v1/computers/"+computerName+"/properties"},
         });
 
 
