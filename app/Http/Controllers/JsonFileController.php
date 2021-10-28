@@ -24,11 +24,16 @@ class JsonFileController extends Controller
 
     public function classesJsonFileDownload()
     {
-        $wmiClasses = json_encode(WmiClass::all());
+        try {
+            $wmiClasses = json_encode(WmiClass::all());
 
-        $jsongFile = time() . '_file.json';
-        File::put($this->public_path('uploads/'.$jsongFile), $wmiClasses);
-        return response()->download($this->public_path('uploads/'.$jsongFile));
+            $jsongFile = time() . '_file.json';
+            File::put($this->public_path('uploads/'.$jsongFile), $wmiClasses);
+            return response()->download($this->public_path('uploads/'.$jsongFile));
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
     }
 
 
@@ -50,7 +55,6 @@ class JsonFileController extends Controller
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 404);
         }
-
     }
 
 
