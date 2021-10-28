@@ -63,17 +63,19 @@ var computerName;
         $("#tree").fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
-                $("#header-devmng").html("Диспетчер устройств" + data.name);
+                console.log(data);
                 return data.typeInfo.iconTooltip;
 
             },
             source: {url: "/api/v1/computers/{{ $computer->id }}/properties"},
         });
 
+
     });
 
     
 
+    // $("#header-devmng").html("Диспетчер устройств " + data.name);
 
 
 
