@@ -46,12 +46,13 @@ class InfoController extends Controller
     {
         try {
             // if ($request->input('computer') != '') {
-                $computerName = $request->input('computer');
+                // $computerName = $request->input('computer');
 
-                $computer = Computer::query()->where('name', $computerName)->firstOrFail();
+                // $computer = Computer::query()->where('name', $computerName)->firstOrFail();
         
                 $page_title = 'Аппаратное обеспечение';
-                return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
+                return view('computers.tree')->with('page_title', $page_title);
+                // return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
             // } else {
 
             //     return abort(404);
