@@ -31,6 +31,10 @@
 }
 
 
+.row {
+  display: flex;
+}
+
 /* Clear floats after the columns */
 .row:after {
     content: "";
