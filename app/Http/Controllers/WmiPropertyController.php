@@ -22,7 +22,7 @@ class WmiPropertyController extends Controller
 
 
 
-    public function showAllPropertiesOfClass($id)
+    public function showAllPropertiesOfWmiClass($id)
     {
         try {
 
@@ -39,7 +39,7 @@ class WmiPropertyController extends Controller
     }
 
 
-    public function showOnePropertyOfClass($id, $property)
+    public function showOnePropertyOfWmiClass($id, $property)
     {
         try {
             $wmiClass = WmiClass::findOrFail($id);

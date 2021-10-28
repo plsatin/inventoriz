@@ -35,7 +35,7 @@ class WmiClassController extends Controller
 
     }
 
-    public function showOneClass($id)
+    public function showOneWmiClass($id)
     {
         try {
             return response()->json(WmiClass::findOrFail($id));

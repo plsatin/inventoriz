@@ -23,18 +23,23 @@ $router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
+    // Информация о версии API
     $router->get('v1/',  ['uses' => 'InfoController@apiVersion']);
    
+    // Запрос на скачивание json-файла с классами и их свойствами
+    $router->get('json-file-download', ['uses' => 'JsonFileController@jsonFileDownload']);
+
+
 
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
-    $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneClass']);
+    $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneWmiClass']);
     // $router->post('v1/classes', ['uses' => 'WmiClassController@create']);
     // $router->delete('v1/classes/{id}', ['uses' => 'WmiClassController@delete']);
     // $router->put('v1/classes/{id}', ['uses' => 'WmiClassController@update']);
 
 
-    $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfClass']);
-    $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertyOfClass']);
+    $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfWmiClass']);
+    $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertyOfWmiClass']);
     // $router->post('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@create']);
     // $router->delete('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@delete']);
     // $router->put('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@update']);
