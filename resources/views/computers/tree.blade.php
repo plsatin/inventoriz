@@ -10,30 +10,35 @@
 
 <style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* Create two unequal columns that floats next to each other */
 .column {
-  float: left;
-  padding: 10px;
+    float: left;
+    padding: 10px;
 
 }
 
 .left {
-  width: 25%;
-  min-width: 320px;
+    width: 25%;
+    min-width: 30px;
 }
 
 .right {
-  width: 75%;
+    width: auto;
+    max-width: 100%;
+}
+
+.row {
+  display: flex;
 }
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 </style>
