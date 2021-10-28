@@ -27,7 +27,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/',  ['uses' => 'InfoController@getApiVersion']);
    
     // Запрос на скачивание json-файла с классами и их свойствами
-    $router->get('download/classes-json', ['uses' => 'JsonFileController@jsonFileDownload']);
+    $router->get('v1/download/classes-json', ['uses' => 'JsonFileController@jsonFileDownload']);
 
 
 
