@@ -83,106 +83,115 @@ function Get-ComputerUUID {
 
 
 
-#Замер времени исполнения скрипта
-$watch = [System.Diagnostics.Stopwatch]::StartNew()
-$watch.Start() #Запуск таймера
+
+
+$result = Test-Connection -ComputerName $ComputerName -Count 2 -Quiet
+
+if ($result) {
+    #Замер времени исполнения скрипта
+    $watch = [System.Diagnostics.Stopwatch]::StartNew()
+    $watch.Start() #Запуск таймера
+
+    $ComputerUUID = Get-ComputerUUID -ComputerName $ComputerName
+    
+    Write-Host "[OK] Host $ComputerName is available"
+    Write-Host "Computer UUID: $ComputerUUID "
+
+    $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
+
+    if ($ComputerTarget.id) {
+        $ComputerTargetId = $ComputerTarget.id
+    } else {
+        $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
+        $postParams = @{"name" = "$ComputerName"; "computertargetid" = "$ComputerUUID"}
+        $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers" -Body $postParams
+        $ComputerTargetId = $ComputerTarget.id
+    }
 
 
 
-$ComputerUUID = Get-ComputerUUID -ComputerName $ComputerName
-$ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
-
-if ($ComputerTarget.id) {
-    $ComputerTargetId = $ComputerTarget.id
-} else {
-    $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
-    $postParams = @{"name" = "$ComputerName"; "computertargetid" = "$ComputerUUID"}
-    $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers" -Body $postParams
-    $ComputerTargetId = $ComputerTarget.id
-}
 
 
+    $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes"
+    # $wmiClasses
 
+    $recordCount = 0
 
+    foreach ($class in $wmiClasses) {
+        $wmiClassId = $class.id
+        $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes/$wmiClassId/properties"
+        # $wmiProperties
 
-$wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes"
-# $wmiClasses
+        $Win32Namespace = $class.namespace
+        $Win32ClassName = $class.name
 
-$recordCount = 0
+        if ($class.enabled -eq 1) {
+            Write-Host "Processed class: $Win32ClassName"
 
-foreach ($class in $wmiClasses) {
-    $wmiClassId = $class.id
-    $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes/$wmiClassId/properties"
-    # $wmiProperties
-
-    $Win32Namespace = $class.namespace
-    $Win32ClassName = $class.name
-
-    if ($class.enabled -eq 1) {
-        Write-Verbose $Win32ClassName
-
-        switch ($Win32ClassName) {
-            "SoftwareLicensingProduct" {
-                $computerClassI = Get-WmiObject -Class SoftwareLicensingProduct -ComputerName $ComputerName -ErrorAction Stop | Where-Object PartialProductKey | Select-Object Name, ApplicationId, LicenseStatus, ProductKeyChannel
-                break
-            }
-            "Win32_Product" {
-                $computerClassI = Get-WMIObject -Class Win32_Product -ComputerName $ComputerName | Sort-Object InstallDate –Descending
-                break
-            }
-            "Win32_PNPEntity" {
-                $computerClassI = Get-WmiObject -Class Win32_PNPEntity -ComputerName $ComputerName -ErrorAction Stop | 
-                    Where-Object{$_.ConfigManagerErrorCode -ne 0} | 
-                    Select-Object Name, DeviceID, ConfigManagerErrorCode
-                break
-            }
-            default {
-                $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
-                break
-            }
-        }
-        
-        $InstanceId = 0
-
-        if ($computerClassI) {
-            foreach ($computerClass in $computerClassI) {
-                $InstanceId = $InstanceId + 1
-
-                foreach ($rowProp in $wmiProperties) {
-                    $PropertyId = $rowProp.id
-                    $PropertyName = $rowProp.name
-
-                        $Value = $computerClass.$PropertyName | Out-String
-                        try {
-                            if (!($Null -eq $Value) -And ($Value.ToString() -like '*\*')) {
-                                Write-Verbose $Value.ToString()
-                                $Value = ($Value.ToString()).Replace("\", "\\")
-                            } else {
-
-                            }
-                        } catch [Exception] {
-                            Write-Verbose $_.Exception.ToString()
-                        }
-
-                        $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
-                        $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
-                        $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
-
-                        $recordCount ++
+            switch ($Win32ClassName) {
+                "SoftwareLicensingProduct" {
+                    $computerClassI = Get-WmiObject -Class SoftwareLicensingProduct -ComputerName $ComputerName -ErrorAction Stop | Where-Object PartialProductKey | Select-Object Name, ApplicationId, LicenseStatus, ProductKeyChannel
+                    break
+                }
+                "Win32_Product" {
+                    $computerClassI = Get-WMIObject -Class Win32_Product -ComputerName $ComputerName | Sort-Object InstallDate –Descending
+                    break
+                }
+                "Win32_PNPEntity" {
+                    $computerClassI = Get-WmiObject -Class Win32_PNPEntity -ComputerName $ComputerName -ErrorAction Stop | 
+                        Where-Object{$_.ConfigManagerErrorCode -ne 0} | 
+                        Select-Object Name, DeviceID, ConfigManagerErrorCode
+                    break
+                }
+                default {
+                    $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
+                    break
                 }
             }
-        }
+            
+            $InstanceId = 0
+
+            if ($computerClassI) {
+                foreach ($computerClass in $computerClassI) {
+                    $InstanceId = $InstanceId + 1
+
+                    foreach ($rowProp in $wmiProperties) {
+                        $PropertyId = $rowProp.id
+                        $PropertyName = $rowProp.name
+
+                            $Value = $computerClass.$PropertyName | Out-String
+                            try {
+                                if (!($Null -eq $Value) -And ($Value.ToString() -like '*\*')) {
+                                    Write-Verbose $Value.ToString()
+                                    $Value = ($Value.ToString()).Replace("\", "\\")
+                                } else {
+
+                                }
+                            } catch [Exception] {
+                                Write-Verbose $_.Exception.ToString()
+                            }
+
+                            $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
+                            $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
+                            $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
+
+                            $recordCount ++
+                    }
+                }
+            }
 
 
-    } ## if $class.enabled
+        } ## if $class.enabled
 
+    }
+
+
+
+    $watch.Stop() #Остановка таймера
+    Write-Host $watch.Elapsed #Время выполнения
+    Write-Host "Total properties pushed: $recordCount"
+
+
+} else {
+    Write-Host "[UNKNOWN] Host $ComputerName is not available."
 }
-
-
-
-
-
-
-$watch.Stop() #Остановка таймера
-Write-Host $watch.Elapsed #Время выполнения
-Write-Host "Total properties pushed: $recordCount"
