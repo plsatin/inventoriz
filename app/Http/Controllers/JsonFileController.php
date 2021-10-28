@@ -21,11 +21,19 @@ class JsonFileController extends Controller
 
 
         $jsongFile = time() . '_file.json';
-        File::put(public_path('/upload/json/'.$jsongFile), $wmiClasses);
+        File::put($this->public_path('/upload/json/'.$jsongFile), $wmiClasses);
         return Response::download(public_path('/upload/jsonfile/'.$jsongFile));
 	}
 
 
+
+
+    
+
+    public function public_path($path = null)
+    {
+        return rtrim(app()->basePath('public/' . $path), '/');
+    }
 
 
 }
