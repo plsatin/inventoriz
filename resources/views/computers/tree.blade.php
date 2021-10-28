@@ -43,7 +43,7 @@
         <p>Some text..</p>
     </div>
     <div class="column right">
-        <h2>Диспетчер устройств</h2>
+        <h2 id="hedaer-devmng">Диспетчер устройств</h2>
         <div class="computer-tree" id="tree"></div>
         <div id="statusline"></div>
     </div>
@@ -57,18 +57,22 @@
 
 <script>
 $(document).ready(function () {
+var dataJson;
 
     $(function(){
         $("#tree").fancytree({
             tooltip: true,
-            iconTooltip: function(event, data) {
-                return data.typeInfo.iconTooltip;
+            iconTooltip: function(event, dataJson) {
+                return dataJson.typeInfo.iconTooltip;
             },
             source: {url: "/api/v1/computers/{{ $computer->id }}/properties"},
+            
 
 
         });
     });
+
+    $("#header-devmng").html("Диспетчер устройств" + dataJson.name);
 
 
 
