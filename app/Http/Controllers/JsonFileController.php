@@ -1,18 +1,26 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\WmiClass;
-use App\Models\WmiProperty;
+use Illuminate\Support\Facades\File;
 
 use Response;
 use View;
-// use File;
 
-use Illuminate\Support\Facades\File;
+use App\Models\WmiClass;
+use App\Models\WmiProperty;
+
 
 
 class JsonFileController extends Controller
 {
+
+    public function public_path($path = null)
+    {
+        return rtrim(app()->basePath('public/' . $path), '/');
+    }
+
+
+
 
     public function classesJsonFileDownload()
     {
@@ -49,10 +57,6 @@ class JsonFileController extends Controller
 
 
 
-    public function public_path($path = null)
-    {
-        return rtrim(app()->basePath('public/' . $path), '/');
-    }
 
 
 }
