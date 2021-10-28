@@ -30,9 +30,6 @@
     max-width: 100%;
 }
 
-.row {
-  display: flex;
-}
 
 /* Clear floats after the columns */
 .row:after {
