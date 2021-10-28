@@ -6,7 +6,10 @@ use App\Models\WmiProperty;
 
 use Response;
 use View;
-use File;
+// use File;
+
+use Illuminate\Support\Facades\File;
+
 
 class JsonFileController extends Controller
 {
