@@ -110,21 +110,24 @@ var computerName;
             htmlComputerList = htmlComputerList + '</ul>';
             $("#list-computers").html(htmlComputerList);
 
+
+            $("[id^='computer-id_']").click(function () {
+                var objData = $(this);
+                console.log(objData);
+                computerName = ($(this).id).replace('computer-id_', '');
+                console.log(computerName);
+                $('#header-devmng').html('Устройства компьютера: ' + computerName);
+                renderComputerTree(computerName);
+            });
+
+
+
         },
         error: function (jqXHR, text, error) {
             console.log(error);
         }
     });
 
-
-    $("[id^='computer-id_']").click(function () {
-        var objData = $(this);
-        console.log(objData);
-        computerName = ($(this).id).replace('computer-id_', '');
-        console.log(computerName);
-        $('#header-devmng').html('Устройства компьютера: ' + computerName);
-        renderComputerTree(computerName);
-    });
 
 
 
