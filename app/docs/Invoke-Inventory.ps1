@@ -1,4 +1,4 @@
-<#
+﻿<#
  .SYNOPSIS
   
  
@@ -120,7 +120,22 @@ foreach ($class in $wmiClasses) {
 
     if ($class.enabled -eq 1) {
         Write-Verbose $Win32ClassName
-        $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
+
+        switch ($Win32ClassName) {
+            "SoftwareLicensingProduct" {
+                $computerClassI = Get-WmiObject -Class SoftwareLicensingProduct -ComputerName $ComputerName -ErrorAction Stop | Where-Object PartialProductKey | Select-Object Name, ApplicationId, LicenseStatus, ProductKeyChannel
+                break
+            }
+            "Win32_Product" {
+                $computerClassI = Get-WMIObject -Class $Win32ClassName -ComputerName $ComputerName | Sort-Object InstallDate –Descending
+                break
+            }
+            default {
+                $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
+                break
+            }
+        }
+        
         $InstanceId = 0
 
         if ($computerClassI) {

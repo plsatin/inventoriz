@@ -50,7 +50,7 @@ class InfoController extends Controller
 
                 $computer = Computer::query()->where('name', $computerName)->firstOrFail();
         
-                $page_title = 'Диспетчер устройств: ' . $computerName;
+                $page_title = 'Аппаратное обеспечение';
                 return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
             // } else {
 
