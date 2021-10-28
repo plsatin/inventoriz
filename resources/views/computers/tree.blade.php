@@ -98,7 +98,7 @@ var computerName;
         type: "GET",
         url: '/api/v1/computers',
         success: function (data) {
-            // console.log(data);
+            console.log(data);
             var htmlComputerList = '<ul>';
 
             for (var computer in data) {
