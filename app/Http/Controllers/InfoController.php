@@ -23,7 +23,7 @@ class InfoController extends Controller
     }
 
 
-    public function apiVersion()
+    public function getApiVersion()
     {
         try {
             $apiVersionTxt = 'API Version 0.9';
