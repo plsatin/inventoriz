@@ -17,11 +17,12 @@
 .column {
   float: left;
   padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
+
 }
 
 .left {
   width: 25%;
+  min-width: 320px;
 }
 
 .right {
@@ -40,11 +41,11 @@
 
 
 <div class="row">
-    <div class="column left" style="background-color:#aaa;">
+    <div class="column left">
         <h2>Список компьютеров</h2>
         <p>Some text..</p>
     </div>
-    <div class="column right" style="background-color:#bbb;">
+    <div class="column right">
         <h2>Диспетчер устройств</h2>
         <div class="computer-tree" id="tree"></div>
         <div id="statusline"></div>
