@@ -27,9 +27,9 @@ class JsonFileController extends Controller
         try {
             $wmiClasses = json_encode(WmiClass::all());
 
-            $jsongFile = time() . '_file.json';
-            File::put($this->public_path('uploads/'.$jsongFile), $wmiClasses);
-            return response()->download($this->public_path('uploads/'.$jsongFile));
+            $jsonFile = time() . '_file.json';
+            File::put($this->public_path('uploads/'.$jsonFile), $wmiClasses);
+            return response()->download($this->public_path('uploads/'.$jsonFile));
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 404);
@@ -47,9 +47,9 @@ class JsonFileController extends Controller
             $classProperties = $wmiClass->properties()->get();
 
 
-            // $jsongFile = time() . '_file.json';
-            // File::put($this->public_path('uploads/'.$jsongFile), $classProperties);
-            // return response()->download($this->public_path('uploads/'.$jsongFile));
+            // $jsonFile = time() . '_file.json';
+            // File::put($this->public_path('uploads/'.$jsonFile), $classProperties);
+            // return response()->download($this->public_path('uploads/'.$jsonFile));
 
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
