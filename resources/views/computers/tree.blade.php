@@ -77,7 +77,7 @@
 <div class="row">
     <div class="column left">
         <h2>Список компьютеров</h2>
-        <div id="list-computers"></div>
+        <div class="list-computers" id="list-computers"></div>
     </div>
     <div class="column right">
         <h2 id="header-devmng">Диспетчер устройств</h2>
