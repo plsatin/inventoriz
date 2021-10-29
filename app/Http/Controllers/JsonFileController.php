@@ -40,16 +40,17 @@ class JsonFileController extends Controller
     public function propertiesJsonFileDownload()
     {
         try {
-            $id = 0;
+            // $id = 0;
+            // $wmiClass = WmiClass::findOrFail($id);
+            // // $classProperties = WmiProperty::query()->where('wmiclass_id', $wmiClass->id)->get();
+            // $classProperties = $wmiClass->properties()->get();
 
-            $wmiClass = WmiClass::findOrFail($id);
-            // $classProperties = WmiProperty::query()->where('wmiclass_id', $wmiClass->id)->get();
-            $classProperties = $wmiClass->properties()->get();
+            $wmiProperties = json_encode(WmiProperty::all());
 
 
-            // $jsonFile = time() . '_file.json';
-            // File::put($this->public_path('uploads/'.$jsonFile), $classProperties);
-            // return response()->download($this->public_path('uploads/'.$jsonFile));
+            $jsonFile = time() . '_file.json';
+            File::put($this->public_path('uploads/'.$jsonFile), $wmiProperties);
+            return response()->download($this->public_path('uploads/'.$jsonFile));
 
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
