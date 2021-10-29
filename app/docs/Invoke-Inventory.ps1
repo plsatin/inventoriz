@@ -43,9 +43,11 @@ function Get-ComputerUUID {
 
         if (!$computerSystem) {
             #Запрос не выполнен завершаем!
+            Write-Host "[CRITICAL] Host $ComputerName is not accepting requests!"
             Write-Host $err.Message
             $returnState = $returnStateUnknown
-            [System.Environment]::Exit($returnState)
+            exit
+            # [System.Environment]::Exit($returnState)
         } else {
             $returnState = $returnStateOK
         }
@@ -54,22 +56,22 @@ function Get-ComputerUUID {
         $OSSerial = get-wmiobject Win32_OperatingSystem -computername $ComputerName | Select-Object -ExpandProperty SerialNumber -ErrorAction SilentlyContinue
 
         Write-Verbose "UUID from WMI: $ComputerUUID"
+        Write-Verbose "OS serial from WMI: $OSSerial"
 
-        if ($ComputerUUID -eq "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF") {
+        ## Нужно однозначно определится с UUID
+        # if ($ComputerUUID -eq "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF") {
+        # } elseif ($ComputerUUID -eq "00000000-0000-0000-0000-000000000000") {
+        # } elseif ($ComputerUUID -eq "03000200-0400-0500-0006-000700080009") {
+        #     if ($OSSerial -eq "00425-00000-00002-AA147") {
+        #         $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
+        #         $ComputerUUID = $ComputerUUID.ToUpper()
+        #     }
+        # } elseif ( $Null -eq $ComputerUUID ) {
+        #     $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
+        #     $ComputerUUID = $ComputerUUID.ToUpper()
+        # } else {
+        # }
 
-        } elseif ($ComputerUUID -eq "00000000-0000-0000-0000-000000000000") {
-
-        } elseif ($ComputerUUID -eq "03000200-0400-0500-0006-000700080009") {
-            if ($OSSerial -eq "00425-00000-00002-AA147") {
-                $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
-                $ComputerUUID = $ComputerUUID.ToUpper()
-            }
-        } elseif ( $Null -eq $ComputerUUID ) {
-            $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
-            $ComputerUUID = $ComputerUUID.ToUpper()
-        } else {
-
-        }
         $ComputerUUID = $ComputerUUID + "-" + $OSSerial
         Write-Verbose "ComputerUUID: $ComputerUUID"
 
@@ -97,6 +99,7 @@ if ($result) {
     Write-Host "[OK] Host $ComputerName is available"
     Write-Host "Computer UUID: $ComputerUUID "
 
+    # Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
     $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
 
     if ($ComputerTarget.id) {
@@ -107,8 +110,6 @@ if ($result) {
         $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers" -Body $postParams
         $ComputerTargetId = $ComputerTarget.id
     }
-
-
 
 
 
@@ -124,7 +125,7 @@ if ($result) {
 
         Write-Verbose "Removing a class: $Win32ClassName"
         $wmiDelClass = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
-        $wmiDelClass.data.Message
+        # $wmiDelClass.data.Message
 
         $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
         # $wmiProperties
