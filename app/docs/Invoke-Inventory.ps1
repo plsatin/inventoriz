@@ -5,7 +5,7 @@
  .DESCRIPTION
  
  .EXAMPLE
-.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -Verbose
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -apiUrl "http://192.168.0.235:8000" -Verbose
 
  .LINK
   https://webnote.satin-pl.com
@@ -22,7 +22,7 @@ Param(
     [Parameter(Mandatory = $true)]
     [string]$ComputerName,
     [Parameter(Mandatory = $false)]
-    [string]$CEnabled = 1
+    [string]$apiUrl = "http://192.168.0.235:8000"
 
 )
 
@@ -97,14 +97,14 @@ if ($result) {
     Write-Host "[OK] Host $ComputerName is available"
     Write-Host "Computer UUID: $ComputerUUID "
 
-    $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
+    $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
 
     if ($ComputerTarget.id) {
         $ComputerTargetId = $ComputerTarget.id
     } else {
         $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
         $postParams = @{"name" = "$ComputerName"; "computertargetid" = "$ComputerUUID"}
-        $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers" -Body $postParams
+        $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers" -Body $postParams
         $ComputerTargetId = $ComputerTarget.id
     }
 
@@ -112,18 +112,22 @@ if ($result) {
 
 
 
-    $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes"
+    $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes"
     # $wmiClasses
 
     $recordCount = 0
 
     foreach ($class in $wmiClasses) {
         $wmiClassId = $class.id
-        $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "http://192.168.0.235:8000/api/v1/classes/$wmiClassId/properties"
-        # $wmiProperties
-
         $Win32Namespace = $class.namespace
         $Win32ClassName = $class.name
+
+        Write-Verbose "Removing a class: $Win32ClassName"
+        $wmiDelClass = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
+        $wmiDelClass.data.Message
+
+        $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
+        # $wmiProperties
 
         if ($class.enabled -eq 1) {
             Write-Host "Processed class: $Win32ClassName"
@@ -148,7 +152,10 @@ if ($result) {
                     break
                 }
             }
+
             
+
+
             $InstanceId = 0
 
             if ($computerClassI) {
@@ -173,7 +180,7 @@ if ($result) {
 
                             $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
                             $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
-                            $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "http://192.168.0.235:8000/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
+                            $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
 
                             $recordCount ++
                     }

@@ -92,9 +92,11 @@ class ComputerController extends Controller
     public function delete($id)
     {
         try {
-            Computer::findOrFail($id)->delete();
+            $computer = Computer::findOrFail($id);
+            $computerName = $computer->name;
+            $computer->delete();
 
-            $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));
+            $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Computer ' . $computerName . ' deleted successfully'));
             return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
