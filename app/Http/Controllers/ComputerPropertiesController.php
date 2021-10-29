@@ -192,6 +192,23 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+    public function deleteWmiClass($id, $class)
+    {
+        try {
+
+            $computer = Computer::findOrFail($id);
+            $wmiclass = WmiClass::findOrFail($class);
+
+            $property = ComputerProperties::whereBelongsTo($computer)
+                ->whereBelongsTo($wmiclass)->delete();
+
+            $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));
+            return response()->json($responseObject, 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
+    }
 
 
 
