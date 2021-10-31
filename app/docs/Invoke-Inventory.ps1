@@ -27,6 +27,24 @@ Param(
 )
 
 
+function Get-UserApiKey {
+    Param(
+        [Parameter(Mandatory = $false)]
+        [string]$UserName = "tech@rezhcable.ru",
+        [Parameter(Mandatory = $false)]
+        [string]$UserPassword = "Z123456z",
+        [Parameter(Mandatory = $false)]
+        [string]$apiUrl = "http://192.168.0.235:8000"
+    
+    )
+
+    $headers = @{ "Content-Type" = "application/x-www-form-urlencoded" }    
+    $postParams = @{"email"="$UserName";"password"="$UserPassword"}
+    $UserAPiKey  = Invoke-RestMethod -Method POST -Body $postParams -Headers $headers -Uri "$apiUrl/api/login"
+
+    return $UserAPiKey
+}
+
 
 function Get-ComputerUUID {
     Param(
@@ -87,6 +105,9 @@ function Get-ComputerUUID {
 
 
 
+
+$api_key = (Get-UserApiKey).token
+
 $result = Test-Connection -ComputerName $ComputerName -Count 2 -Quiet
 
 if ($result) {
@@ -105,7 +126,7 @@ if ($result) {
     if ($ComputerTarget.id) {
         $ComputerTargetId = $ComputerTarget.id
     } else {
-        $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
+        $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
         $postParams = @{"name" = "$ComputerName"; "computertargetid" = "$ComputerUUID"}
         $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers" -Body $postParams
         $ComputerTargetId = $ComputerTarget.id
@@ -179,7 +200,7 @@ if ($result) {
                                 Write-Verbose $_.Exception.ToString()
                             }
 
-                            $headers = @{"Content-Type" = "application/x-www-form-urlencoded"}
+                            $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
                             $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
                             $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
 
