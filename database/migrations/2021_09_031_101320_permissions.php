@@ -12,6 +12,7 @@ class Permissions extends Migration{
             $table->string('name')->nullable();
             $table->string('key')->nullable();
             $table->string('controller');
+            $table->string('action');
             $table->string('method');
             $table->timestamps();
            });
