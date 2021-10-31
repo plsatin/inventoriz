@@ -23,6 +23,10 @@ $router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
+    /** Авторизация */
+    $router->post('register', 'AuthController@register');
+    
+
     /** Информация о версии API */
     $router->get('v1/',  ['uses' => 'InfoController@getApiVersion']);
    

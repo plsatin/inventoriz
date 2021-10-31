@@ -103,7 +103,7 @@ var computerId;
         type: "GET",
         url: '/api/v1/computers',
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             var htmlComputerList = '<ul>';
 
             for (var computer in data) {
@@ -116,9 +116,9 @@ var computerId;
             $("[id^='computer-id_']").click(function () {
                 var objData = $(this);
                 computerName = $(this).text();
-                console.log(computerName);
+                // console.log(computerName);
                 computerId = (objData[0].id).replace('computer-id_', '');
-                console.log(computerId);
+                // console.log(computerId);
                 $('#header-devmng').html('Устройства компьютера: ' + computerName);
                 renderComputerTree(computerId);
             });
