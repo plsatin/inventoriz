@@ -124,8 +124,8 @@ if ($result) {
         $Win32ClassName = $class.name
 
         Write-Verbose "Removing a class: $Win32ClassName"
-        $wmiDelClass = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
-        # $wmiDelClass.data.Message
+        $wmiClassDelete = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
+        Write-Verbose $($wmiClassDelete.data.Message)
 
         $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
         # $wmiProperties

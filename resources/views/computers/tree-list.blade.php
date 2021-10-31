@@ -13,16 +13,17 @@
   box-sizing: border-box;
 }
 
-/* .column {
-  float: left;
-  min-width: 300px;
-  padding: 10px;
+/*
+.column {
+    float: left;
+    min-width: 300px;
+    padding: 10px;
 }
 
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .left {
@@ -33,12 +34,12 @@
     width: calc(50% - 100px);
 }
 
-
 @media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-} */
+    .column {
+        width: 100%;
+    }
+}
+*/
 
 
 

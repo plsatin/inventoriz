@@ -29,3 +29,14 @@ FROM computer_properties AS cp
         WHERE cp.wmiproperty_id = '901' AND cp.value LIKE '%Kaspersky%' 
 
 ```
+
+
+## Отчет о моделях принтеров
+
+```sql
+SELECT c.name,  cp.value
+FROM computer_properties AS cp
+JOIN computers AS c ON (c.id = cp.computer_id)
+WHERE cp.wmiproperty_id = '95' AND  cp.value NOT LIKE '%Microsoft%' AND cp.value NOT LIKE '%PDF%' AND cp.value NOT LIKE '%FAX%' AND cp.value NOT LIKE '%OneNote%' AND cp.value NOT LIKE '%AnyDesk%'  GROUP BY cp.value
+
+```
