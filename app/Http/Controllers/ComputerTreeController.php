@@ -25,6 +25,36 @@ class ComputerTreeController extends Controller
 
 
 
+
+
+    public function showSomeComputers(Request $request) 
+    {
+        try {
+            if ($request->filled('name')) {
+                $computerName = $request->get('name');
+                if ($request->filled('computertargetid')) {
+                    $computerTargetId = $request->get('computertargetid');
+                    $computers = Computer::where('name', $computerName)->where('computertargetid', $computerTargetId)->orderBy('name')->get();
+                } else {
+                    $computers = Computer::where('name', $computerName)->orderBy('name')->get();
+                }
+            } else {
+                if ($request->filled('computertargetid')) {
+                    $computerTargetId = $request->get('computertargetid');
+                    $computers = Computer::where('computertargetid', $computerTargetId)->orderBy('name')->get();
+                } else {
+                    $computers = Computer::query()->orderBy('name')->get();
+                }
+            }
+
+            return response()->json($computers);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
+
+    }
+
     public function showAllPropertiesOfComputerDeviceTree($id)
     {
         try {

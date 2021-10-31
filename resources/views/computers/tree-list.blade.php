@@ -101,7 +101,7 @@ var computerId;
 
     $.ajax({
         type: "GET",
-        url: '/api/v1/computers',
+        url: '/api/v1/computers-list',
         success: function (data) {
             // console.log(data);
             var htmlComputerList = '<ul>';

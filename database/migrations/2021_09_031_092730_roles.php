@@ -19,16 +19,16 @@ class Roles extends Migration
         });
 
         // Добавляем группы по умолчанию
-        DB::table('roles')->insert([['name' => 'admin'], ['name' => 'user']]);
+        DB::table('roles')->insert([
+            ['name' => 'admin', 'description' => 'Роль администратора'],
+            ['name' => 'user', 'description' => 'Роль пользователя']]
+        );
 
     }
+
 
     public function down(){
         Schema::dropIfExists('roles');
     }
-
-
-
-
 
 }

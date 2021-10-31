@@ -70,6 +70,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     /** Дя построение дерева */
+    $router->get('v1/computers-list',  ['uses' => 'ComputerTreeController@showSomeComputers']);
     $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerDeviceTree']);
     // $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerTree']);
     // $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerSoftwareTree']);
