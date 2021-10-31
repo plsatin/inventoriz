@@ -8,15 +8,15 @@ class Users extends Migration{
     
     public function up(){
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('role_id')->index();
+            $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
     public function down(){
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role_id');
             $table->dropForeign('users_role_id_foreign');
+            $table->dropColumn('role_id');
         });
     }
 }
