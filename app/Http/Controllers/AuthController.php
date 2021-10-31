@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\Models\User;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class AuthController extends Controller
 {
     /**
@@ -41,8 +44,54 @@ class AuthController extends Controller
             return response()->json($responseObject, 409);
 
         }
-
     }
 
+
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+
+
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function login(Request $request)
+    {
+          //validate incoming request 
+        $this->validate($request, [
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = $request->only(['email', 'password']);
+
+        if (! $token = Auth::attempt($credentials)) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => '0x00401', 'Message' => 'Unauthorized'));
+            return response()->json($responseObject, 401);
+        }
+
+        return $this->respondWithToken($token);
+    }
 
 }
