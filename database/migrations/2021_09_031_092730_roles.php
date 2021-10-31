@@ -17,6 +17,10 @@ class Roles extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
+
+        // Добавляем группы по умолчанию
+        DB::table('roles')->insert([['name' => 'admin'], ['name' => 'user']]);
+
     }
 
     public function down(){
@@ -24,8 +28,6 @@ class Roles extends Migration
     }
 
 
-    // Добавляем группы по умолчанию
-    DB::table('roles')->insert([['name' => 'admin'], ['name' => 'user']]);
 
 
 
