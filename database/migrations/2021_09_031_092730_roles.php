@@ -27,14 +27,14 @@ class Roles extends Migration
     // Добавляем группу администраторов
     DB::table('roles')->insert(
         array(
-            'name' => 'admin',
-        );
+            'name' => 'admin'
+        )
     );
     // Добавляем группу пользователей
     DB::table('roles')->insert(
         array(
-            'name' => 'user',
-        );
+            'name' => 'user'
+        )
     );
 
 }
