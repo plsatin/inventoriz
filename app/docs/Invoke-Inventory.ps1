@@ -121,7 +121,8 @@ if ($result) {
     Write-Host "Computer UUID: $ComputerUUID "
 
     # Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
-    $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
+    $headers = @{"Authorization" = "Bearer $api_key"}
+    $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
 
     if ($ComputerTarget.id) {
         $ComputerTargetId = $ComputerTarget.id
@@ -133,8 +134,8 @@ if ($result) {
     }
 
 
-
-    $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes"
+    $headers = @{"Authorization" = "Bearer $api_key"}
+    $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes"
     # $wmiClasses
 
     $recordCount = 0
@@ -145,10 +146,12 @@ if ($result) {
         $Win32ClassName = $class.name
 
         Write-Verbose "Removing a class: $Win32ClassName"
-        $wmiClassDelete = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
+        $headers = @{"Authorization" = "Bearer $api_key"}
+        $wmiClassDelete = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
         Write-Verbose $($wmiClassDelete.data.Message)
 
-        $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
+        $headers = @{"Authorization" = "Bearer $api_key"}
+        $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
         # $wmiProperties
 
         if ($class.enabled -eq 1) {
