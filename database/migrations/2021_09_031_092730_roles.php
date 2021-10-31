@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 use DB;
 
+
 class Roles extends Migration
 {
     
@@ -27,13 +28,13 @@ class Roles extends Migration
     DB::table('roles')->insert(
         array(
             'name' => 'admin',
-        )
+        );
     );
     // Добавляем группу пользователей
     DB::table('roles')->insert(
         array(
             'name' => 'user',
-        )
+        );
     );
 
 }
