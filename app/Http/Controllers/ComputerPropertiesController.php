@@ -43,6 +43,7 @@ class ComputerPropertiesController extends Controller
         try {
             $computer = Computer::findOrFail($id);
             $computerClasses = WmiClass::query()
+                ->where('enabled', 1)
                 ->where('name','NOT LIKE', 'Win32_Product')
                 ->where('name','NOT LIKE', 'Win32_QuickFixEngineering')
                     ->get();
