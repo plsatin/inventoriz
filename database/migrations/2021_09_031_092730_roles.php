@@ -24,17 +24,9 @@ class Roles extends Migration
     }
 
 
-    // Добавляем группу администраторов
-    DB::table('roles')->insert(
-        array(
-            'name' => 'admin'
-        )
-    );
-    // Добавляем группу пользователей
-    DB::table('roles')->insert(
-        array(
-            'name' => 'user'
-        )
-    );
+    // Добавляем группы по умолчанию
+    DB::table('roles')->insert([['name' => 'admin'], ['name' => 'user']]);
+
+
 
 }
