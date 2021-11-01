@@ -72,4 +72,16 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+
+    public function logout () {
+        Auth::logout();
+
+        $responseObject = array('Response' => 'Error', 'data' => array('Code' => '0x00200', 'Message' => 'Successfully logged out'));
+        return response()->json($responseObject, 200);
+    }
+
+
+
+
+
 }

@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
-        // Eloquent::unguard();
+        // // $this->call('UsersTableSeeder');
+        // // Eloquent::unguard();
 
 
         // $pathWmiclasses = 'app/docs/sql/wmiclasses.sql';
