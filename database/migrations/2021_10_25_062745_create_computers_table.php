@@ -34,16 +34,3 @@ class CreateComputersTable extends Migration
         Schema::dropIfExists('computers');
     }
 }
-
-
-
-/*
-
-id	int Автоматическое приращение	 
-ComputerTargetId	varchar(255)	 
-Name	varchar(256)	 
-LastReportedInventoryTime	datetime NULL	 
-LastReportedSoftInventoryTime	datetime NULL	 
-LastReportedUpdatesInventoryTime	datetime NULL
-
-*/

@@ -20,4 +20,3 @@ class Users extends Migration{
         });
     }
 }
-

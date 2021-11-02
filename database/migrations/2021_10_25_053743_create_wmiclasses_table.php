@@ -35,16 +35,3 @@ class CreateWmiclassesTable extends Migration
         Schema::dropIfExists('wmiclasses');
     }
 }
-
-
-/*
-
-ClassID	int	 
-Name	varchar(256)	 
-Namespace	varchar(256) [root\cimv2]	 
-Title	varchar(256)	 
-Description	longtext	 
-Icon	varchar(256)	 
-Enabled	int [1]	 
-
-*/

@@ -37,14 +37,3 @@ class CreateWmipropertiesTable extends Migration
         Schema::dropIfExists('wmiproperties');
     }
 }
-
-
-/*
-
-PropertyID	int	 
-ClassID	int	 
-Name	varchar(256)	 
-Type	varchar(10)	 
-Description	longtext
-
-*/

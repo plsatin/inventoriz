@@ -39,16 +39,3 @@ class CreateComputerPropertiesTable extends Migration
         Schema::dropIfExists('computer_properties');
     }
 }
-
-
-
-/*
-
-id	int Автоматическое приращение	 
-ComputerTargetId	varchar(255)	 
-ClassID	int	 
-PropertyID	int	 
-Value	varchar(256)	 
-InstanceId	int [1]
-
-*/
