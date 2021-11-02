@@ -52,7 +52,7 @@ class InfoController extends Controller
                 $page_title = 'Диспетчер устройств: ' . $computer->name;
                 return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
             } else {
-                $page_title = 'Аппаратное обеспечение';
+                $page_title = 'Инвентаризация';
                 return view('computers.tree-list')->with('page_title', $page_title);
             }
         } catch (\Exception $e) {
