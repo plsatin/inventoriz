@@ -79,7 +79,7 @@ class ComputerPropertiesController extends Controller
 
             $property = ComputerProperties::updateOrCreate(
                 ['computer_id' => $computer->id, 'wmiclass_id' => $wmiclass->id, 'wmiproperty_id' => $wmiproperty->id, 'instance_id' => $request->input('instance_id')],
-                ['value' => $request->input('value')]
+                ['value' => trim($request->input('value'))]
             );
 
 
