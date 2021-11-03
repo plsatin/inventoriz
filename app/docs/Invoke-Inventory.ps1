@@ -38,7 +38,9 @@ function Get-UserApiKey {
     
     )
 
-    $headers = @{ "Content-Type" = "application/x-www-form-urlencoded" }    
+    $headers = @{}
+    $headers = @{ "Content-Type" = "application/x-www-form-urlencoded" }
+    $postParams = @{}
     $postParams = @{"email"="$UserName";"password"="$UserPassword"}
     $UserAPiKey  = Invoke-RestMethod -Method POST -Body $postParams -Headers $headers -Uri "$apiUrl/api/login"
 
@@ -108,13 +110,16 @@ if ($result) {
     Write-Host "Computer UUID: $ComputerUUID "
 
     ## Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
+    $headers = @{}
     $headers = @{"Authorization" = "Bearer $api_key"}
     $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
 
     if ($ComputerTarget.id) {
         $ComputerTargetId = $ComputerTarget.id
     } else {
+        $headers = @{}
         $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
+        $postParams = @{}
         $postParams = @{"name" = "$ComputerName"; "computertargetid" = "$ComputerUUID"}
         $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers" -Body $postParams
         $ComputerTargetId = $ComputerTarget.id
@@ -126,9 +131,13 @@ if ($result) {
         $ComputerInventoryIndex = 1
     }
 
+
     ## Сохраняем время начала инвентаризации и ее порядковый номер
+    $inventorySart = $(Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
+    $headers = @{}
     $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
-    $postParams = @{"last_inventory_start" = "$($(Get-Date).ToString("yyyy-MM-dd HH:MM:s"))"; "last_inventory_end" = $Null; "last_inventory_index" = "$ComputerInventoryIndex"}
+    $postParams = @{}
+    $postParams = @{"last_inventory_start" = "$inventorySart"; "last_inventory_end" = ""; "last_inventory_index" = "$ComputerInventoryIndex"}
 
     $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
 
@@ -136,6 +145,7 @@ if ($result) {
 
 
     ## Получаем списко классов для инвентаризации
+    $headers = @{}
     $headers = @{"Authorization" = "Bearer $api_key"}
     $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes"
     # $wmiClasses
@@ -148,11 +158,11 @@ if ($result) {
         $Win32ClassName = $class.name
 
         Write-Verbose "Removing a class: $Win32ClassName"
+        $headers = @{}
         $headers = @{"Authorization" = "Bearer $api_key"}
         $wmiClassDelete = Invoke-RestMethod -Method DELETE -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/classes/$wmiClassId"
         Write-Verbose $($wmiClassDelete.data.Message)
 
-        $headers = @{"Authorization" = "Bearer $api_key"}
         $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
         # $wmiProperties
 
@@ -205,7 +215,9 @@ if ($result) {
                                 Write-Verbose $_.Exception.ToString()
                             }
 
+                            $headers = @{}
                             $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
+                            $postParams = @{}
                             $postParams = @{"value" = "$Value"; "instance_id" = "$InstanceId"}
                             $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
 
@@ -218,6 +230,17 @@ if ($result) {
         } ## if $class.enabled
 
     }
+
+
+    ## Сохраняем время окончания инвентаризации
+    $inventoryEnd = $(Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
+    $headers = @{}
+    $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
+    $postParams = @{}
+    $postParams = @{"last_inventory_end" = "$inventoryEnd"; "last_inventory_start" = "$inventorySart"; "last_inventory_index" = "$ComputerInventoryIndex"}
+
+    $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
+    
 
 
 
