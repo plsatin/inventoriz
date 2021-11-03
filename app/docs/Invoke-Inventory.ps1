@@ -128,7 +128,7 @@ if ($result) {
 
     ## Сохраняем время начала инвентаризации и ее порядковый номер
     $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
-    $postParams = @{"last_inventory_start" = "$($(Get-Date).ToString("yyyy-MM-dd HH:MM:s"))"; "last_inventory_end" = "NULL"; "last_inventory_index" = "$ComputerInventoryIndex"}
+    $postParams = @{"last_inventory_start" = "$($(Get-Date).ToString("yyyy-MM-dd HH:MM:s"))"; "last_inventory_end" = $Null; "last_inventory_index" = "$ComputerInventoryIndex"}
 
     $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
 
