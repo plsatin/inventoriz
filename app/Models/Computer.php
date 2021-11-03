@@ -13,7 +13,7 @@ class Computer extends Model
      * @var array
      */
     protected $fillable = [
-        'computertargetid', 'name', 'last_inventory_report',
+        'computertargetid', 'name', 'last_inventory_start', 'last_inventory_end', 'last_inventory_index',
     ];
 
     // public $timestamps = false;
