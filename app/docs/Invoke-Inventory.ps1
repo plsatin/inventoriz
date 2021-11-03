@@ -60,7 +60,7 @@ function Get-ComputerUUID {
         $computerSystem = Get-WmiObject Win32_ComputerSystem -computer $ComputerName -ErrorAction SilentlyContinue -Errorvariable err
 
         if (!$computerSystem) {
-            #Запрос не выполнен завершаем!
+            ## Запрос не выполнен завершаем!
             Write-Host "[CRITICAL] Host $ComputerName is not accepting requests!"
             Write-Host $err.Message
             $returnState = $returnStateUnknown
@@ -76,19 +76,6 @@ function Get-ComputerUUID {
         Write-Verbose "UUID from WMI: $ComputerUUID"
         Write-Verbose "OS serial from WMI: $OSSerial"
 
-        ## Нужно однозначно определится с UUID
-        # if ($ComputerUUID -eq "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF") {
-        # } elseif ($ComputerUUID -eq "00000000-0000-0000-0000-000000000000") {
-        # } elseif ($ComputerUUID -eq "03000200-0400-0500-0006-000700080009") {
-        #     if ($OSSerial -eq "00425-00000-00002-AA147") {
-        #         $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
-        #         $ComputerUUID = $ComputerUUID.ToUpper()
-        #     }
-        # } elseif ( $Null -eq $ComputerUUID ) {
-        #     $ComputerUUID = $(Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Cryptography -Name MachineGuid).MachineGuid
-        #     $ComputerUUID = $ComputerUUID.ToUpper()
-        # } else {
-        # }
 
         $ComputerUUID = $ComputerUUID + "-" + $OSSerial
         Write-Verbose "ComputerUUID: $ComputerUUID"
@@ -98,7 +85,7 @@ function Get-ComputerUUID {
         $errorstr = $_.Exception.toString()
         Write-Verbose $errorstr
     }
-} # Конец функции Get-ComputerUUID
+} ## Конец функции Get-ComputerUUID
 
 
 
@@ -111,7 +98,7 @@ $api_key = (Get-UserApiKey).token
 $result = Test-Connection -ComputerName $ComputerName -Count 2 -Quiet
 
 if ($result) {
-    #Замер времени исполнения скрипта
+    ## Замер времени исполнения скрипта
     $watch = [System.Diagnostics.Stopwatch]::StartNew()
     $watch.Start() #Запуск таймера
 
@@ -120,7 +107,7 @@ if ($result) {
     Write-Host "[OK] Host $ComputerName is available"
     Write-Host "Computer UUID: $ComputerUUID "
 
-    # Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
+    ## Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
     $headers = @{"Authorization" = "Bearer $api_key"}
     $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
 
@@ -133,7 +120,22 @@ if ($result) {
         $ComputerTargetId = $ComputerTarget.id
     }
 
+    if ($ComputerTarget.last_inventory_index) {
+        $ComputerInventoryIndex = $ComputerTarget.last_inventory_index + 1
+    } else {
+        $ComputerInventoryIndex = 1
+    }
 
+    ## Сохраняем время начала инвентаризации и ее порядковый номер
+    $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
+    $postParams = @{"last_inventory_start" = "$($(Get-Date).ToString("yyyy-MM-dd HH:MM:s"))"; "last_inventory_end" = "NULL"; "last_inventory_index" = "$ComputerInventoryIndex"}
+
+    $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
+
+
+
+
+    ## Получаем списко классов для инвентаризации
     $headers = @{"Authorization" = "Bearer $api_key"}
     $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes"
     # $wmiClasses
@@ -219,8 +221,8 @@ if ($result) {
 
 
 
-    $watch.Stop() #Остановка таймера
-    Write-Host $watch.Elapsed #Время выполнения
+    $watch.Stop() ## Остановка таймера
+    Write-Host $watch.Elapsed ## Время выполнения
     Write-Host "Total properties pushed: $recordCount"
 
 

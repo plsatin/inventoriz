@@ -81,7 +81,12 @@ class ComputerController extends Controller
     {
         try {
             $computer = Computer::findOrFail($id);
-            $computer->update($request->all());
+            // $computer->update($request->all());
+            $computer->update([
+                'last_inventory_start' => $request->input('last_inventory_start'),
+                'last_inventory_end' => $request->input('last_inventory_end'),
+                'last_inventory_index' => $request->input('last_inventory_index')
+            ]);
 
             return response()->json($computer, 200);
         } catch (\Exception $e) {
