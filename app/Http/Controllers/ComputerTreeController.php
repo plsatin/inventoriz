@@ -131,57 +131,8 @@ class ComputerTreeController extends Controller
             $computer = Computer::findOrFail($id);
             $computerClasses = WmiClass::query()->get();
 
-            $classCount = 0;
 
-            foreach ($computerClasses as $class)
-            {
-                $classPropertiesInstance = ComputerProperties::select('instance_id')->where('computer_id', $computer->id)
-                    ->where('computer_properties.wmiclass_id', $class->id)->groupBy('instance_id')
-                        ->get();
-
-                $instanceId = 0;
-                $classProperties = [];
-
-                foreach ($classPropertiesInstance as $instance) {
-
-                    $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id',
-                     'computer_properties.wmiproperty_id', 'computer_properties.value',
-                      DB::raw("CONCAT(wmiproperties.name, ':  ', computer_properties.value) AS title"),
-                       'computer_properties.instance_id', 'wmiproperties.name AS name', 'wmiproperties.description AS iconTooltip')
-                        ->where('computer_id', $computer->id)
-                        ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                            ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
-                                ->get();
-                    $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
-                        ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                        ->where('wmiproperties.name', 'Name')
-                            ->orWhere('computer_id', $computer->id)
-                                ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
-                                ->where('wmiproperties.name', 'Caption')
-                                    ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
-                                        ->first();
-
-
-                    $classProperties[$instanceId]['id'] = $instance->instance_id;
-                    $classProperties[$instanceId]['parent_id'] =  $class->id;
-                    $classProperties[$instanceId]['icon'] = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
-                    if($classPropertiesInstanceName) {
-                        $classProperties[$instanceId]['title'] =  $classPropertiesInstanceName->value;
-                    }
-
-                    $classProperties[$instanceId]['children'] = $classPropertiesInstanceArray;
-
-                    $instanceId ++;
-                }
-
-                $computerClasses[$classCount]->iconTooltip = $computerClasses[$classCount]['description'];
-                $computerClasses[$classCount]->icon = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
-                $computerClasses[$classCount]->children = $classProperties;
-                $classCount ++;
-            }
-
-
-            $computer->children = $computerClasses;
+            $computer->children = getComputerTree($computerClasses)
 
             return response()->json($computer, 200);
         } catch (\Exception $e) {
@@ -190,6 +141,61 @@ class ComputerTreeController extends Controller
         }
     }
 
+
+
+
+
+
+    function getComputerTree($computerClasses)
+    {
+        $classCount = 0;
+
+        foreach ($computerClasses as $class) {
+            $classPropertiesInstance = ComputerProperties::select('instance_id')->where('computer_id', $computer->id)
+                ->where('computer_properties.wmiclass_id', $class->id)->groupBy('instance_id')
+                    ->get();
+
+            $instanceId = 0;
+            $classProperties = [];
+
+            foreach ($classPropertiesInstance as $instance) {
+
+                $classPropertiesInstanceArray = ComputerProperties::select('computer_properties.computer_id', 'computer_properties.wmiclass_id',
+                    'computer_properties.wmiproperty_id', 'computer_properties.value',
+                    DB::raw("CONCAT(wmiproperties.name, ':  ', computer_properties.value) AS title"),
+                    'computer_properties.instance_id', 'wmiproperties.name AS name', 'wmiproperties.description AS iconTooltip')
+                    ->where('computer_id', $computer->id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
+                        ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                            ->get();
+                $classPropertiesInstanceName = ComputerProperties::where('computer_id', $computer->id)
+                    ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
+                    ->where('wmiproperties.name', 'Name')
+                        ->orWhere('computer_id', $computer->id)
+                            ->where('computer_properties.wmiclass_id', $class->id)->where('instance_id', $instance->instance_id)
+                            ->where('wmiproperties.name', 'Caption')
+                                ->join('wmiproperties', 'computer_properties.wmiproperty_id', '=', 'wmiproperties.id')
+                                    ->first();
+
+                $classProperties[$instanceId]['id'] = $instance->instance_id;
+                $classProperties[$instanceId]['parent_id'] =  $class->id;
+                $classProperties[$instanceId]['icon'] = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
+                if($classPropertiesInstanceName) {
+                    $classProperties[$instanceId]['title'] =  $classPropertiesInstanceName->value;
+                }
+                $classProperties[$instanceId]['children'] = $classPropertiesInstanceArray;
+                $instanceId ++;
+            }
+
+            $computerClasses[$classCount]->iconTooltip = $computerClasses[$classCount]['description'];
+            $computerClasses[$classCount]->icon = '/assets/img/icons/' . $computerClasses[$classCount]['icon'];
+            $computerClasses[$classCount]->children = $classProperties;
+            $classCount ++;
+        }
+
+        return $computerClasses;
+
+    }
 
 
 
