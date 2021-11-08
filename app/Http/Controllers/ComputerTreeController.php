@@ -93,7 +93,7 @@ class ComputerTreeController extends Controller
     }
 
 
-    public static function getComputerTree($computerClasses, $computer)
+    private function getComputerTree($computerClasses, $computer)
     {
         $classCount = 0;
 
