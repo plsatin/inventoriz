@@ -1,8 +1,21 @@
 # Записки этого проекта
 
 
+## Интеллектуальная инвентаризация
 
-## Отчет об установленном ПО на компьютере
+Автоматизированная система (АС) должна сама знать, что нужно инвентаризировать клиенту на данный момент
+
+
+
+
+
+
+
+
+
+## Отчеты (в разработке)
+
+### Отчет об установленном ПО на компьютере
 
 ```sql
 SELECT cp.computer_id, 
@@ -19,7 +32,7 @@ FROM computer_properties AS cp
 ```
 
 
-## Отчет об установленной программе на всех компьютерах
+### Отчет об установленной программе на всех компьютерах
 
 ```sql
 SELECT c.name,
@@ -31,7 +44,7 @@ FROM computer_properties AS cp
 ```
 
 
-## Отчет о моделях принтеров
+### Отчет о моделях принтеров
 
 ```sql
 SELECT c.name,  cp.value
@@ -40,3 +53,8 @@ JOIN computers AS c ON (c.id = cp.computer_id)
 WHERE cp.wmiproperty_id = '95' AND  cp.value NOT LIKE '%Microsoft%' AND cp.value NOT LIKE '%PDF%' AND cp.value NOT LIKE '%FAX%' AND cp.value NOT LIKE '%OneNote%' AND cp.value NOT LIKE '%AnyDesk%'  GROUP BY cp.value
 
 ```
+
+
+
+
+

@@ -36,6 +36,19 @@ class WmiClassController extends Controller
 
     }
 
+    public function showSomeWmiClasses(Request $request) 
+    {
+        try {
+            $wmiClasses = WmiClass::all();
+
+            return response()->json($wmiClasses);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 404);
+        }
+
+    }
+
     public function showOneWmiClass($id)
     {
         try {
@@ -48,7 +61,7 @@ class WmiClassController extends Controller
 
 
 
-/* Для этих функций маршруты отключены */
+/** Для этих функций маршруты временно отключены */
 
     public function create(Request $request)
     {

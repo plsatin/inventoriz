@@ -41,6 +41,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     /** Работа с WMI классами */
     $router->get('v1/classes',  ['uses' => 'WmiClassController@showAllWmiClasses']);
+    // $router->get('v1/classes',  ['uses' => 'WmiClassController@showSomeWmiClasses']);
     $router->get('v1/classes/{id}', ['uses' => 'WmiClassController@showOneWmiClass']);
     // $router->post('v1/classes', ['uses' => 'WmiClassController@create']);
     // $router->delete('v1/classes/{id}', ['uses' => 'WmiClassController@delete']);
@@ -69,10 +70,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('v1/computers/{id}/properties/{class}/{property}', ['uses' => 'ComputerPropertiesController@update']);
 
 
-    /** Дя построение дерева */
+    /** Для построение дерева */
     $router->get('v1/computers-list',  ['uses' => 'ComputerTreeController@showSomeComputers']);
-    $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerDeviceTree']);
-    // $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerTree']);
-    // $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerSoftwareTree']);
+    $router->get('v1/computers/{id}/hardware',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerDeviceTree']);
+    $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerTree']);
+    $router->get('v1/computers/{id}/software',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerSoftwareTree']);
 
 });

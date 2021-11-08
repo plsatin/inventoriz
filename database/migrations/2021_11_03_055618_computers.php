@@ -15,7 +15,7 @@ class Computers extends Migration
         Schema::table('computers', function (Blueprint $table) {
             $table->dateTime('last_inventory_start')->nullable();
             $table->dateTime('last_inventory_end')->nullable();
-            $table->bigInteger('last_inventory_index')->nullable();
+            $table->unsignedInteger('last_inventory_index')->nullable()->index();
 
             $table->dropColumn('last_inventory_report');
         });

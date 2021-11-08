@@ -1,6 +1,6 @@
 ﻿<#
  .SYNOPSIS
-  
+  Скрипт инвентаризации компьютера и отправки данных в Inventory API v1
  
  .DESCRIPTION
  
@@ -11,11 +11,13 @@
   https://webnote.satin-pl.com
  
  .NOTES
-  Version:        0.01
+  Version:        0.1.1
   Author:         Pavel Satin
   Email:          plsatin@yandex.ru
-  Creation Date:  21.06.2020
+  Creation Date:  25.10.2021
   Purpose/Change: Initial script development
+  Update Date:    03.11.2021
+  Purpose/Change: Добавлено: время начала и окончания инвентаризации, а также порядковый номер инвентаризации
  
 #>
 Param(
@@ -45,7 +47,7 @@ function Get-UserApiKey {
     $UserAPiKey  = Invoke-RestMethod -Method POST -Body $postParams -Headers $headers -Uri "$apiUrl/api/login"
 
     return $UserAPiKey
-}
+} ## Конец функции Get-UserApiKey
 
 
 function Get-ComputerUUID {
@@ -95,7 +97,6 @@ function Get-ComputerUUID {
 
 
 
-$api_key = (Get-UserApiKey).token
 
 $result = Test-Connection -ComputerName $ComputerName -Count 2 -Quiet
 
@@ -106,10 +107,13 @@ if ($result) {
 
     $ComputerUUID = Get-ComputerUUID -ComputerName $ComputerName
     
-    Write-Host "[OK] Host $ComputerName is available"
+    Write-Host "Host $ComputerName is available"
     Write-Host "Computer UUID: $ComputerUUID "
 
-    ## Получам ИД компьютера из БД, иначе создаем новую запись о компьютере
+    ## Получаем токен для доступа к API
+    $api_key = (Get-UserApiKey).token
+
+    ## Получаем ИД компьютера из БД, иначе создаем новую запись о компьютере
     $headers = @{}
     $headers = @{"Authorization" = "Bearer $api_key"}
     $ComputerTarget  = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/computers?name=$ComputerName&computertargetid=$ComputerUUID"
@@ -141,21 +145,29 @@ if ($result) {
 
     $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
 
+    Write-Verbose "Computer inventory ($ComputerInventoryIndex) start time: $inventorySart"
 
 
-
-    ## Получаем списко классов для инвентаризации
+    ## Получаем список классов для инвентаризации
     $headers = @{}
     $headers = @{"Authorization" = "Bearer $api_key"}
     $wmiClasses = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes"
-    # $wmiClasses
-
+    Write-Verbose ($wmiClasses | Select-Object id, name, namespace, title | Format-Table | Out-String)
+    
+    $classCount = $wmiClasses.Count
     $recordCount = 0
+    $classDone = 1
+
 
     foreach ($class in $wmiClasses) {
         $wmiClassId = $class.id
         $Win32Namespace = $class.namespace
         $Win32ClassName = $class.name
+
+        ## Показываем прогресс выполнения
+        $percentDone =  [math]::Round(($classDone / $classCount) * 100)
+        Write-Progress -Activity "Processed class: $Win32ClassName on computer $ComputerName ..." -Status "Done: $percentDone%" -PercentComplete $percentDone
+
 
         Write-Verbose "Removing a class: $Win32ClassName"
         $headers = @{}
@@ -164,10 +176,10 @@ if ($result) {
         Write-Verbose $($wmiClassDelete.data.Message)
 
         $wmiProperties = Invoke-RestMethod -Method GET -ContentType "application/json" -Headers $headers -Uri "$apiUrl/api/v1/classes/$wmiClassId/properties"
-        # $wmiProperties
+        Write-Verbose ($wmiProperties | Select-Object id, wmiclass_id, name | Format-Table | Out-String)
 
         if ($class.enabled -eq 1) {
-            Write-Host "Processed class: $Win32ClassName"
+            Write-Verbose "Processed class: $Win32ClassName"
 
             switch ($Win32ClassName) {
                 "SoftwareLicensingProduct" {
@@ -190,14 +202,12 @@ if ($result) {
                 }
             }
 
-            
-
 
             $InstanceId = 0
 
             if ($computerClassI) {
                 foreach ($computerClass in $computerClassI) {
-                    $InstanceId = $InstanceId + 1
+                    $InstanceId ++
 
                     foreach ($rowProp in $wmiProperties) {
                         $PropertyId = $rowProp.id
@@ -229,6 +239,8 @@ if ($result) {
 
         } ## if $class.enabled
 
+        $classDone ++
+
     }
 
 
@@ -240,13 +252,13 @@ if ($result) {
     $postParams = @{"last_inventory_end" = "$inventoryEnd"; "last_inventory_start" = "$inventorySart"; "last_inventory_index" = "$ComputerInventoryIndex"}
 
     $ComputerTarget  = Invoke-RestMethod -Method PUT -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId" -Body $postParams
-    
 
 
 
     $watch.Stop() ## Остановка таймера
-    Write-Host $watch.Elapsed ## Время выполнения
+    Write-Host "The script ran in: $($watch.Elapsed)" ## Время выполнения
     Write-Host "Total properties pushed: $recordCount"
+    Write-Host "[OK] Сomputer has been successfully inventoried"
 
 
 } else {

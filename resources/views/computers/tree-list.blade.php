@@ -140,7 +140,7 @@ var computerId;
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            source: {url: '/api/v1/computers/'+computerName+'/properties'},
+            source: {url: '/api/v1/computers/'+computerName+'/hardware'},
         });
     }
   
