@@ -146,7 +146,7 @@ class ComputerTreeController extends Controller
 
 
 
-    function getComputerTree($computerClasses)
+    public static function getComputerTree($computerClasses)
     {
         $classCount = 0;
 
