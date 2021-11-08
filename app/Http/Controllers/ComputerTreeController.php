@@ -132,7 +132,7 @@ class ComputerTreeController extends Controller
             $computerClasses = WmiClass::query()->get();
 
 
-            $computer->children = $this->getComputerTree($computerClasses);
+            $computer->children = $this->getComputerTree($computerClasses, $computer);
 
             return response()->json($computer, 200);
         } catch (\Exception $e) {
@@ -146,7 +146,7 @@ class ComputerTreeController extends Controller
 
 
 
-    public static function getComputerTree($computerClasses)
+    public static function getComputerTree($computerClasses, $computer)
     {
         $classCount = 0;
 
