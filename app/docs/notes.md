@@ -54,7 +54,3 @@ WHERE cp.wmiproperty_id = '95' AND  cp.value NOT LIKE '%Microsoft%' AND cp.value
 
 ```
 
-
-
-
-

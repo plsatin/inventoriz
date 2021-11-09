@@ -82,7 +82,6 @@ class ComputerTreeController extends Controller
             $computer = Computer::findOrFail($id);
             $computerClasses = WmiClass::query()->get();
 
-
             $computer->children = $this->getComputerTree($computerClasses, $computer);
 
             return response()->json($computer, 200);
@@ -91,6 +90,9 @@ class ComputerTreeController extends Controller
             return response()->json($responseObject, 404);
         }
     }
+
+
+
 
 
     private function getComputerTree($computerClasses, $computer)
