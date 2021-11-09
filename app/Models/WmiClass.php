@@ -3,6 +3,38 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(
+ *      schema="WmiClass",
+ *      type="object",
+ *      @OA\Property(
+ *          property="name",
+ *          type="string",
+ *          description="Наименование WMI класса",
+ *      ),
+ *      @OA\Property(
+ *          property="namespace",
+ *          type="string",
+ *          description="Пространство имен WMI",
+ *      ),
+ *      @OA\Property(
+ *          property="title",
+ *          type="string",
+ *          description="Наименование WMI класса",
+ *      ),
+ *      @OA\Property(
+ *          property="description",
+ *          type="string",
+ *          description="Описание WMI класса",
+ *      ),
+ *      @OA\Property(
+ *          property="icon",
+ *          type="string",
+ *          description="Имя файла значка класса",
+ *      ),
+ * )
+ */
 class WmiClass extends Model
 {
     protected $table = "wmiclasses";

@@ -3,6 +3,39 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+
+/**
+ * @OA\Schema(
+ *      schema="ComputerProperties",
+ *      type="object",
+ *      @OA\Property(
+ *          property="computer_id",
+ *          type="integer",
+ *          description="ИД компьютера",
+ *      ),
+ *      @OA\Property(
+ *          property="wmiclass_id",
+ *          type="integer",
+ *          description="ИД WMI класса",
+ *      ),
+ *      @OA\Property(
+ *          property="wmiproperty_id",
+ *          type="integer",
+ *          description="ИД свойства WMI класса",
+ *      ),
+ *      @OA\Property(
+ *          property="value",
+ *          type="string",
+ *          description="Значение",
+ *      ),
+ *      @OA\Property(
+ *          property="instance_id",
+ *          type="integer",
+ *          description="ИД экземпляра свойства",
+ *      ),
+ * )
+ */
 class ComputerProperties extends Model
 {
     protected $table = "computer_properties";
