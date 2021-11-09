@@ -51,7 +51,7 @@ class UserController extends Controller
     public function profile()
     {
         try {
-
+            
             return response()->json(['user' => Auth::user()], 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
@@ -91,7 +91,9 @@ class UserController extends Controller
     {
         try {
 
-            return response()->json(['users' =>  User::all()], 200);
+            $users = User::all();
+
+            return response()->json($users, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
@@ -135,7 +137,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
 
-            return response()->json(['user' => $user], 200);
+            return response()->json($user, 200);
 
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));

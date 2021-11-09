@@ -96,7 +96,7 @@ class WmiClassController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/json",
      *              @OA\Schema(
-     *                  type="array",
+     *                  mediaType="application/json",
      *                  @OA\Items(ref="#/components/schemas/WmiClass"),
      *              ),
      *          ), 
