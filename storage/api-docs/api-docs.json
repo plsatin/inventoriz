@@ -271,6 +271,96 @@
                 },
                 "type": "object"
             },
+            "Computer": {
+                "properties": {
+                    "computertargetid": {
+                        "description": "GUID компьютера",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Наименование компьютера",
+                        "type": "string"
+                    },
+                    "last_inventory_start": {
+                        "description": "Дата и время начала последней инвентаризации",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "last_inventory_end": {
+                        "description": "Дата и время окончания последней инвентаризации",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "last_inventory_index": {
+                        "description": "ИД последней инвентаризации",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ComputerProperties": {
+                "properties": {
+                    "computer_id": {
+                        "description": "ИД компьютера",
+                        "type": "integer"
+                    },
+                    "wmiclass_id": {
+                        "description": "ИД WMI класса",
+                        "type": "integer"
+                    },
+                    "wmiproperty_id": {
+                        "description": "ИД свойства WMI класса",
+                        "type": "integer"
+                    },
+                    "value": {
+                        "description": "Значение",
+                        "type": "string"
+                    },
+                    "instance_id": {
+                        "description": "ИД экземпляра свойства",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Permission": {
+                "properties": {
+                    "name": {
+                        "description": "Наименование разрешения",
+                        "type": "string"
+                    },
+                    "key": {
+                        "description": "Ключ",
+                        "type": "string"
+                    },
+                    "action": {
+                        "description": "Действие (функция)",
+                        "type": "string"
+                    },
+                    "controller": {
+                        "description": "Контроллер",
+                        "type": "string"
+                    },
+                    "method": {
+                        "description": "HTTP метод",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Role": {
+                "properties": {
+                    "name": {
+                        "description": "Наименование роли",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Описание роли",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "properties": {
                     "name": {
@@ -284,6 +374,60 @@
                     },
                     "role_id": {
                         "description": "ИД роли пользователя",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WmiClass": {
+                "properties": {
+                    "name": {
+                        "description": "Наименование WMI класса",
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "description": "Пространство имен WMI",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Наименование WMI класса",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Описание WMI класса",
+                        "type": "string"
+                    },
+                    "icon": {
+                        "description": "Имя файла значка класса",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WmiProperty": {
+                "properties": {
+                    "wmiclass_id": {
+                        "description": "ИД WMI класса",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Наименование свойства WMI класса",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Наименование (для отображения) свойства WMI класса",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Описание свойства WMI класса",
+                        "type": "string"
+                    },
+                    "property_type": {
+                        "description": "Тип свойства класса",
+                        "type": "string"
+                    },
+                    "icon": {
+                        "description": "Имя файла значка свойства класса",
                         "type": "string"
                     }
                 },
