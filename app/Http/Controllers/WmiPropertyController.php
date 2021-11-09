@@ -98,7 +98,7 @@ class WmiPropertyController extends Controller
      *         description="Возвращает свойство WMI класса",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Items(ref="#/components/schemas/WmiProperty"),
+     *              @OA\Schema(ref="#/components/schemas/WmiProperty"),
      *          ), 
      *     ),
      *     @OA\Response(
