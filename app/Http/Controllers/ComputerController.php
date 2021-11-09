@@ -98,7 +98,7 @@ class ComputerController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/computers/{id}",
+     *     path="/api/v1/computers/{id}",
      *     description="Получение компьютера по ИД",
      *     tags={"computers"},
      *     @OA\Parameter(
@@ -141,7 +141,7 @@ class ComputerController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/computers",
+     *     path="/api/v1/computers",
      *     description="Создание компьютера",
      *     tags={"computers"},
      *     @OA\RequestBody(
@@ -179,7 +179,7 @@ class ComputerController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/computers/{id}",
+     *     path="/api/v1/computers/{id}",
      *     description="Обновление компьютера с ИД",
      *     tags={"computers"},
      *     @OA\Parameter(
@@ -238,7 +238,7 @@ class ComputerController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/computers/{id}",
+     *     path="/api/v1/computers/{id}",
      *     description="Удаление компьютера с ИД",
      *     tags={"computers"},
      *     @OA\Parameter(
