@@ -95,10 +95,7 @@ class WmiClassController extends Controller
      *         description="Возвращает один WMI класс",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(
-     *                  mediaType="application/json",
-     *                  @OA\Items(ref="#/components/schemas/WmiClass"),
-     *              ),
+     *              @OA\Items(ref="#/components/schemas/WmiClass"),
      *          ), 
      *     ),
      *     @OA\Response(
