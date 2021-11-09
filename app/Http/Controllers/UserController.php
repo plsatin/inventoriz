@@ -19,30 +19,95 @@ class UserController extends Controller
     }
 
     /**
-     * Get the authenticated User.
-     *
-     * @return Response
-     */
+     * @OA\Get(
+     *     path="/api/profile",
+     *     description="Получение профиля авторизованного пользователя",
+     *     tags={"auth"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства пользователя",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="user",
+     *                      type="object",
+     *                      ref="#/components/schemas/User"),
+     *              ),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function profile()
     {
         return response()->json(['user' => Auth::user()], 200);
     }
 
     /**
-     * Get all User.
-     *
-     * @return Response
-     */
+     * @OA\Get(
+     *     path="/api/users",
+     *     description="Получение всех пользователей",
+     *     tags={"users"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает пользователей",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/User"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если пользователь не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function allUsers()
     {
          return response()->json(['users' =>  User::all()], 200);
     }
 
     /**
-     * Get one user.
-     *
-     * @return Response
-     */
+     * @OA\Get(
+     *     path="/api/users/{id}",
+     *     description="Получение пользователя с ИД",
+     *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД пользователя",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства пользователя",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/User"),
+     *          ) 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если пользователь не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function singleUser($id)
     {
         try {

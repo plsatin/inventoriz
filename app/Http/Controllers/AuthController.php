@@ -10,12 +10,58 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+
+
     /**
-     * Store a new user.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
+     * @OA\Post(
+     *     path="/api/register",
+     *     description="Регистрация пользователя",
+     *     tags={"auth"},
+     *     @OA\RequestBody(
+     *         description="Объект пользователя",
+     *         required=true,
+     *         @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      description="Имя пользователя",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      format="email",
+     *                      description="Email пользователя",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string",
+     *                      format="password",
+     *                      description="Пароль пользователя",
+     *                  ),
+     *              ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Возвращает свойства пользователя",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/User"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="409",
+     *         description="Ответ если регистрация завершилась с ошибкой",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     * )
+     */    
     public function register(Request $request)
     {
         //validate incoming request 
@@ -49,11 +95,66 @@ class AuthController extends Controller
 
 
     /**
-     * Get a JWT via given credentials.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
+     * @OA\Post(
+     *     path="/api/login",
+     *     description="Авторизация пользователя",
+     *     tags={"auth"},
+     *     @OA\RequestBody(
+     *         description="Объект пользователя",
+     *         required=true,
+     *         @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      format="email",
+     *                      description="Email пользователя",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string",
+     *                      format="password",
+     *                      description="Пароль пользователя",
+     *                  ),
+     *              ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства пользователя",
+     *         @OA\MediaType(
+     *              mediaType="application/json",
+     *                  @OA\Schema(
+     *                      @OA\Property(
+     *                          property="token",
+     *                          type="string",
+     *                          description="Токен",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="token_type",
+     *                          type="string",
+     *                          description="Тип токена",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="expires_in",
+     *                          type="integer",
+     *                          description="Срок действия токена",
+     *                      ),
+     *                  ),
+     *              ),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="401",
+     *         description="Авторизация пользователя завершилась с ошибкой",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     * )
+     */    
     public function login(Request $request)
     {
           //validate incoming request 
