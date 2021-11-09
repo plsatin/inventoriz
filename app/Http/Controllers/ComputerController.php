@@ -25,6 +25,47 @@ class ComputerController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/computers",
+     *     description="Выборка компьютеров",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Имя компьютера",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="computertargetid",
+     *         in="query",
+     *         description="GUID компьютера",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает компьютеры",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Computer"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если компьютер не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showSomeComputers(Request $request) 
     {
         try {
@@ -53,6 +94,39 @@ class ComputerController extends Controller
 
     }
 
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/computers/{id}",
+     *     description="Получение компьютера по ИД",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Computer"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если компьютер не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showOneComputer($id)
     {
         try {
@@ -64,6 +138,31 @@ class ComputerController extends Controller
     }
 
 
+
+    /**
+     * @OA\Post(
+     *     path="/api/computers",
+     *     description="Создание компьютера",
+     *     tags={"computers"},
+     *     @OA\RequestBody(
+     *         description="Объект компьютер",
+     *         required=true,
+     *         @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(ref="#/components/schemas/Computer"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Возвращает свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Computer"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function create(Request $request)
     {
         try {
@@ -77,6 +176,46 @@ class ComputerController extends Controller
         }
     }
 
+
+    /**
+     * @OA\Put(
+     *     path="/api/computers/{id}",
+     *     description="Обновление компьютера с ИД",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Объект компьютер",
+     *         required=true,
+     *         @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(ref="#/components/schemas/Computer"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Computer"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если предложение не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function update($id, Request $request)
     {
         try {
@@ -95,6 +234,38 @@ class ComputerController extends Controller
         }
     }
 
+
+
+    /**
+     * @OA\Delete(
+     *     path="/api/computers/{id}",
+     *     description="Удаление компьютера с ИД",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Ответ при успешном удалении",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          ),
+     *     ),
+      *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если компьютер не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function delete($id)
     {
         try {
