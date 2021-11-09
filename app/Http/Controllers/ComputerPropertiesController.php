@@ -50,7 +50,7 @@ class ComputerPropertiesController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если компьютер не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -69,7 +69,7 @@ class ComputerPropertiesController extends Controller
             return response()->json($computerProperties, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -113,7 +113,7 @@ class ComputerPropertiesController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если (компьютер, класс или свойство) не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -135,10 +135,71 @@ class ComputerPropertiesController extends Controller
                 ->whereBelongsTo($wmiclass)
                     ->whereBelongsTo($wmiproperty)->get();
 
-            return response()->json($property, 201);
+            return response()->json($property, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
+        }
+    }
+
+
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/computers/{id}/properties/{class}",
+     *     description="Запрос свойств класса компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства класса компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/ComputerProperties"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если (компьютер, класс) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
+    public function showClassPropertiesOfComputer($id, $class, $property)
+    {
+        try {
+
+            $computer = Computer::findOrFail($id);
+            $wmiclass = WmiClass::findOrFail($class);
+
+            $property = ComputerProperties::query()->whereBelongsTo($computer)
+                ->whereBelongsTo($wmiclass)->get();
+
+            return response()->json($property, 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -171,7 +232,7 @@ class ComputerPropertiesController extends Controller
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
-     *         response="200",
+     *         response="201",
      *         description="Возвращает созданное свойство компьютера",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -182,7 +243,7 @@ class ComputerPropertiesController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если (компьютер, класс или свойство) не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -218,7 +279,7 @@ class ComputerPropertiesController extends Controller
             return response()->json($property, 201);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -253,7 +314,7 @@ class ComputerPropertiesController extends Controller
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
-     *         response="200",
+     *         response="201",
      *         description="Сообщение об успешном создании свойства компьютера",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -261,7 +322,7 @@ class ComputerPropertiesController extends Controller
      *          ),
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если (компьютер, класс или свойство) не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -284,10 +345,10 @@ class ComputerPropertiesController extends Controller
 
             // dd($property);
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Computer property ' . $wmiproperty->name . ' of WMI Class ' . $wmiclass->name . ' updated successfully'));
-            return response()->json($responseObject, 200);
+            return response()->json($responseObject, 201);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -329,7 +390,7 @@ class ComputerPropertiesController extends Controller
      *          ),
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если (компьютер, класс или свойство) не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -355,7 +416,7 @@ class ComputerPropertiesController extends Controller
             return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -390,7 +451,7 @@ class ComputerPropertiesController extends Controller
      *          ),
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если (компьютер, класс или свойство) не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -414,7 +475,7 @@ class ComputerPropertiesController extends Controller
             return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 

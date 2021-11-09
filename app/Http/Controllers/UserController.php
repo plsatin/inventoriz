@@ -37,12 +37,27 @@ class UserController extends Controller
      *              ),
      *          ),
      *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если произошла ошибка",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
      *     security={{ "apiAuth": {} }}
      * )
      */    
     public function profile()
     {
-        return response()->json(['user' => Auth::user()], 200);
+        try {
+
+            return response()->json(['user' => Auth::user()], 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
     }
 
     /**
@@ -62,8 +77,8 @@ class UserController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
-     *         description="Ответ если пользователь не найден",
+     *         response="204",
+     *         description="Ответ если произошла",
      *          @OA\MediaType(
      *              mediaType="application/json",
      *              @OA\Schema(ref="#/components/schemas/Response"),
@@ -74,7 +89,14 @@ class UserController extends Controller
      */    
     public function allUsers()
     {
-         return response()->json(['users' =>  User::all()], 200);
+        try {
+
+            return response()->json(['users' =>  User::all()], 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
     }
 
     /**
@@ -98,7 +120,7 @@ class UserController extends Controller
      *          ) 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если пользователь не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -116,8 +138,8 @@ class UserController extends Controller
             return response()->json(['user' => $user], 200);
 
         } catch (\Exception $e) {
-            $responseObject = array('Response' => 'Error', 'data' => array('Code' => '0x00404', 'Message' => 'User not found!'));
-            return response()->json($responseObject, 404);
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
         }
 
     }

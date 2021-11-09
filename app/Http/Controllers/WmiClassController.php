@@ -40,7 +40,7 @@ class WmiClassController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если WMI класс не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -58,7 +58,7 @@ class WmiClassController extends Controller
             return response()->json($wmiClasses);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
 
     }
@@ -72,7 +72,7 @@ class WmiClassController extends Controller
             return response()->json($wmiClasses);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
 
     }
@@ -102,7 +102,7 @@ class WmiClassController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если WMI класс не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -118,7 +118,7 @@ class WmiClassController extends Controller
             return response()->json(WmiClass::findOrFail($id));
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -135,7 +135,7 @@ class WmiClassController extends Controller
             return response()->json($wmiClass, 201);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -148,7 +148,7 @@ class WmiClassController extends Controller
             return response()->json($wmiClass, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -161,7 +161,7 @@ class WmiClassController extends Controller
             return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 

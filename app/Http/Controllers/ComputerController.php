@@ -56,7 +56,7 @@ class ComputerController extends Controller
      *          ), 
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если компьютер не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -89,7 +89,7 @@ class ComputerController extends Controller
             return response()->json($computers);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
 
     }
@@ -117,7 +117,7 @@ class ComputerController extends Controller
      *          ),
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если компьютер не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -133,7 +133,7 @@ class ComputerController extends Controller
             return response()->json(Computer::findOrFail($id));
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -160,6 +160,14 @@ class ComputerController extends Controller
      *              @OA\Schema(ref="#/components/schemas/Computer"),
      *          ),
      *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если компьютер не создан",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
      *     security={{ "apiAuth": {} }}
      * )
      */    
@@ -172,7 +180,7 @@ class ComputerController extends Controller
             return response()->json($computer, 201);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -206,7 +214,7 @@ class ComputerController extends Controller
      *          ),
      *     ),
      *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если предложение не найдено",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -230,7 +238,7 @@ class ComputerController extends Controller
             return response()->json($computer, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
@@ -256,7 +264,7 @@ class ComputerController extends Controller
      *          ),
      *     ),
       *     @OA\Response(
-     *         response="404",
+     *         response="204",
      *         description="Ответ если компьютер не найден",
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -277,7 +285,7 @@ class ComputerController extends Controller
             return response()->json($responseObject, 200);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 404);
+            return response()->json($responseObject, 204);
         }
     }
 
