@@ -23,6 +23,40 @@ class WmiPropertyController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/classes/{id}/properties",
+     *     description="Выборка WMI классов",
+     *     tags={"classes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойства WMI класса",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/WmiProperty"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если свойства не найдены",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showAllPropertiesOfWmiClass($id)
     {
         try {
@@ -40,6 +74,47 @@ class WmiPropertyController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/classes/{id}/properties/{property}",
+     *     description="Выборка WMI классов",
+     *     tags={"classes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойство WMI класса",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/WmiProperty"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если свойства не найдены",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showOnePropertyOfWmiClass($id, $property)
     {
         try {

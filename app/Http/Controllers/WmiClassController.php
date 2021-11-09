@@ -23,6 +23,33 @@ class WmiClassController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/classes",
+     *     description="Выборка WMI классов",
+     *     tags={"classes"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает WMI классы",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/WmiClass"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если WMI класс не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showAllWmiClasses(Request $request) 
     {
         try {
@@ -35,6 +62,7 @@ class WmiClassController extends Controller
         }
 
     }
+
 
     public function showSomeWmiClasses(Request $request) 
     {
@@ -49,6 +77,41 @@ class WmiClassController extends Controller
 
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/classes/{id}",
+     *     description="Выборка одного WMI класса",
+     *     tags={"classes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает один WMI класс",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/WmiClass"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если WMI класс не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showOneWmiClass($id)
     {
         try {
