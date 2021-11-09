@@ -26,6 +26,40 @@ class ComputerPropertiesController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/computers/{id}/properties",
+     *     description="Выборка всех свойств компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает все свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/ComputerProperties"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если компьютер не найден",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showAllPropertiesOfComputer($id)
     {
         try {
@@ -41,6 +75,54 @@ class ComputerPropertiesController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/computers/{id}/properties/{class}/{property}",
+     *     description="Запрос свойства компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает свойство компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/ComputerProperties"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если (компьютер, класс или свойство) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function showOnePropertyOfComputer($id, $class, $property)
     {
         try {
@@ -60,6 +142,56 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+
+
+    /**
+     * @OA\POST(
+     *     path="/api/v1/computers/{id}/properties/{class}/{property}",
+     *     description="Создание свойства компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает созданное свойство компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/ComputerProperties"),
+     *              ),
+     *          ), 
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если (компьютер, класс или свойство) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function create(Request $request, $id, $class, $property)
     {
         try {
@@ -90,6 +222,55 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+
+
+
+
+    /**
+     * @OA\PUT(
+     *     path="/api/v1/computers/{id}/properties/{class}/{property}",
+     *     description="Обновление свойства компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Сообщение об успешном создании свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если (компьютер, класс или свойство) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function update(Request $request, $id, $class, $property)
     {
         try {
@@ -110,6 +291,54 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+
+
+
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/computers/{id}/properties/{class}/{property}",
+     *     description="Удаление свойства компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Сообщение об успешном удалении свойства компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если (компьютер, класс или свойство) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function delete($id, $class, $property)
     {
         try {
@@ -130,6 +359,47 @@ class ComputerPropertiesController extends Controller
         }
     }
 
+
+
+
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/computers/{id}/classes/{class}",
+     *     description="Удаление класса свойств компьютера",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ИД компьютера",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="class",
+     *         in="path",
+     *         description="ИД WMI класса",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Сообщение об успешном удалении класса свойств компьютера",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Ответ если (компьютер, класс или свойство) не найдено",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function deleteWmiClass($id, $class)
     {
         try {
