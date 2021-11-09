@@ -186,7 +186,7 @@ class ComputerPropertiesController extends Controller
      *     security={{ "apiAuth": {} }}
      * )
      */    
-    public function showClassPropertiesOfComputer($id, $class, $property)
+    public function showClassPropertiesOfComputer($id, $class)
     {
         try {
 
