@@ -1,23 +1,24 @@
-# Lumen PHP Framework
+# API инвентаризации компьютеров
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+## О проекте
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Проект предназначен для сбора информации об аппаратном и программном обеспечении компьютеров в сети. На данный момент сбор информации производится с помощью Powershell [скрипта](app/docs/Invoke-Inventory.ps1). Так же будет разработан плагин для Icinga2 для сбора информации. Интерфейс предполагается в двух вариантах, как самостоятельное веб-приложение (на PHP, Laravel или HTML+Javascript) и как модуль к Icingaweb2.
 
-## Official Documentation
+На самом деле, можно сказать это вторая версия предыдущего проекта по инвентаризации компьютеров.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
-## Contributing
+## Сбор информации
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Пример запуска скрипта:
 
-## Security Vulnerabilities
+```powershell
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -apiUrl "http://192.168.0.235:8000" -Verbose
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```
+
+
+
+
 
 ## License
 
