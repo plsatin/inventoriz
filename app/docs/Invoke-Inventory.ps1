@@ -24,7 +24,7 @@ Param(
     [Parameter(Mandatory = $true)]
     [string]$ComputerName,
     [Parameter(Mandatory = $false)]
-    [string]$apiUrl = "http://192.168.0.235:8000"
+    [string]$apiUrl = "http://itdesk.rexhcable.ru:8400"
 
 )
 

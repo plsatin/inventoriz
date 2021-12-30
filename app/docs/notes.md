@@ -8,8 +8,8 @@
 
 ## Ссылки
 
- - [Swagger UI](http://192.168.0.235:8000/api/documentation)
- - [Тестовый интерфейс](http://192.168.0.235:8000/tree)
+ - [Swagger UI](http://itdesk.rezhcable.ru:8400/api/documentation)
+ - [Тестовый интерфейс](http://itdesk.rezhcable.ru:8400/tree)
 
 
 

@@ -30,7 +30,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  *      ),
  *      @OA\Property(
  *          property="role_id",
- *          type="string",
+ *          type="integer",
  *          description="ИД роли пользователя",
  *      ),
  * )
