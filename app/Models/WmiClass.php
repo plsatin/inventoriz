@@ -33,6 +33,11 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string",
  *          description="Имя файла значка класса",
  *      ),
+ *      @OA\Property(
+ *          property="enabled",
+ *          type="integer",
+ *          description="Признак включен/выключен/другое",
+ *      ),
  * )
  */
 class WmiClass extends Model

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *      type="object",
  *      @OA\Property(
  *          property="wmiclass_id",
- *          type="string",
+ *          type="integer",
  *          description="ИД WMI класса",
  *      ),
  *      @OA\Property(
