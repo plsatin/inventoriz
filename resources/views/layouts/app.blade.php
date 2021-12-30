@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/logo/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/ui.fancytree.css') }}">
 

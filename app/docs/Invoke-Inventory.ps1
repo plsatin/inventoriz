@@ -24,20 +24,22 @@ Param(
     [Parameter(Mandatory = $true)]
     [string]$ComputerName,
     [Parameter(Mandatory = $false)]
-    [string]$apiUrl = "http://itdesk.rexhcable.ru:8400"
-
+    [string]$apiUrl = "http://itdesk.rezhcable.ru:8400",
+    [Parameter(Mandatory = $false)]
+    [string]$UserName = "tech@rezhcable.ru",
+    [Parameter(Mandatory = $false)]
+    [string]$UserPassword = "Z123456z"
 )
 
 
 function Get-UserApiKey {
     Param(
-        [Parameter(Mandatory = $false)]
-        [string]$UserName = "tech@rezhcable.ru",
-        [Parameter(Mandatory = $false)]
-        [string]$UserPassword = "Z123456z",
-        [Parameter(Mandatory = $false)]
-        [string]$apiUrl = "http://192.168.0.235:8000"
-    
+        [Parameter(Mandatory = $true)]
+        [string]$UserName,
+        [Parameter(Mandatory = $true)]
+        [string]$UserPassword,
+        [Parameter(Mandatory = $true)]
+        [string]$apiUrl
     )
 
     $headers = @{}
@@ -111,7 +113,7 @@ if ($result) {
     Write-Host "Computer UUID: $ComputerUUID "
 
     ## Получаем токен для доступа к API
-    $api_key = (Get-UserApiKey).token
+    $api_key = (Get-UserApiKey -UserName $UserName -UserPassword $UserPassword -apiUrl $apiUrl).token
 
     ## Получаем ИД компьютера из БД, иначе создаем новую запись о компьютере
     $headers = @{}
