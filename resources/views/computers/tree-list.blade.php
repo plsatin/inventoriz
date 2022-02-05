@@ -24,11 +24,11 @@
                 </header>
 
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <h5>Список компьютеров</h5>
                         <div class="list-computers" id="list-computers" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                     </div>
-                    <div class="col-md-14">
+                    <div class="col-md-16">
                         <h5 id="header-devmng">Диспетчер устройств</h5>
                         <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                         <div id="statusline"></div>
