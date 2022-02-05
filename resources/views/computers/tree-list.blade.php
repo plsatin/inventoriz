@@ -129,6 +129,9 @@ var computerId;
             for (var computer in data) {
                 htmlComputerList = htmlComputerList + 
                 '<div class="entity-list-item"><div class="item-icon"><span class="glyph glyph-devices"></span></div>' +
+                '<div class="item-content-secondary">' +
+    			'<div class="content-text-primary">' + data[computer].last_inventory_start +
+    			'</div></div>' +
                 '<div class="content-text-primary">' +
                 '<span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span>' +
                 '</div><div class="content-text-secondary">Компьютер ...' +
