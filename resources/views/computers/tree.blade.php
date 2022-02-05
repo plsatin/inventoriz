@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-24">
-                <h1>{{ $page_title ?? '' }}</h1>
+                <h2>{{ $page_title ?? '' }}</h2>
             </div>
         </div>
     </div>

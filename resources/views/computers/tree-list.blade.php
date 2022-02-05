@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-24">
-                <h1>{{ $page_title ?? '' }}</h1>
+                <h2>{{ $page_title ?? '' }}</h2>
             </div>
         </div>
     </div>
@@ -89,11 +89,11 @@
 
                 <div class="row">
                     <div class="column left">
-                        <h2>Список компьютеров</h2>
+                        <h5>Список компьютеров</h5>
                         <div class="list-computers" id="list-computers"></div>
                     </div>
                     <div class="column right">
-                        <h2 id="header-devmng">Диспетчер устройств</h2>
+                        <h5 id="header-devmng">Диспетчер устройств</h5>
                         <div class="computer-tree" id="tree"></div>
                         <div id="statusline"></div>
                     </div>
