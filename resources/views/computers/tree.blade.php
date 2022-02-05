@@ -24,7 +24,7 @@
                 </header>
     
 
-                <div class="computer-tree" id="tree"></div>
+                <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                 <div id="statusline"></div>
 
 

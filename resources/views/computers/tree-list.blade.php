@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="column left" style="padding-right: 16px;">
                         <h5>Список компьютеров</h5>
-                        <div class="list-computers" id="list-computers"  style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
+                        <div class="list-computers" id="list-computers" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                     </div>
                     <div class="column right">
                         <h5 id="header-devmng">Диспетчер устройств</h5>
