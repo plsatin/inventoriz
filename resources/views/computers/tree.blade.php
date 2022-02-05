@@ -1,15 +1,33 @@
 @extends('layouts.app')
 @section('title')
 <div class="page-header">
-  <h1>{{ $page_title ?? '' }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24">
+                <h1>{{ $page_title ?? '' }}</h1>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('content')
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-xs-24">
+            <section class="section">
 
-    <div class="computer-tree" id="tree"></div>
-    <div id="statusline"></div>
+
+                <div class="computer-tree" id="tree"></div>
+                <div id="statusline"></div>
+
+
+
+            </section>
+        </div>
+    </div>
+</div>
 
 
 

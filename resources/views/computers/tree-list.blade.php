@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('title')
 <div class="page-header">
-  <h1>{{ $page_title ?? '' }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24">
+                <h1>{{ $page_title ?? '' }}</h1>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('content')
@@ -75,19 +81,29 @@
 
 
 
-<div class="row">
-    <div class="column left">
-        <h2>Список компьютеров</h2>
-        <div class="list-computers" id="list-computers"></div>
-    </div>
-    <div class="column right">
-        <h2 id="header-devmng">Диспетчер устройств</h2>
-        <div class="computer-tree" id="tree"></div>
-        <div id="statusline"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-24">
+            <section class="section">
+
+
+                <div class="row">
+                    <div class="column left">
+                        <h2>Список компьютеров</h2>
+                        <div class="list-computers" id="list-computers"></div>
+                    </div>
+                    <div class="column right">
+                        <h2 id="header-devmng">Диспетчер устройств</h2>
+                        <div class="computer-tree" id="tree"></div>
+                        <div id="statusline"></div>
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
     </div>
 </div>
-
-
 
 
 

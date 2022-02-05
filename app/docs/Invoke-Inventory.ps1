@@ -7,6 +7,8 @@
  .EXAMPLE
 .\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -apiUrl "http://192.168.0.235:8000" -Verbose
 
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc88.rezhcable.ru -Verbose
+
  .LINK
   https://webnote.satin-pl.com
  
