@@ -136,7 +136,7 @@ var computerId;
                         '<div class="content-text-primary" style="cursor: pointer;">' +
                             '<span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span>' +
                         '</div>' +
-                        '<div class="content-text-secondary">Последний опрос: ' + data[computer].last_inventory_start + '</div>' +
+                        '<div class="content-text-secondary"><span class="type-t9">Состояние на: ' + data[computer].last_inventory_start + '</span></div>' +
                     '</div>' +
                 '</div>';
             }
