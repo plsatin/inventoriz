@@ -58,11 +58,11 @@
 }
 @media (min-width: 48em) {
     .right {
-        width: 70%;
+        width: 67%;
         float:left;
     }
     .left {
-        width: 30%;
+        width: 33%;
         float:left;
     }
 
@@ -133,7 +133,7 @@ var computerId;
                         '<span class="glyph glyph-devices"></span>' +
                     '</div>' +
                     '<div class="item-content-primary">' +
-                        '<div class="content-text-primary">' +
+                        '<div class="content-text-primary" style="cursor: pointer;">' +
                             '<span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span>' +
                         '</div>' +
                         '<div class="content-text-secondary">Компьютер ...' + '</div>' +
