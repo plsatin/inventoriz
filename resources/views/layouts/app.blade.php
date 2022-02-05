@@ -41,8 +41,8 @@
 
 
 
-        @include('layouts.about.navbar')
-        @include('layouts.backtop.navbar')
+        @include('layouts.partials.about')
+        @include('layouts.partials.backtop')
 
         <script src="{{ url('/assets/js/vendor/bootstrap.min.js') }}"></script>
         <script src="{{ url('/assets/js/app.js') }}"></script>
