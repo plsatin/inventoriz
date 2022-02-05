@@ -94,11 +94,11 @@
                 <div class="row">
                     <div class="column left">
                         <h5>Список компьютеров</h5>
-                        <div class="list-computers" id="list-computers"  style="height: 640px; overflow: scroll;"></div>
+                        <div class="list-computers" id="list-computers"  style="height: 620px; overflow-x: hidden; overflow-y: scroll;"></div>
                     </div>
                     <div class="column right">
                         <h5 id="header-devmng">Диспетчер устройств</h5>
-                        <div class="computer-tree" id="tree"></div>
+                        <div class="computer-tree" id="tree" style="height: 620px; overflow-x: hidden; overflow-y: scroll;"></div>
                         <div id="statusline"></div>
                     </div>
                 </div>
