@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-<div class="page-header">
+{{-- <div class="page-header">
     <div class="container">
         <div class="row">
             <div class="col-xs-24">
@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 @section('content')
 
@@ -17,7 +17,12 @@
     <div class="row">
         <div class="col-xs-24">
             <section class="section">
-
+                <header class="section-header">
+                    <h1 class="section-title">
+                        {{ $page_title ?? '' }}
+                    </h1>
+                </header>
+    
 
                 <div class="computer-tree" id="tree"></div>
                 <div id="statusline"></div>
