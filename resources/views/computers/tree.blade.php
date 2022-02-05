@@ -23,9 +23,12 @@
                     </h1>
                 </header>
     
-
-                <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
-                <div id="statusline"></div>
+                <div class="row">
+                    <div class="col-md-24">
+                        <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
+                        <div id="statusline"></div>
+                    </div>
+                </div>
 
 
 

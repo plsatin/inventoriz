@@ -13,74 +13,6 @@
 @section('content')
 
 
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-/*
-.column {
-    float: left;
-    min-width: 300px;
-    padding: 10px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.left {
-    width: calc(50% - 100px);
-}
-
-.right {
-    width: calc(50% - 100px);
-}
-
-@media screen and (max-width: 600px) {
-    .column {
-        width: 100%;
-    }
-}
-*/
-
-
-
-
-.row {
-    width: 100%;
-}
-.right, .left {
-    width:100%;
-}
-@media (min-width: 48em) {
-    .right {
-        width: 65%;
-        float:left;
-    }
-    .left {
-        width: 35%;
-        float:left;
-    }
-
-    .row {
-        content:"";
-        display: table;
-        clear: both;
-    }
-}
-
-.list-computers li span {
-    cursor: pointer;
-}
-
-</style>
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-xs-24">
@@ -92,11 +24,11 @@
                 </header>
 
                 <div class="row">
-                    <div class="column left" style="padding-right: 16px;">
+                    <div class="col-md-10">
                         <h5>Список компьютеров</h5>
                         <div class="list-computers" id="list-computers" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                     </div>
-                    <div class="column right">
+                    <div class="col-md-14">
                         <h5 id="header-devmng">Диспетчер устройств</h5>
                         <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
                         <div id="statusline"></div>
@@ -108,7 +40,6 @@
         </div>
     </div>
 </div>
-
 
 
 
