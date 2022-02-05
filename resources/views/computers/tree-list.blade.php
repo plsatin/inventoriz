@@ -155,7 +155,7 @@ var computerId;
 
 
     function renderComputerTree(computerName){
-        $('#tree').html('');
+        // $('#tree').html('');
         $('#tree').fancytree();
         $('#tree').fancytree({
             tooltip: true,
