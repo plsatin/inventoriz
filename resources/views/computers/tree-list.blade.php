@@ -92,7 +92,7 @@
                 </header>
 
                 <div class="row">
-                    <div class="column left">
+                    <div class="column left" style="height: 420px;">
                         <h5>Список компьютеров</h5>
                         <div class="list-computers" id="list-computers"></div>
                     </div>
