@@ -155,26 +155,26 @@ var computerId;
 
 
     function renderComputerTree(computerName){
-        // $('#tree').html();
-        $('#tree').fancytree();
-        // $('#tree').fancytree({
-        //     tooltip: true,
-        //     iconTooltip: function(event, data) {
-        //         return data.typeInfo.iconTooltip;
-        //     },
-        //     source: {url: '/api/v1/computers/'+computerName+'/hardware'},
-        // });
-
-        var newSourceOption = {
+        $('#tree').html('');
+        // $('#tree').fancytree();
+        $('#tree').fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
             source: {url: '/api/v1/computers/'+computerName+'/hardware'},
-        };
+        });
 
-        var tree = $('#tree').fancytree('getTree');
-        tree.reload(newSourceOption);
+        // var newSourceOption = {
+        //     tooltip: true,
+        //     iconTooltip: function(event, data) {
+        //         return data.typeInfo.iconTooltip;
+        //     },
+        //     source: {url: '/api/v1/computers/'+computerName+'/hardware'},
+        // };
+
+        // var tree = $('#tree').fancytree('getTree');
+        // tree.reload(newSourceOption);
 
     }
   
