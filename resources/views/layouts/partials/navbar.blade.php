@@ -16,8 +16,8 @@
                     <i class="glyph glyph-hamburger"></i>
                 </button>
 
-                <a href="index.html" class="navbar-brand">
-                    <img src="assets/images/winstrap_white.svg" alt="Winstrap" height="29" />
+                <a href="/tree" class="navbar-brand">
+                    <img src="/assets/images/inventoriz-logo-header.png" alt="Winstrap" height="29" />
                 </a>
 
             </div>
@@ -28,9 +28,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/tree">Все узлы</a></li>
                             <li class="divider"></li>
-                            <li><a href="colors.html#bootstrap-colors">Bootstrap colors</a></li>
-                            <li><a href="colors.html#mdl-colors">MDL colors</a></li>
-                            <li><a href="colors.html#mdl-alt-colors">MDL alt colors</a></li>
+                            <li><a href="/tree">Все узлы</a></li>
                         </ul>
                     </li>
 
