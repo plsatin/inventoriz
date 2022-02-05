@@ -92,9 +92,9 @@
                 </header>
 
                 <div class="row">
-                    <div class="column left" style="height: 420px;">
+                    <div class="column left">
                         <h5>Список компьютеров</h5>
-                        <div class="list-computers" id="list-computers"></div>
+                        <div class="list-computers" id="list-computers"  style="height: 640px; overflow: scroll;"></div>
                     </div>
                     <div class="column right">
                         <h5 id="header-devmng">Диспетчер устройств</h5>
@@ -155,6 +155,7 @@ var computerId;
 
 
     function renderComputerTree(computerName){
+        $('#tree').html();
         $('#tree').fancytree({
             tooltip: true,
             iconTooltip: function(event, data) {
