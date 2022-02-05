@@ -58,11 +58,11 @@
 }
 @media (min-width: 48em) {
     .right {
-        width: 67%;
+        width: 65%;
         float:left;
     }
     .left {
-        width: 33%;
+        width: 35%;
         float:left;
     }
 
