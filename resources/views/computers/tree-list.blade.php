@@ -133,7 +133,7 @@ var computerId;
                         '<span class="glyph glyph-devices"></span>' +
                     '</div>' +
                     '<div class="item-content-secondary">' +
-    			        '<div class="content-text-primary">' + data[computer].last_inventory_start + '</div>' +
+    			        '<div class="content-text-primary">' + '</div>' +
     			    '</div>' +
                     '<div class="item-content-primary">' +
                         '<div class="content-text-primary">' +
