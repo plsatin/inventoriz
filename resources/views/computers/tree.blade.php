@@ -13,6 +13,15 @@
 @section('content')
 
 
+<style>
+    .list-computers, .computer-tree {
+        height: 600px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+</style>
+
+
 <div class="container">
     <div class="row">
         <div class="col-xs-24">
@@ -25,7 +34,7 @@
     
                 <div class="row">
                     <div class="col-md-24">
-                        <div class="computer-tree" id="tree" style="height: 600px; overflow-x: hidden; overflow-y: scroll;"></div>
+                        <div class="computer-tree" id="tree"></div>
                         <div id="statusline"></div>
                     </div>
                 </div>
