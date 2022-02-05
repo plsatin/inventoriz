@@ -123,13 +123,18 @@ var computerId;
         type: "GET",
         url: '/api/v1/computers-list',
         success: function (data) {
-            // console.log(data);
-            var htmlComputerList = '<ul>';
+            console.log(data);
+            var htmlComputerList = '<div class="entity-list">';
 
             for (var computer in data) {
-                htmlComputerList = htmlComputerList + '<li><span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span></li>';
+                htmlComputerList = htmlComputerList + 
+                '<div class="entity-list-item"><div class="item-icon"><span class="glyph glyph-devices"></span></div>' +
+                '<div class="content-text-primary">' +
+                '<span id="computer-id_' + data[computer].id + '">' + data[computer].name + '</span>' +
+                '</div><div class="content-text-secondary">Компьютер ...' +
+                '</div></div>';
             }
-            htmlComputerList = htmlComputerList + '</ul>';
+            htmlComputerList = htmlComputerList + '</div>';
             $("#list-computers").html(htmlComputerList);
 
 
