@@ -161,7 +161,7 @@ if ($result) {
     $classCount = $wmiClasses.Count
     $recordCount = 0
     $classDone = 1
-
+    $isQuickFix = $false
 
     foreach ($class in $wmiClasses) {
         $wmiClassId = $class.id
@@ -200,6 +200,11 @@ if ($result) {
                         Select-Object Name, DeviceID, ConfigManagerErrorCode
                     break
                 }
+                "Win32_QuickFixEngineering" {
+                    $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
+                    $isQuickFix = $true
+                    break
+                }
                 default {
                     $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
                     break
@@ -215,7 +220,18 @@ if ($result) {
 
                     foreach ($rowProp in $wmiProperties) {
                         $PropertyId = $rowProp.id
-                        $PropertyName = $rowProp.name
+                        if ($isQuickFix) {
+                            $PropertyName = $rowProp.name
+                            if ($PropertyName -eq "HotFixID") {
+                                $HotFixID = $computerClass.$PropertyName | Out-String
+                            }
+                            if ($PropertyName -eq "Name") {
+                                $computerClass.$PropertyName = $HotFixID
+                            }
+                        } else {
+                            $PropertyName = $rowProp.name
+
+                        }
 
                             $Value = $computerClass.$PropertyName | Out-String
                             try {
@@ -239,6 +255,8 @@ if ($result) {
                     }
                 }
             }
+
+            $isQuickFix = $false
 
 
         } ## if $class.enabled

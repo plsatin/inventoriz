@@ -38,7 +38,7 @@
                         <div class="list-computers" id="list-computers"></div>
                     </div>
                     <div class="col-md-16">
-                        <h5 id="header-devmng">Диспетчер устройств</h5>
+                        <h5 id="header-devmng"></h5>
                         <div class="computer-tree" id="tree" ></div>
                         <div id="statusline"></div>
                     </div>
@@ -90,7 +90,7 @@ var computerId;
                 // console.log(computerName);
                 computerId = (objData[0].id).replace('computer-id_', '');
                 // console.log(computerId);
-                $('#header-devmng').html('Устройства компьютера: ' + computerName);
+                $('#header-devmng').html('Диспетчер устройств: ' + computerName);
                 renderComputerTree(computerId);
             });
 
