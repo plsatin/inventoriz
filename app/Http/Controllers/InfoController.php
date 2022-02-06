@@ -49,7 +49,7 @@ class InfoController extends Controller
                 $computerName = $request->input('computer');
                 $computer = Computer::query()->where('name', $computerName)->firstOrFail();
         
-                $page_title = 'Все данные узла: ' . $computer->name;
+                $page_title = 'Инвентаризация: ' . $computer->name;
                 return view('computers.tree')->withComputer($computer)->with('page_title', $page_title);
             } else {
                 $page_title = 'Инвентаризация';
