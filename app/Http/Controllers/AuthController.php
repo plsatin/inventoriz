@@ -177,7 +177,7 @@ class AuthController extends Controller
     public function logout () {
         Auth::logout();
 
-        $responseObject = array('Response' => 'Error', 'data' => array('Code' => '0x00200', 'Message' => 'Successfully logged out'));
+        $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Successfully logged out'));
         return response()->json($responseObject, 200);
     }
 

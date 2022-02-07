@@ -13,6 +13,17 @@ use App\Models\WmiProperty;
 
 class JsonFileController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        // $this->middleware('roles');
+    }
+
 
     public function public_path($path = null)
     {

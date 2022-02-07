@@ -10,14 +10,46 @@
 
  - [Swagger UI](http://itdesk.rezhcable.ru:8400/api/documentation)
  - [Тестовый интерфейс](http://itdesk.rezhcable.ru:8400/tree)
+ - [Список компьютеров (Json для дерева)](http://itdesk.rezhcable.ru:8400/api/v1/computers-list)
 
 
 
 
+## Права и роли
+
+### Сводная таблица прав и ролей
+
+```sql
+SELECT p.controller, p.action, p.method,
+    MAX(CASE r.role_id WHEN '1' THEN r.role_id ELSE NULL END) Admin,
+    MAX(CASE r.role_id WHEN '2' THEN r.role_id ELSE NULL END) User
+ FROM permissions AS p
+ JOIN permission_role AS r ON (p.id = r.permission_id)
+        GROUP BY r.permission_id;
+
+```
+
+
+## Сбор информации
+
+### Обновления Windows
+
+```powershell
+
+Session = New-Object -ComObject "Microsoft.Update.Session"
+$Searcher = $Session.CreateUpdateSearcher()
+$historyCount = $Searcher.GetTotalHistoryCount()
+$Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"; expression={switch($_.operation){1 {"Installation"}; 2 {"Uninstallation"}; 3 {"Other"}}}}, @{name="Status"; expression={switch($_.resultcode){1 {"In Progress"}; 2 {"Succeeded"}; 3 {"Succeeded With Errors"};4 {"Failed"}; 5 {"Aborted"} }}}, Title, Description
+
+
+```
 
 
 
-## Отчеты (в разработке)
+## Отчеты
+
+ + [Laravel Report Generators (PDF, CSV & Excel)](https://github.com/Jimmy-JS/laravel-report-generator)
+
 
 ### Отчет об установленном ПО на компьютере
 
@@ -58,3 +90,4 @@ WHERE cp.wmiproperty_id = '95' AND  cp.value NOT LIKE '%Microsoft%' AND cp.value
 
 ```
 
+ 
