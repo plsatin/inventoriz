@@ -52,7 +52,7 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
 
 ## Пользовательский интерфейс
 
- - [Winstrap - примеры компонентов](http://localhost/winstrap)
+ - [Winstrap - примеры компонентов](http://itdesk.rezhcable.ru:8400/winstrap/index.html)
 
 
 
