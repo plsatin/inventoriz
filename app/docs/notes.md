@@ -1,4 +1,4 @@
-# Записки этого проекта
+# Записки проекта
 
 
 ## Интеллектуальная инвентаризация
@@ -43,6 +43,20 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
 
 
 ```
+
+
+
+
+
+
+
+## Пользовательский интерфейс
+
+ - [Winstrap - примеры компонентов](http://localhost/winstrap)
+
+
+
+
 
 
 
