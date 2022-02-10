@@ -81,7 +81,7 @@ class ReportsController extends Controller
                     $computer->last_inventory_end,
                     $computer->computertargetid,
                     $computer->id,
-                    $computer->last_inventory_index
+                    $computer->properties()
                 ];
 
                 array_push($data, $arrComputer);
@@ -95,7 +95,7 @@ class ReportsController extends Controller
                 'data' => $data
             ];
 
-            return response()->json($computers);
+            return response()->json($response);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
