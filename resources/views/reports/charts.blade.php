@@ -85,25 +85,31 @@
     }
 
     function getDataManufacturer() {
-        var result = [];
+        
+        var arrComputersManufacturer = [];
         $.ajax({
             type: "GET",
             url: '/api/v1/reports/properties/86',
             success: function (data) {
                 console.log(data);
-                // var arrComputersManufacturer;
                 // for (var computer in data) {
                 // }
 
-                
+                var result = [];
                 data.reduce(function(res, dataR) {
                     if (!res[dataR.value]) {
-                        res[dataR.value] = [ dataR.value, 0 ];
+                        res[dataR.value] = { Manufacturer: dataR.value, qty: 0 };
                         result.push(res[dataR.value])
                     }
-                    res[dataR.value].[1] += 1;
+                    res[dataR.value].qty += 1;
                     return res;
                 }, {});
+
+
+                for (var row in result) {
+                    console.log(row);
+
+                }
 
                 // console.log(result);
 
@@ -114,7 +120,7 @@
             }
         });
 
-        return result;
+        return arrComputersManufacturer;
         
     }
 
