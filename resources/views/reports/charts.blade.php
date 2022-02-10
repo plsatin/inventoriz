@@ -191,7 +191,7 @@
             chartArea: {
                 left: 0,
                 height: 250,
-                width: 500
+                width: 600
             },
             legend: { position: 'bottom' },
 
