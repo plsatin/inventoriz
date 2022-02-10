@@ -107,6 +107,8 @@
                     return res;
                 }, {});
 
+                arrComputersManufacturer.push(['Manufacturer', 'qty']);
+
                 $.each( result, function( key, value ) {
                     arrComputersManufacturer.push([value.Manufacturer, value.qty]);
                 });
