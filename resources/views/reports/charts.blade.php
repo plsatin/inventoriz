@@ -73,7 +73,7 @@
     });
 
     function drawChart(data0) {
-        var data = google.visualization.arrayToDataTable(data0);
+        var data = google.visualization.arrayToDataTable([data0]);
 
         var options = {
             title: 'Top Manufacturer',
