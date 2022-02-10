@@ -81,12 +81,16 @@
         var options = {
             title: 'Производители',
             pieHole: 0.4,
-            legend: {
-                position: 'right',
-                alignment: 'center',
-                width: 400,
-                floating: true
+            chartArea: {
+                left: 0,
+                height: 250,
+                width: 600
             },
+            height: 300,
+            width: 600,
+            legend: {
+                maxLines: 2,
+            }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartManufacturers'));
         chart.draw(data, options);
