@@ -31,6 +31,9 @@
                             <li><a href="/tree?computer=rzh01-pc83.rezhcable.ru">rzh01-pc83.rezhcable.ru</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="color-type-secondary" href="/api/documentation" >Rest API</a>
+                    </li>
 
                     <li>
                         <a class="color-type-secondary" href="#aboutdialog" data-toggle="modal">О проекте</a>
