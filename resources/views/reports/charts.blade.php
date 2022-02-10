@@ -81,7 +81,7 @@
         dataOS = getDataFromInventoriz('/api/v1/reports/properties/15');
         dataCPU = getDataFromInventoriz('/api/v1/reports/properties/4');
         dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
-        dataUpdated = getDataFromInventoriz('/api/v1/reports/computers/last_updated');
+        dataUpdated = getDataFromInventorizUpdated('/api/v1/reports/computers/last_updated');
 
         console.log(dataUpdated);
 
@@ -211,6 +211,28 @@
                 }, {});
 
                 arrValues.push(['Наименование', 'Количество']);
+                $.each( result, function( key, value ) {
+                    arrValues.push([value.Manufacturer, value.qty]);
+                });
+               
+            },
+            error: function (jqXHR, text, error) {
+                console.log(error);
+            }
+        });
+        return arrValues;
+    }
+
+    function getDataFromInventorizUpdated(dataUrl) {
+        var arrValues = [];
+        $.ajax({
+            type: "GET",
+            url: dataUrl,
+            success: function (data) {
+                console.log(data);
+                var result = [];
+
+                arrValues.push(['Дата', 'Количество']);
                 $.each( result, function( key, value ) {
                     arrValues.push([value.Manufacturer, value.qty]);
                 });
