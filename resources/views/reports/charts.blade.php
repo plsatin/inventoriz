@@ -193,7 +193,7 @@
                 height: 250,
                 width: 600
             },
-            legend: { position: 'bottom' },
+            legend: { position: 'none' },
 
 
         };
