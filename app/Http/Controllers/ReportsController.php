@@ -35,7 +35,7 @@ class ReportsController extends Controller
             // $wmiclass = WmiClass::findOrFail($property->wmiclass_id);
             // $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
 
-            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->orderBy('value', 'computer_id')->get();
+            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->orderBy('value')->orderBy('computer_id')->get();
 
 
 
