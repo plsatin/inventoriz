@@ -106,10 +106,7 @@
             height: 300,
             width: 600,
             legend: {
-                maxLines: 1,
-                textStyle: {
-                    fontSize: 15
-                }
+                maxLines: 2,
             }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
