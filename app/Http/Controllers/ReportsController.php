@@ -76,12 +76,12 @@ class ReportsController extends Controller
 
             $countComputers = 0;
 
-            foreach ($computer as $computers) {
+            foreach ($computers as $computer) {
                 $arrComputer = [$computer->name,
                     $computer->last_inventory_end,
                     $computer->computertargetid,
                     $computer->id,
-                    $computer->last_inventory_index,
+                    $computer->last_inventory_index
                 ];
 
                 array_push($data, $arrComputer);
