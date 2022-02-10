@@ -195,7 +195,7 @@
 
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chartUpdated'));
+        var chart = new google.visualization.LineChart(document.getElementById('chartUpdated'));
         chart.draw(data, options);
     }
 
