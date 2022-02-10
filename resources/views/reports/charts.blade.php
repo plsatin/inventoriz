@@ -90,13 +90,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- <tr>
-                                        <td>rzh01-pc83.rezhcable.ru</td>
-                                        <td>2022-02-10 19:00:45</td>
-                                        <td>Майкрософт Windows 10 Pro</td>
-                                        <td>Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz</td>
-                                        <td class="text-right">16384</td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -314,7 +307,14 @@
 
     setTimeout(function(){
         $('#tableComputers').DataTable( {
-            "ajax": '/api/v1/reports/computers/table'
+            "ajax": '/api/v1/reports/computers/table',
+            "columns": [
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "20%" }
+            ]
         });
     }, 1000);
 
