@@ -68,7 +68,7 @@ class ReportsController extends Controller
         try {
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
-            $computers = Computer::select('name', 'last_inventory_end', 'computertargetid', 'id', 'last_inventory_index')->orderBy('name', 'asc')->get();
+            $computers = Computer::query()->properties()->orderBy('name', 'asc')->get();
 
 
             $response = [];
@@ -95,7 +95,7 @@ class ReportsController extends Controller
                 'data' => $data
             ];
 
-            return response()->json($response);
+            return response()->json($computers);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
