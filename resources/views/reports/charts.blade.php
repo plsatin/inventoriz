@@ -82,7 +82,8 @@
         dataCPU = getDataFromInventoriz('/api/v1/reports/properties/4');
         dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
         dataUpdated = getDataFromInventoriz('/api/v1/reports/computers/last_updated');
-        // console.log(dataManufacturer);
+
+        console.log(dataUpdated);
 
 
         google.charts.load("current", {packages:["corechart"]});
