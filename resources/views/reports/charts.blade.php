@@ -57,24 +57,16 @@
 
 <script>
 
-    var dataManufacturer;
+    var dataManufacturer = [];
 
-
-    $(document).ready(function () {
-
-
-
-
-        dataManufacturer = getDataManufacturer();
-        console.log(dataManufacturer);
-
-
-    });
-
+    dataManufacturer = getDataManufacturer();
+    console.log(dataManufacturer);
 
 
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
+
+
     function drawChart() {
         var data = google.visualization.arrayToDataTable(dataManufacturer);
 
@@ -99,7 +91,7 @@
                 // }
 
                 var result = [];
-                data.reduce(function(res, dataR) {
+                result = data.reduce(function(res, dataR) {
                     if (!res[dataR.value]) {
                         res[dataR.value] = { Manufacturer: dataR.value, qty: 0 };
                         result.push(res[dataR.value])
