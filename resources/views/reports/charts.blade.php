@@ -76,14 +76,7 @@
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2],
-            ['Commute',  2],
-            ['Watch TV', 2],
-            ['Sleep',    7]
-        ]);
+        var data = google.visualization.arrayToDataTable(dataManufacturer);
 
         var options = {
             title: 'Top Manufacturer',
@@ -100,12 +93,10 @@
             type: "GET",
             url: '/api/v1/reports/properties/86',
             success: function (data) {
-                console.log(data);
-                var arrComputersManufacturer;
-
+                // console.log(data);
+                // var arrComputersManufacturer;
                 // for (var computer in data) {
                 // }
-
 
                 var result = [];
                 data.reduce(function(res, dataR) {
@@ -117,7 +108,7 @@
                     return res;
                 }, {});
 
-                console.log(result);
+                // console.log(result);
 
                 return result;
             },
