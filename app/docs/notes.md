@@ -17,10 +17,17 @@
 
 ## Права и роли
 
+### Генерация таблицы прав
+
+```bash
+php artisan db:seed --class=DatabaseSeeder
+
+```
+
 ### Сводная таблица прав и ролей
 
 ```sql
-SELECT p.controller, p.action, p.method,
+SELECT p.id, p.controller, p.action, p.method,
     MAX(CASE r.role_id WHEN '1' THEN r.role_id ELSE NULL END) Admin,
     MAX(CASE r.role_id WHEN '2' THEN r.role_id ELSE NULL END) User
  FROM permissions AS p
@@ -53,7 +60,6 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
 ## Пользовательский интерфейс
 
  - [Winstrap - примеры компонентов](http://itdesk.rezhcable.ru:8400/winstrap/index.html)
-
 
 
 
