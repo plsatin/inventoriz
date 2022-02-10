@@ -68,12 +68,12 @@
 
 
         google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart([dataManufacturer]));
+        google.charts.setOnLoadCallback(drawChart(dataManufacturer));
 
     });
 
     function drawChart(data) {
-        var data = google.visualization.arrayToDataTable(data);
+        var data = google.visualization.arrayToDataTable([data]);
 
         var options = {
             title: 'Top Manufacturer',
