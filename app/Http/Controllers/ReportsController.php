@@ -45,7 +45,7 @@ class ReportsController extends Controller
 
 
 
-    public function getComputersUpdatedAt(Request $request, $property) 
+    public function getComputersUpdatedAt(Request $request) 
     {
         try {
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
@@ -54,7 +54,7 @@ class ReportsController extends Controller
                 ->groupBy('date')->orderBy('date', 'desc')->take(7)->get();
 
 
-            return response()->json($property);
+            return response()->json($computers);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
