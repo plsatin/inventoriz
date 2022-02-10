@@ -61,7 +61,7 @@
 
     var dataManufacturer = [];
 
-    $(document).ready(function () {
+    // $(document).ready(function () {
 
         dataManufacturer = getDataManufacturer();
         // console.log(dataManufacturer);
@@ -70,7 +70,7 @@
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart(dataManufacturer));
 
-    });
+    // });
 
     function drawChart(data0) {
         console.log(data0);
