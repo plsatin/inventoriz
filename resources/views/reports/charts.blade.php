@@ -95,7 +95,7 @@
     function drawChartOS() {
         var data = google.visualization.arrayToDataTable(dataOS);
         var options = {
-            width: 100%,
+            width: '100%',
             title: 'Операционные системы',
             pieHole: 0.4,
             chartArea: {
