@@ -185,7 +185,8 @@
         var options = {
             title: 'Последние опросы',
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
-            vAxis: {minValue: 0}
+            vAxis: {minValue: 0},
+            curveType: 'function',
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chartUpdated'));
