@@ -233,8 +233,8 @@
                 var result = [];
 
                 arrValues.push(['Дата', 'Количество']);
-                $.each( result, function( key, value ) {
-                    arrValues.push([value.Manufacturer, value.qty]);
+                $.each( data, function( key, value ) {
+                    arrValues.push([value.date, value.total]);
                 });
                
             },
