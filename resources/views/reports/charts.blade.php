@@ -147,8 +147,6 @@
                 height: 250,
                 width: 600
             },
-            height: 300,
-            width: 600,
             legend: {
                 maxLines: 2,
             }
