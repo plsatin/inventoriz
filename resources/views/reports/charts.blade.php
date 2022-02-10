@@ -35,10 +35,10 @@
                 </header>
     
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
 
                         <div class="chart_wrap">
-                            <div id="donutchart" style="width: 100%; height: 400px;"></div>
+                            <div id="donutchart" style="width: 100%; height: 360px;"></div>
                         </div>
 
                     </div>
@@ -77,7 +77,7 @@
         var data = google.visualization.arrayToDataTable(dataManufacturer);
 
         var options = {
-            title: 'Top Manufacturer',
+            title: 'Производители',
             pieHole: 0.4,
         };
 
