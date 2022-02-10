@@ -312,11 +312,11 @@
     // });
 
 
-    $(document).ready(function() {
+    setTimeout(function(){
         $('#tableComputers').DataTable( {
             "ajax": '/api/v1/reports/computers/table'
         });
-    });
+    }, 2000);
 
 </script>
 
