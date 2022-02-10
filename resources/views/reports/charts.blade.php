@@ -83,7 +83,7 @@
         dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
         dataUpdated = getDataFromInventorizUpdated('/api/v1/reports/computers/last_updated');
 
-        console.log(dataUpdated);
+        // console.log(dataUpdated);
 
 
         google.charts.load("current", {packages:["corechart"]});
@@ -187,6 +187,7 @@
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
             vAxis: {minValue: 0},
             curveType: 'function',
+            legend: { position: 'bottom' }
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chartUpdated'));
@@ -230,7 +231,7 @@
             type: "GET",
             url: dataUrl,
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 var result = [];
 
                 arrValues.push(['Дата', 'Количество']);
