@@ -59,13 +59,16 @@
 
     var dataManufacturer = [];
 
-    dataManufacturer = getDataManufacturer();
-    console.log(dataManufacturer);
+    $(document).ready(function () {
+
+        dataManufacturer = getDataManufacturer();
+        console.log(dataManufacturer);
 
 
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart(dataManufacturer));
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart(dataManufacturer));
 
+    });
 
     function drawChart(data) {
         var data = google.visualization.arrayToDataTable(data);
