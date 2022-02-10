@@ -91,9 +91,9 @@ class ReportsController extends Controller
 
                 $arrComputer = [$computer->name,
                     $computer->last_inventory_end,
-                    $propertyOS->value,
-                    $propertyCPU->value,
-                    $propertyRAM->value
+                    $propertyOS[0]->value,
+                    $propertyCPU[0]->value,
+                    $propertyRAM[0]->value
                 ];
 
                 array_push($data, $arrComputer);
