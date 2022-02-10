@@ -95,9 +95,22 @@
     function drawChartOS() {
         var data = google.visualization.arrayToDataTable(dataOS);
         var options = {
+            width: 100%,
             title: 'Операционные системы',
             pieHole: 0.4,
-            legend: { position: "right", alignment: "start", maxLines: 2 },
+            chartArea: {
+                left: 0,
+                height: 250,
+                width: 600
+            },
+            height: 300,
+            width: 600,
+            legend: {
+                maxLines: 1,
+                textStyle: {
+                    fontSize: 15
+                }
+            }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
         chart.draw(data, options);
