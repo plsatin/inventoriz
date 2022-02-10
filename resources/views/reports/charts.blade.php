@@ -111,7 +111,7 @@
 
                 }
 
-                // console.log(result);
+                console.log(result);
 
                 
             },
