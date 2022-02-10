@@ -69,7 +69,7 @@
             <section class="section">
                 <header class="section-header">
                     <h1 class="section-title">
-                        {{ $page_title ?? '' }}
+                        Компьютеры
                     </h1>
                 </header>
 
@@ -79,16 +79,20 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Description</th>
-                                    <th class="text-right">Price</th>
+                                    <th>Имя</th>
+                                    <th>Последний опрос</th>
+                                    <th>Операционная система</th>
+                                    <th>Процессор</th>
+                                    <th>Оперативная память</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Gadget Alpha</td>
-                                        <td>This is the amazing new Gadget Alpha.</td>
-                                        <td class="text-right">$0.99</td>
+                                        <td>rzh01-pc83.rezhcable.ru</td>
+                                        <td>2022-02-10 19:00:45</td>
+                                        <td>Майкрософт Windows 10 Pro</td>
+                                        <td>Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz</td>
+                                        <td class="text-right">16384</td>
                                     </tr>
                                 </tbody>
                             </table>
