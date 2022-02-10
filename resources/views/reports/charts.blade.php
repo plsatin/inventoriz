@@ -35,7 +35,7 @@
                 </header>
     
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
 
                         <div class="chart_wrap">
                             <div id="donutchart" style="width: 100%; height: 400px;"></div>
