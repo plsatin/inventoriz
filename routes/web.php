@@ -18,9 +18,8 @@
 // });
 
 /** Отображение интерфейса пользователя */
-$router->get('/',  ['uses' => 'ReportsController@showCharts']);
-$router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
-$router->get('/charts',  ['uses' => 'ReportsController@showCharts']);
+$router->get('/',  ['uses' => 'HomeController@index']);
+$router->get('/tree',  ['uses' => 'HomeController@showComputerTree']);
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
@@ -34,7 +33,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     /** Информация о версии API */
-    $router->get('v1/',  ['uses' => 'InfoController@getApiVersion']);
+    $router->get('v1/',  ['uses' => 'HomeController@getApiVersion']);
    
     /** Запрос на скачивание json-файла с классами и их свойствами */
     $router->get('v1/download/classes-json', ['uses' => 'JsonFileController@classesJsonFileDownload']);

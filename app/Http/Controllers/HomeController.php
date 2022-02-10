@@ -9,8 +9,9 @@ use App\Models\WmiProperty;
 use App\Models\Computer;
 use App\Models\ComputerProperties;
 
+use DB;
 
-class InfoController extends Controller
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,6 +22,28 @@ class InfoController extends Controller
     {
         // $this->middleware('auth');
         // $this->middleware('roles');
+    }
+
+
+
+
+    
+    
+    /**
+     * Домашняя страница
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index(Request $request)
+    {
+        try {
+            $page_title = 'Статистика';
+            return view('index')->with('page_title', $page_title);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
     }
 
 
@@ -62,7 +85,6 @@ class InfoController extends Controller
         }
 
     }
-
 
 
 
