@@ -79,7 +79,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     /** Выборки для отчетов и графиков */
-    $router->get('v1/computers/properties/{property}', ['uses' => 'ReportsController@getComputersProperty']);
+    $router->get('v1/computers/reports/{property}', ['uses' => 'ReportsController@getComputersProperty']);
 
 
 });
