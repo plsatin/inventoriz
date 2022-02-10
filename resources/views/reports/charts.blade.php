@@ -59,6 +59,30 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-24">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                    <th class="text-right">Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Gadget Alpha</td>
+                                        <td>This is the amazing new Gadget Alpha.</td>
+                                        <td class="text-right">$0.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
             </section>
         </div>
     </div>
