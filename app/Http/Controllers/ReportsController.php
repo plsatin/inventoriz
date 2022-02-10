@@ -70,18 +70,30 @@ class ReportsController extends Controller
 
             $computers = Computer::query()->orderBy('name', 'asc')->get();
 
-
             $response = [];
             $data = [];
-
             $countComputers = 0;
 
+
+
+
             foreach ($computers as $computer) {
+
+                $computerR = Computer::findOrFail($computer->id);
+
+                $wmiproperty = WmiProperty::query()->findOrFail(4);
+                $propertyCPU = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+                $wmiproperty = WmiProperty::query()->findOrFail(15);
+                $propertyOS = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+                $wmiproperty = WmiProperty::query()->findOrFail(88);
+                $propertyRAM = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+    
+
                 $arrComputer = [$computer->name,
                     $computer->last_inventory_end,
-                    $computer->computertargetid,
-                    $computer->id,
-                    $computer->properties()
+                    $propertyOS,
+                    $propertyCPU,
+                    $propertyRAM
                 ];
 
                 array_push($data, $arrComputer);
