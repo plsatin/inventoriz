@@ -76,8 +76,8 @@
 
                 <div class="row">
                     <div class="col-md-24">
-                        <div class="table-responsive" id="tableComputers">
-                            <table class="table">
+                        <div class="table-responsive">
+                            <table class="table" id="tableComputers">
                                 <thead>
                                 <tr>
                                     <th>Имя</th>
