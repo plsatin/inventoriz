@@ -49,6 +49,26 @@ class ReportsController extends Controller
 
     }
 
+    
+    
+    /**
+     * Диаграммы
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showCharts(Request $request)
+    {
+        try {
+                $page_title = 'Статистика';
+                return view('reports.charts')->with('page_title', $page_title);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
+    }
+
+
 
 
 

@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 
 /** Отображение дерева устройств */
 $router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
+$router->get('/charts',  ['uses' => 'ReportsController@showCharts']);
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
