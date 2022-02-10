@@ -128,6 +128,679 @@
                 }
             }
         },
+        "/api/v1/computers": {
+            "get": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Выборка компьютеров",
+                "operationId": "4509fc6ed71d29ba82f7b848d887be7b",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Имя компьютера",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "computertargetid",
+                        "in": "query",
+                        "description": "GUID компьютера",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает компьютеры",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Computer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если компьютер не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Создание компьютера",
+                "operationId": "1befa212851ae75ea9153b7ee18aad0b",
+                "requestBody": {
+                    "description": "Объект компьютер",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Computer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Возвращает свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Computer"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если компьютер не создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/computers/{id}": {
+            "get": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Получение компьютера по ИД",
+                "operationId": "65dbc122aaf3aa981356fb320de84787",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Computer"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если компьютер не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Обновление компьютера с ИД",
+                "operationId": "35b82e4835ae7d228283c789982ec22e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Объект компьютер",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Computer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Computer"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если предложение не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Удаление компьютера с ИД",
+                "operationId": "99e67c4fe5fa3620a2f6352d04b4b0d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ответ при успешном удалении",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если компьютер не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/computers/{id}/properties": {
+            "get": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Выборка всех свойств компьютера",
+                "operationId": "27efc235cf5e47aa33b8ce68fce5ec28",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает все свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ComputerProperties"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если компьютер не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/computers/{id}/properties/{class}/{property}": {
+            "get": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Запрос свойства компьютера",
+                "operationId": "76201a6e5683dec98026577999c2d27b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойство компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ComputerProperties"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс или свойство) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Обновление свойства компьютера",
+                "operationId": "2660025ff15ee28eda44db0c004eaf21",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Сообщение об успешном создании свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс или свойство) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Создание свойства компьютера",
+                "operationId": "279ad6b90999f9d128919ee65e4fc90c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Возвращает созданное свойство компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ComputerProperties"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс или свойство) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Удаление свойства компьютера",
+                "operationId": "9cc8a6df58ec321b8a21398533cbf9fd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Сообщение об успешном удалении свойства компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс или свойство) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/computers/{id}/properties/{class}": {
+            "get": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Запрос свойств класса компьютера",
+                "operationId": "5ae15c58c6de80bac7b411a915183812",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойства класса компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ComputerProperties"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/computers/{id}/classes/{class}": {
+            "delete": {
+                "tags": [
+                    "computers"
+                ],
+                "description": "Удаление класса свойств компьютера",
+                "operationId": "97cca370fafcdaf33acc73cd85761885",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД компьютера",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "class",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Сообщение об успешном удалении класса свойств компьютера",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если (компьютер, класс или свойство) не найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/profile": {
             "get": {
                 "tags": [
@@ -147,6 +820,16 @@
                                         }
                                     },
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если произошла ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
                                 }
                             }
                         }
@@ -180,8 +863,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Ответ если пользователь не найден",
+                    "204": {
+                        "description": "Ответ если произошла",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -227,8 +910,200 @@
                             }
                         }
                     },
-                    "404": {
+                    "204": {
                         "description": "Ответ если пользователь не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/classes": {
+            "get": {
+                "tags": [
+                    "classes"
+                ],
+                "description": "Выборка WMI классов",
+                "operationId": "572a051ab5ed6cde7bf32d2830f248ec",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает WMI классы",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/WmiClass"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если WMI класс не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/classes/{id}": {
+            "get": {
+                "tags": [
+                    "classes"
+                ],
+                "description": "Выборка одного WMI класса",
+                "operationId": "4a7ba75066e8bc3597d972ccd55c03db",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает один WMI класс",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WmiClass"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если WMI класс не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/classes/{id}/properties": {
+            "get": {
+                "tags": [
+                    "classes"
+                ],
+                "description": "Выборка WMI классов",
+                "operationId": "55f2a45a61d0db5de4058322e1cd7bf2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойства WMI класса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/WmiProperty"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если свойства не найдены",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/classes/{id}/properties/{property}": {
+            "get": {
+                "tags": [
+                    "classes"
+                ],
+                "description": "Выборка WMI классов",
+                "operationId": "dbfc713b5d8a05f542f3ed15024a3145",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ИД WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства WMI класса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает свойство WMI класса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WmiProperty"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если свойства не найдены",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -374,7 +1249,7 @@
                     },
                     "role_id": {
                         "description": "ИД роли пользователя",
-                        "type": "string"
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -400,6 +1275,10 @@
                     "icon": {
                         "description": "Имя файла значка класса",
                         "type": "string"
+                    },
+                    "enabled": {
+                        "description": "Признак включен/выключен/другое",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -408,7 +1287,7 @@
                 "properties": {
                     "wmiclass_id": {
                         "description": "ИД WMI класса",
-                        "type": "string"
+                        "type": "integer"
                     },
                     "name": {
                         "description": "Наименование свойства WMI класса",
