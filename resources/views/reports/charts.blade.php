@@ -68,7 +68,7 @@
 
 
         google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart(dataManufacturer));
+        google.charts.setOnLoadCallback(drawChart([dataManufacturer]));
 
     });
 
@@ -109,13 +109,7 @@
                     arrComputersManufacturer.push([value.Manufacturer, value.qty]);
                 });
 
-                // for (var row in result) {
-                //     console.log(row.Manufacturer);
-
-                // }
-
-                console.log(arrComputersManufacturer);
-
+                // console.log(arrComputersManufacturer);
                 
             },
             error: function (jqXHR, text, error) {
