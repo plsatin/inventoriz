@@ -77,4 +77,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerTree']);
     $router->get('v1/computers/{id}/software',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerSoftwareTree']);
 
+
+    /** Выборки для отчетов и графиков */
+    $router->put('v1/computers/properties/{property}', ['uses' => 'ReportsController@getComputersProperty']);
+
+
 });
