@@ -314,7 +314,10 @@
                 { "width": "28%" },
                 { "width": "27%" },
                 { "width": "10%", "className": "dt-body-right" }
-            ]
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
+            }
         });
     }, 1000);
 
