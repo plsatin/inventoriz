@@ -23,16 +23,16 @@ class DatabaseSeeder extends Seeder
         // // Eloquent::unguard();
 
 
-        $pathWmiclasses = 'app/docs/sql/wmiclasses.sql';
-        DB::unprepared(file_get_contents($pathWmiclasses));
-        $this->command->info('Wmiclasses table seeded!');
+        // $pathWmiclasses = 'app/docs/sql/wmiclasses.sql';
+        // DB::unprepared(file_get_contents($pathWmiclasses));
+        // $this->command->info('Wmiclasses table seeded!');
 
-        $pathWmiproperties = 'app/docs/sql/wmiproperties.sql';
-        DB::unprepared(file_get_contents($pathWmiproperties));
-        $this->command->info('Wmiclasses table seeded!');
+        // $pathWmiproperties = 'app/docs/sql/wmiproperties.sql';
+        // DB::unprepared(file_get_contents($pathWmiproperties));
+        // $this->command->info('Wmiclasses table seeded!');
 
 
-        // $this->call(PermissionTableSeeder::Class);
+        $this->call(PermissionTableSeeder::Class);
 
 
     }
