@@ -101,12 +101,12 @@
             legend: {
                 position: 'right',
                 alignment: 'center',
-                width: 300,
+                width: 400,
                 floating: true
             },
             chartArea: {
-                left: 20,
-                right: 30
+                left: 16,
+                right: 16
             }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
