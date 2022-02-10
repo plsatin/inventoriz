@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="chart_wrap">
-                            <div id="chartRAM" style="width: 100%; height: 360px;"></div>
+                            <div id="chartUpdated" style="width: 100%; height: 360px;"></div>
                         </div>
                     </div>
                 </div>
@@ -77,10 +77,11 @@
 
     // $(document).ready(function () {
 
-        dataManufacturer = getDataFromInventoriz('86');
-        dataOS = getDataFromInventoriz('15');
-        dataCPU = getDataFromInventoriz('4');
-        dataRAM = getDataFromInventoriz('88');
+        dataManufacturer = getDataFromInventoriz('/api/v1/reports/properties/86');
+        dataOS = getDataFromInventoriz('/api/v1/reports/properties/15');
+        dataCPU = getDataFromInventoriz('/api/v1/reports/properties/4');
+        dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
+        dataUpdated = getDataFromInventoriz('/api/v1/reports/computers/last_updated');
         // console.log(dataManufacturer);
 
 
@@ -88,7 +89,7 @@
         google.charts.setOnLoadCallback(drawChartManufacturers);
         google.charts.setOnLoadCallback(drawChartOS);
         google.charts.setOnLoadCallback(drawChartCPU);
-        // google.charts.setOnLoadCallback(drawChartRAM);
+        google.charts.setOnLoadCallback(drawChartUpdated);
 
 
     // });
@@ -177,11 +178,25 @@
     }
 
 
-    function getDataFromInventoriz(dataId) {
+    function drawChartUpdated() {
+        var data = google.visualization.arrayToDataTable(dataUpdated);
+
+        var options = {
+            title: 'Последние опросы',
+            hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chartUpdated'));
+        chart.draw(data, options);
+    }
+
+
+    function getDataFromInventoriz(dataUrl) {
         var arrValues = [];
         $.ajax({
             type: "GET",
-            url: '/api/v1/reports/properties/' + dataId,
+            url: dataUrl,
             success: function (data) {
                 // console.log(data);
                 var result = [];
