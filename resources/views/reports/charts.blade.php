@@ -188,6 +188,7 @@
             vAxis: {minValue: 0},
             curveType: 'function',
             legend: { position: 'bottom' },
+            width: '100%',
 
         };
 
