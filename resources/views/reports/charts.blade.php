@@ -183,6 +183,7 @@
             width: '100%',
             title: 'Последние опросы',
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0},
             curveType: 'function',
             chartArea: {
                 left: 0,
@@ -238,7 +239,7 @@
                 // console.log(data);
                 var result = [];
 
-                arrValues.push(['Дата', 'Количество']);
+                arrValues.push(['Дата', 'Компьютеры']);
                 $.each( data, function( key, value ) {
                     arrValues.push([value.date, value.total]);
                 });
