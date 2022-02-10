@@ -64,7 +64,7 @@
     $(document).ready(function () {
 
         dataManufacturer = getDataManufacturer();
-        console.log(dataManufacturer);
+        // console.log(dataManufacturer);
 
 
         google.charts.load("current", {packages:["corechart"]});
@@ -73,6 +73,7 @@
     });
 
     function drawChart(data0) {
+        console.log(data0);
         var data = google.visualization.arrayToDataTable([data0]);
 
         var options = {
