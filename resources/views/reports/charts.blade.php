@@ -36,15 +36,16 @@
     
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="chart_wrap">
-                            <div id="donutchart" style="width: 100%; height: 360px;"></div>
+                            <div id="chartManufacturers" style="width: 100%; height: 360px;"></div>
                         </div>
-
+                    </div>
+                    <div class="col-md-12">
+                        <div class="chart_wrap">
+                            <div id="chartOS" style="width: 100%; height: 360px;"></div>
+                        </div>
                     </div>
                 </div>
-
-
 
             </section>
         </div>
@@ -60,36 +61,47 @@
     $.ajaxSetup({ async: false });
 
     var dataManufacturer = [];
+    var dataOS = [];
 
     // $(document).ready(function () {
 
-        dataManufacturer = getDataManufacturer();
+        dataManufacturer = getDataFromInventoriz('86');
+        dataOS = getDataFromInventoriz('15');
         // console.log(dataManufacturer);
 
 
         google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChartManufacturers);
+        google.charts.setOnLoadCallback(drawChartOS);
 
     // });
 
-    function drawChart() {
-        // console.log(dataManufacturer);
+    function drawChartManufacturers() {
         var data = google.visualization.arrayToDataTable(dataManufacturer);
-
         var options = {
             title: 'Производители',
             pieHole: 0.4,
         };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        var chart = new google.visualization.PieChart(document.getElementById('chartManufacturers'));
         chart.draw(data, options);
     }
 
-    function getDataManufacturer() {
-        var arrComputersManufacturer = [];
+    function drawChartOS() {
+        var data = google.visualization.arrayToDataTable(dataOS);
+        var options = {
+            title: 'Операционные системы',
+            pieHole: 0.4,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
+        chart.draw(data, options);
+    }
+
+
+    function getDataFromInventoriz(dataId) {
+        var arrValues = [];
         $.ajax({
             type: "GET",
-            url: '/api/v1/reports/properties/86',
+            url: '/api/v1/reports/properties/' + dataId,
             success: function (data) {
                 // console.log(data);
                 var result = [];
@@ -102,9 +114,9 @@
                     return res;
                 }, {});
 
-                arrComputersManufacturer.push(['Manufacturer', 'qty']);
+                arrValues.push(['Наименование', 'Количество']);
                 $.each( result, function( key, value ) {
-                    arrComputersManufacturer.push([value.Manufacturer, value.qty]);
+                    arrValues.push([value.Manufacturer, value.qty]);
                 });
                
             },
@@ -112,7 +124,7 @@
                 console.log(error);
             }
         });
-        return arrComputersManufacturer;
+        return arrValues;
     }
 
 
