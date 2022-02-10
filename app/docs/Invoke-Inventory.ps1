@@ -238,8 +238,10 @@ if ($result) {
                                 if (!($Null -eq $Value) -And ($Value.ToString() -like '*\*')) {
                                     Write-Verbose $Value.ToString()
                                     $Value = ($Value.ToString()).Replace("\", "\\")
-                                } else {
+                                    $Value = ($Value.ToString()).Trim()
+                                    $Value = ($Value.ToString()).Replace("`r|`n","")
 
+                                } else {
                                 }
                             } catch [Exception] {
                                 Write-Verbose $_.Exception.ToString()

@@ -46,6 +46,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart_wrap">
+                            <div id="chartCPU" style="width: 100%; height: 360px;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="chart_wrap">
+                            <div id="chartRAM" style="width: 100%; height: 360px;"></div>
+                        </div>
+                    </div>
+                </div>
 
             </section>
         </div>
@@ -67,12 +79,17 @@
 
         dataManufacturer = getDataFromInventoriz('86');
         dataOS = getDataFromInventoriz('15');
+        dataCPU = getDataFromInventoriz('4');
+        dataRAM = getDataFromInventoriz('88');
         // console.log(dataManufacturer);
 
 
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChartManufacturers);
         google.charts.setOnLoadCallback(drawChartOS);
+        google.charts.setOnLoadCallback(drawChartCPU);
+        google.charts.setOnLoadCallback(drawChartRAM);
+
 
     // });
 
@@ -114,6 +131,48 @@
             }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
+        chart.draw(data, options);
+    }
+
+    function drawChartCPU() {
+        var data = google.visualization.arrayToDataTable(dataCPU);
+        var options = {
+            width: '100%',
+            title: 'Процессор',
+            pieHole: 0.4,
+            chartArea: {
+                left: 0,
+                height: 250,
+                width: 600
+            },
+            height: 300,
+            width: 600,
+            legend: {
+                maxLines: 2,
+            }
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chartCPU'));
+        chart.draw(data, options);
+    }
+
+    function drawChartRAM() {
+        var data = google.visualization.arrayToDataTable(dataRAM);
+        var options = {
+            width: '100%',
+            title: 'Оперативная память, Мб',
+            pieHole: 0.4,
+            chartArea: {
+                left: 0,
+                height: 250,
+                width: 600
+            },
+            height: 300,
+            width: 600,
+            legend: {
+                maxLines: 2,
+            }
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chartRAM'));
         chart.draw(data, options);
     }
 
