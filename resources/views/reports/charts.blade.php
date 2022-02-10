@@ -310,9 +310,9 @@
             "ajax": '/api/v1/reports/computers/table',
             "columns": [
                 { "width": "20%" },
-                { "width": "10%" },
+                { "width": "15%" },
                 { "width": "30%" },
-                { "width": "30%" },
+                { "width": "25%" },
                 { "width": "10%" }
             ]
         });
