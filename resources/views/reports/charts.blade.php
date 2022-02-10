@@ -59,6 +59,20 @@
                     </div>
                 </div>
 
+            </section>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-24">
+            <section class="section">
+                <header class="section-header">
+                    <h1 class="section-title">
+                        {{ $page_title ?? '' }}
+                    </h1>
+                </header>
+
                 <div class="row">
                     <div class="col-md-24">
                         <div class="table-responsive">
@@ -82,10 +96,10 @@
                     </div>
                 </div>
 
-
             </section>
         </div>
     </div>
+
 </div>
 
 
