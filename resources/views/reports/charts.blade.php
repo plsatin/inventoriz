@@ -93,9 +93,8 @@
                 var result = [];
                 result = data.reduce(function(res, dataR) {
                     if (!res[dataR.value]) {
-                        res[dataR.value].manufacturer = res[dataR.value];
-                        res[dataR.value].qty = 0;
-                        result.push([res[dataR.value], res[dataR.value].qty])
+                        res[dataR.value] = { Manufacturer: dataR.value, qty: 0 };
+                        result.push(res[dataR.value])
                     }
                     res[dataR.value].qty += 1;
                     return res;
