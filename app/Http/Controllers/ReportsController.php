@@ -31,15 +31,7 @@ class ReportsController extends Controller
     public function getComputersProperty(Request $request, $property) 
     {
         try {
-            
-            // $wmiclass = WmiClass::findOrFail($property->wmiclass_id);
-            // $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
-
             $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->orderBy('value')->orderBy('computer_id')->get();
-
-
-
-            // $computers = ComputerProperties::select();
 
             return response()->json($property);
         } catch (\Exception $e) {
@@ -48,6 +40,29 @@ class ReportsController extends Controller
         }
 
     }
+
+
+
+
+
+    public function getComputersUpdatedAt(Request $request, $property) 
+    {
+        try {
+            /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
+
+            $computers = Computer::select(DB::raw('DATE(updated_at) as date'), DB::raw('count(*) as total'))
+                ->groupBy('date')->orderBy('date', 'desc')->take(7)->get();
+
+
+            return response()->json($property);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
+    }
+
+
 
     
     
@@ -59,8 +74,8 @@ class ReportsController extends Controller
     public function showCharts(Request $request)
     {
         try {
-                $page_title = 'Статистика';
-                return view('reports.charts')->with('page_title', $page_title);
+            $page_title = 'Статистика';
+            return view('reports.charts')->with('page_title', $page_title);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
