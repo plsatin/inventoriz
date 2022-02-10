@@ -185,7 +185,13 @@
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
             vAxis: {minValue: 0},
             curveType: 'function',
+            chartArea: {
+                left: 0,
+                height: 250,
+                width: 600
+            },
             legend: { position: 'bottom' },
+
 
         };
 
