@@ -191,7 +191,7 @@
             chartArea: {
                 left: 0,
                 height: 250,
-                width: 600
+                width: 400
             },
             height: 300,
             width: 600,
