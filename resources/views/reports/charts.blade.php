@@ -298,11 +298,23 @@
     }
 
 
+    $.ajax({
+        type: "GET",
+        url: '/api/v1/reports/computers/table',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jqXHR, text, error) {
+            console.log(error);
+        }
+    });
+
+
     $(document).ready(function() {
         $('#tableComputers').DataTable( {
             "ajax": '/api/v1/reports/computers/table'
-        } );
-    } );
+        });
+    });
 
 </script>
 
