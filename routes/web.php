@@ -13,11 +13,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
 
-/** Отображение дерева устройств */
+/** Отображение интерфейса пользователя */
+$router->get('/',  ['uses' => 'ReportsController@showCharts']);
 $router->get('/tree',  ['uses' => 'InfoController@showComputerTree']);
 $router->get('/charts',  ['uses' => 'ReportsController@showCharts']);
 

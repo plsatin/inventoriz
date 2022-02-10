@@ -16,7 +16,7 @@
                     <i class="glyph glyph-hamburger"></i>
                 </button>
 
-                <a href="/charts" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="/assets/images/inventoriz-logo-header.png" alt="Winstrap" height="29" />
                 </a>
 
