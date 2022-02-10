@@ -64,11 +64,11 @@
 
 
     google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart(dataManufacturer));
 
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(dataManufacturer);
+    function drawChart(data) {
+        var data = google.visualization.arrayToDataTable(data);
 
         var options = {
             title: 'Top Manufacturer',
