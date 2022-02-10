@@ -183,7 +183,7 @@
             width: '100%',
             title: 'Последние опросы',
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
-            vAxis: {minValue: 0},
+            vAxis: {title: 'Компьютеры', minValue: 0},
             curveType: 'function',
             chartArea: {
                 left: 0,
