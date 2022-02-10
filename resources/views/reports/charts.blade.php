@@ -85,7 +85,7 @@
     }
 
     function getDataManufacturer() {
-
+        var result = [];
         $.ajax({
             type: "GET",
             url: '/api/v1/reports/properties/86',
@@ -95,7 +95,7 @@
                 // for (var computer in data) {
                 // }
 
-                var result = [];
+                
                 result = data.reduce(function(res, dataR) {
                     if (!res[dataR.value]) {
                         res[dataR.value] = { Manufacturer: dataR.value, qty: 0 };
@@ -105,14 +105,16 @@
                     return res;
                 }, {});
 
-                console.log(result);
+                // console.log(result);
 
-                dataManufacturer = result;
+                
             },
             error: function (jqXHR, text, error) {
                 console.log(error);
             }
         });
+
+        return result;
         
     }
 
