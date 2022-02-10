@@ -88,7 +88,7 @@
         google.charts.setOnLoadCallback(drawChartManufacturers);
         google.charts.setOnLoadCallback(drawChartOS);
         google.charts.setOnLoadCallback(drawChartCPU);
-        google.charts.setOnLoadCallback(drawChartRAM);
+        // google.charts.setOnLoadCallback(drawChartRAM);
 
 
     // });
@@ -138,7 +138,7 @@
         var data = google.visualization.arrayToDataTable(dataCPU);
         var options = {
             width: '100%',
-            title: 'Процессор',
+            title: 'Процессоры',
             pieHole: 0.4,
             chartArea: {
                 left: 0,
