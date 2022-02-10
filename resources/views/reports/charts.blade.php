@@ -14,6 +14,7 @@
 
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
 <style>
     .chart_wrap {
@@ -75,7 +76,7 @@
 
                 <div class="row">
                     <div class="col-md-24">
-                        <div class="table-responsive">
+                        <div class="table-responsive" id="tableComputers">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -87,13 +88,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    {{-- <tr>
                                         <td>rzh01-pc83.rezhcable.ru</td>
                                         <td>2022-02-10 19:00:45</td>
                                         <td>Майкрософт Windows 10 Pro</td>
                                         <td>Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz</td>
                                         <td class="text-right">16384</td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -297,7 +298,11 @@
     }
 
 
-
+    $(document).ready(function() {
+        $('#tableComputers').DataTable( {
+            "ajax": '/api/v1/reports/computers/table'
+        } );
+    } );
 
 </script>
 

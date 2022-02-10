@@ -63,6 +63,22 @@ class ReportsController extends Controller
     }
 
 
+    public function getComputersTable(Request $request) 
+    {
+        try {
+            /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
+
+            $computers = Computer::select('name', 'updated_at', 'computertargetid', 'id', 'last_inventory_index')->orderBy('name', 'asc')->get();
+
+
+            return response()->json($computers);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
+    }
+
 
     
     
