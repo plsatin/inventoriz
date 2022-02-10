@@ -57,6 +57,8 @@
 
 <script>
 
+    $.ajaxSetup({ async: false });
+
     var dataManufacturer = [];
 
     $(document).ready(function () {
