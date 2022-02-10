@@ -71,7 +71,31 @@ class ReportsController extends Controller
             $computers = Computer::select('name', 'last_inventory_end', 'computertargetid', 'id', 'last_inventory_index')->orderBy('name', 'asc')->get();
 
 
-            return response()->json($computers);
+            $response = [];
+            $data = [];
+
+            $countComputers = 0;
+
+            foreach ($computer as $computers) {
+                $arrComputer = [$computer->name,
+                    $computer->last_inventory_end,
+                    $computer->computertargetid,
+                    $computer->id,
+                    $computer->last_inventory_index,
+                ];
+
+                array_push($data, $arrComputer);
+                $countComputers ++;
+            }
+
+
+            $response = ['draw' => 1,
+                'recordsTotal' =>  $countComputers,
+                'recordsFiltered' => $countComputers,
+                'data' => $data
+            ];
+
+            return response()->json($response);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
