@@ -90,7 +90,7 @@
             type: "GET",
             url: '/api/v1/reports/properties/86',
             success: function (data) {
-                // console.log(data);
+                console.log(data);
                 // var arrComputersManufacturer;
                 // for (var computer in data) {
                 // }
