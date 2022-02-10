@@ -35,10 +35,10 @@
                 </header>
     
                 <div class="row">
-                    <div class="col-md-24">
+                    <div class="col-md-12">
 
                         <div class="chart_wrap">
-                            <div id="donutchart" style="width: 100%; height: 250px;"></div>
+                            <div id="donutchart" style="width: 100%; height: 400px;"></div>
                         </div>
 
                     </div>
@@ -73,8 +73,7 @@
     // });
 
     function drawChart() {
-        console.log(dataManufacturer);
-
+        // console.log(dataManufacturer);
         var data = google.visualization.arrayToDataTable(dataManufacturer);
 
         var options = {
@@ -87,16 +86,12 @@
     }
 
     function getDataManufacturer() {
-        
         var arrComputersManufacturer = [];
         $.ajax({
             type: "GET",
             url: '/api/v1/reports/properties/86',
             success: function (data) {
                 // console.log(data);
-                // for (var computer in data) {
-                // }
-
                 var result = [];
                 data.reduce(function(res, dataR) {
                     if (!res[dataR.value]) {
@@ -108,21 +103,16 @@
                 }, {});
 
                 arrComputersManufacturer.push(['Manufacturer', 'qty']);
-
                 $.each( result, function( key, value ) {
                     arrComputersManufacturer.push([value.Manufacturer, value.qty]);
                 });
-
-                // console.log(arrComputersManufacturer);
-                
+               
             },
             error: function (jqXHR, text, error) {
                 console.log(error);
             }
         });
-
         return arrComputersManufacturer;
-        
     }
 
 
