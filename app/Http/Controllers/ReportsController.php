@@ -32,11 +32,10 @@ class ReportsController extends Controller
     {
         try {
             
-            $wmiclass = WmiClass::findOrFail($property->wmiclass_id);
-            $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
+            // $wmiclass = WmiClass::findOrFail($property->wmiclass_id);
+            // $wmiproperty = WmiProperty::where('wmiclass_id', $wmiclass->id)->findOrFail($property);
 
-            $property = ComputerProperties::query()->whereBelongsTo($wmiclass)
-                    ->whereBelongsTo($wmiproperty)->get();
+            $property = ComputerProperties::query()->where('wmiproperty_id', $property)->get();
 
 
 
