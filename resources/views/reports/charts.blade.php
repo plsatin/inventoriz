@@ -98,6 +98,7 @@
     function drawChartManufacturers() {
         var data = google.visualization.arrayToDataTable(dataManufacturer);
         var options = {
+            width: '100%',
             title: 'Производители',
             pieHole: 0.4,
             chartArea: {
@@ -105,8 +106,6 @@
                 height: 250,
                 width: 600
             },
-            height: 300,
-            width: 600,
             legend: {
                 maxLines: 2,
             }
@@ -181,12 +180,12 @@
         var data = google.visualization.arrayToDataTable(dataUpdated);
 
         var options = {
+            width: '100%',
             title: 'Последние опросы',
             hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
             vAxis: {minValue: 0},
             curveType: 'function',
             legend: { position: 'bottom' },
-            width: '100%',
 
         };
 
