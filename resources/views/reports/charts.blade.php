@@ -105,13 +105,16 @@
                     return res;
                 }, {});
 
+                $.each( result, function( key, value ) {
+                    arrComputersManufacturer.push([value.Manufacturer, value.qty]);
+                });
 
-                for (var row in result) {
-                    console.log(row.Manufacturer);
+                // for (var row in result) {
+                //     console.log(row.Manufacturer);
 
-                }
+                // }
 
-                console.log(result);
+                console.log(arrComputersManufacturer);
 
                 
             },
