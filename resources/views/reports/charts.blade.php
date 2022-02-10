@@ -81,6 +81,12 @@
         var options = {
             title: 'Производители',
             pieHole: 0.4,
+            legend: {
+                position: 'right',
+                alignment: 'center',
+                width: 400,
+                floating: true
+            },
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartManufacturers'));
         chart.draw(data, options);
@@ -91,6 +97,12 @@
         var options = {
             title: 'Операционные системы',
             pieHole: 0.4,
+            legend: {
+                position: 'right',
+                alignment: 'center',
+                width: 400,
+                floating: true
+            },
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartOS'));
         chart.draw(data, options);
