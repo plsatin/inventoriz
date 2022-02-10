@@ -69,6 +69,8 @@
 
 
 <script>
+// https://sawtech.ru/tehno-blog/rabota-s-grafikami-i-diagrammami-google-chart/
+
 
     $.ajaxSetup({ async: false });
 
@@ -80,7 +82,7 @@
         dataManufacturer = getDataFromInventoriz('/api/v1/reports/properties/86');
         dataOS = getDataFromInventoriz('/api/v1/reports/properties/15');
         dataCPU = getDataFromInventoriz('/api/v1/reports/properties/4');
-        dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
+        // dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
         dataUpdated = getDataFromInventorizUpdated('/api/v1/reports/computers/last_updated');
 
         // console.log(dataUpdated);
@@ -90,6 +92,7 @@
         google.charts.setOnLoadCallback(drawChartManufacturers);
         google.charts.setOnLoadCallback(drawChartOS);
         google.charts.setOnLoadCallback(drawChartCPU);
+
         google.charts.setOnLoadCallback(drawChartUpdated);
 
 
@@ -195,7 +198,8 @@
 
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chartUpdated'));
+        // var chart = new google.visualization.LineChart(document.getElementById('chartUpdated'));
+        var chart = new google.visualization.AreaChart(document.getElementById('chartUpdated'));
         chart.draw(data, options);
     }
 
