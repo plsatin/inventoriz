@@ -313,7 +313,7 @@
                 { "width": "15%" },
                 { "width": "28%" },
                 { "width": "27%" },
-                { "width": "10%" }
+                { "width": "10%", "className": "dt-body-right" }
             ]
         });
     }, 1000);
