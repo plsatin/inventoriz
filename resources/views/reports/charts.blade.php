@@ -74,6 +74,7 @@
 
     function drawChart(data0) {
         console.log(data0);
+        data0 = data0.replace(/'/g, '"');
         var data = google.visualization.arrayToDataTable([data0]);
 
         var options = {
