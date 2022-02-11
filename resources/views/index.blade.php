@@ -117,7 +117,7 @@
 
     // $(document).ready(function () {
 
-        dataManufacturer = getDataFromInventoriz('/api/v1/reports/properties/86');
+        dataManufacturer = getDataFromInventoriz('/api/v1/reports/properties/113'); //86
         dataOS = getDataFromInventoriz('/api/v1/reports/properties/15');
         dataCPU = getDataFromInventoriz('/api/v1/reports/properties/4');
         // dataRAM = getDataFromInventoriz('/api/v1/reports/properties/88');
