@@ -33,12 +33,33 @@ class JsonFileController extends Controller
 
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/download/classes-json",
+     *     description="Возвращает json-файл с описанием классов",
+     *     tags={"json-files"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает json-файл с описанием классов",
+     *         @OA\Schema(type="file")
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */
     public function classesJsonFileDownload()
     {
         try {
             $wmiClasses = json_encode(WmiClass::all());
 
-            $jsonFile = time() . '_file.json';
+            $jsonFile = time() . '-classes.json';
             File::put($this->public_path('uploads/'.$jsonFile), $wmiClasses);
             return response()->download($this->public_path('uploads/'.$jsonFile));
         } catch (\Exception $e) {
@@ -48,6 +69,28 @@ class JsonFileController extends Controller
     }
 
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/download/properties-json",
+     *     description="Возвращает json-файл с описанием свойств классов",
+     *     tags={"json-files"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает json-файл с описанием свойств классов",
+     *         @OA\Schema(type="file")
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */
     public function propertiesJsonFileDownload()
     {
         try {
@@ -59,7 +102,7 @@ class JsonFileController extends Controller
             $wmiProperties = json_encode(WmiProperty::all());
 
 
-            $jsonFile = time() . '_file.json';
+            $jsonFile = time() . '-properties.json';
             File::put($this->public_path('uploads/'.$jsonFile), $wmiProperties);
             return response()->download($this->public_path('uploads/'.$jsonFile));
 

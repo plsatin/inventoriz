@@ -49,7 +49,7 @@ class WmiClassController extends Controller
      *     ),
      *     security={{ "apiAuth": {} }}
      * )
-     */    
+     */
     public function showAllWmiClasses(Request $request) 
     {
         try {
@@ -108,7 +108,7 @@ class WmiClassController extends Controller
      *     ),
      *     security={{ "apiAuth": {} }}
      * )
-     */    
+     */
     public function showOneWmiClass($id)
     {
         try {
