@@ -35,7 +35,7 @@ class JsonFileController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/download/classes-json",
+     *     path="/api/v1/downloads/classes-json",
      *     description="Возвращает json-файл с описанием классов",
      *     tags={"json-files"},
      *     @OA\Response(
@@ -72,7 +72,7 @@ class JsonFileController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/download/properties-json",
+     *     path="/api/v1/downloads/properties-json",
      *     description="Возвращает json-файл с описанием свойств классов",
      *     tags={"json-files"},
      *     @OA\Response(

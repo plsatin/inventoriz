@@ -41,8 +41,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     /** Запрос на скачивание json-файла с классами и их свойствами */
-    $router->get('v1/download/classes-json', ['uses' => 'JsonFileController@classesJsonFileDownload']);
-    $router->get('v1/download/properties-json', ['uses' => 'JsonFileController@propertiesJsonFileDownload']);
+    $router->get('v1/downloads/classes-json', ['uses' => 'JsonFileController@classesJsonFileDownload']);
+    $router->get('v1/downloads/properties-json', ['uses' => 'JsonFileController@propertiesJsonFileDownload']);
 
 
     /** Работа с WMI классами */
