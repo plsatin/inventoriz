@@ -63,19 +63,140 @@ class ReportsController extends Controller
     }
 
 
+
+
+
+    /**
+     * @OA\Schema(
+     *      schema="ComputersList",
+     *      type="object",
+     *      @OA\Property(
+     *          property="draw",
+     *          type="string",
+     *          description="",
+     *      ),
+     *      @OA\Property(
+     *          property="recordsTotal",
+     *          type="string",
+     *          description="Всего записей",
+     *      ),
+     *      @OA\Property(
+     *          property="recordsFiltered",
+     *          type="string",
+     *          description="Выбрано записей",
+     *      ),
+     *      @OA\Property(
+     *          property="data",
+     *          type="object",
+     *          description="Объект со списком",
+     *          @OA\Property(
+     *              property="LinkWithName",
+     *              type="string",
+     *              description="Имя компьютера в виде ссылки",
+     *          ),
+     *          @OA\Property(
+     *              property="InventoryDate",
+     *              type="string",
+     *              description="Дата последней инвентаризации",
+     *          ),
+     *          @OA\Property(
+     *              property="OperatingSystem",
+     *              type="string",
+     *              description="Операционная система",
+     *          ),
+     *          @OA\Property(
+     *              property="Processor",
+     *              type="string",
+     *              description="Процессор",
+     *          ),
+     *          @OA\Property(
+     *              property="TotalMemory",
+     *              type="string",
+     *              description="Оперативная память",
+     *          ),
+     *      ),
+     * )
+     */
+
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/computers/table",
+     *     description="Получение списка компьютеров для статистической таблицы",
+     *     tags={"computers"},
+     *     @OA\Parameter(
+     *         name="start",
+     *         in="query",
+     *         description="Начало диапазона по ИД (по умолчанию 0)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Ограничение диапазона по ИД (по умолчанию 10 000)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="order",
+     *         in="query",
+     *         description="Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает список компьютеров",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/ComputersList"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */    
     public function getComputersTable(Request $request) 
     {
         try {
-            /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
-            $computers = Computer::query()->orderBy('name', 'asc')->get();
+            // Ограничения выборки и сортировка
+            if ($request->filled('start')) {
+                $startOffset = $request->get('start');
+                $orderBy = 'id';
+            } else {
+                $startOffset = 0;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('limit')) {
+                $limitOffset = $request->get('limit');
+                $orderBy = 'id';
+            } else {
+                $limitOffset = 10000;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('order')) {
+                $orderBy = $request->get('order');
+            }
+
+
+
+            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
             $response = [];
             $data = [];
             $countComputers = 0;
-
-
-
 
             foreach ($computers as $computer) {
 
