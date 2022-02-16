@@ -58,6 +58,13 @@ class ComputerController extends Controller
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
+     *     @OA\Parameter(
+     *         name="order",
+     *         in="query",
+     *         description="Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Возвращает компьютеры",
@@ -84,7 +91,7 @@ class ComputerController extends Controller
     {
         try {
 
-            // Ограничения выборки
+            // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
                 $orderBy = 'id';
@@ -101,6 +108,9 @@ class ComputerController extends Controller
                 $orderBy = 'name';
             }
 
+            if ($request->filled('order')) {
+                $orderBy = $request->get('order');
+            }
             
 
             if ($request->filled('name')) {
