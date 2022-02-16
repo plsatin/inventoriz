@@ -25,6 +25,19 @@ php artisan db:seed --class=DatabaseSeeder
 
 ```
 
+
+## Генерация API документации
+
+```bash
+php artisan swagger-lume:generate
+
+
+```
+
+
+
+
+
 ### Сводная таблица прав и ролей
 
 ```sql

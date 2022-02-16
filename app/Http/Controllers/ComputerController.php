@@ -87,14 +87,18 @@ class ComputerController extends Controller
             // Ограничения выборки
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
+                $orderBy = 'id';
             } else {
                 $startOffset = 0;
+                $orderBy = 'name';
             }
 
             if ($request->filled('limit')) {
                 $limitOffset = $request->get('limit');
+                $orderBy = 'id';
             } else {
                 $limitOffset = 10000;
+                $orderBy = 'name';
             }
 
             
@@ -103,16 +107,16 @@ class ComputerController extends Controller
                 $computerName = $request->get('name');
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
+                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
                 } else {
-                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
+                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
                 }
             } else {
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
+                    $computers = Computer::where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
                 } else {
-                    $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
+                    $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
                 }
             }
 
