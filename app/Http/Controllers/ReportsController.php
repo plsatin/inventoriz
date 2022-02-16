@@ -78,6 +78,13 @@ class ReportsController extends Controller
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
+     *     @OA\Parameter(
+     *         name="order",
+     *         in="query",
+     *         description="Сортировка дат (по умолчанию ASC)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Возвращает список компьютеров",
@@ -108,10 +115,23 @@ class ReportsController extends Controller
                 $limitOffset = 7;
             }
 
+            if ($request->filled('order')) {
+                $order = $request->get('order');
+                if ($order == 'desc') {
+                    $order = 'desc';
+                } else if ($order == 'asc') {
+                    $order = 'asc';
+                } else {
+                    $order = 'desc';
+                }
+            } else {
+                $order = 'asc';
+            }
+
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
             $computers = Computer::select(DB::raw('DATE(updated_at) as date'), DB::raw('count(*) as total'))
-                ->groupBy('date')->orderBy('date', 'desc')->take($limitOffset)->get();
+                ->groupBy('date')->orderBy('date', $order)->take($limitOffset)->get();
 
 
             return response()->json($computers);
