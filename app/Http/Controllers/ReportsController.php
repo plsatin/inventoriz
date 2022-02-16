@@ -88,30 +88,32 @@ class ReportsController extends Controller
      *      @OA\Property(
      *          property="data",
      *          type="array",
-     *          @OA\Item(
-     *              property="LinkWithName",
-     *              type="string",
-     *              description="Имя компьютера в виде ссылки",
-     *          ),
-     *          @OA\Item(
-     *              property="InventoryDate",
-     *              type="string",
-     *              description="Дата последней инвентаризации",
-     *          ),
-     *          @OA\Item(
-     *              property="OperatingSystem",
-     *              type="string",
-     *              description="Операционная система",
-     *          ),
-     *          @OA\Item(
-     *              property="Processor",
-     *              type="string",
-     *              description="Процессор",
-     *          ),
-     *          @OA\Item(
-     *              property="TotalMemory",
-     *              type="string",
-     *              description="Оперативная память",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  property="LinkWithName",
+     *                  type="string",
+     *                  description="Имя компьютера в виде ссылки",
+     *              ),
+     *              @OA\Property(
+     *                  property="InventoryDate",
+     *                  type="string",
+     *                  description="Дата последней инвентаризации",
+     *              ),
+     *              @OA\Property(
+     *                  property="OperatingSystem",
+     *                  type="string",
+     *                  description="Операционная система",
+     *              ),
+     *              @OA\Property(
+     *                  property="Processor",
+     *                  type="string",
+     *                  description="Процессор",
+     *              ),
+     *              @OA\Property(
+     *                  property="TotalMemory",
+     *                  type="string",
+     *                  description="Оперативная память",
+     *              ),
      *          ),
      *      ),
      * )
