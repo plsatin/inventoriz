@@ -44,14 +44,74 @@ class ReportsController extends Controller
 
 
 
+    /**
+     * @OA\Schema(
+     *      schema="ComputersInventoryByDate",
+     *      type="array",
+     *      @OA\Items(
+     *          @OA\Property(
+     *              property="date",
+     *              type="string",
+     *              description="Дата",
+     *          ),
+     *          @OA\Property(
+     *              property="total",
+     *              type="integer",
+     *              description="Количество компьютеров",
+     *          ),
+     *      ),
+     * )
+     */
 
+
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/computers/last_updated",
+     *     description="Получение количества инвентаризированных компьютеров с группировкой по дням",
+     *     tags={"reports"},
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Ограничение диапазона дней (по умолчанию 7)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает список компьютеров",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/ComputersInventoryByDate"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */
     public function getComputersUpdatedAt(Request $request) 
     {
         try {
+
+            // Лимит выборки дней
+            if ($request->filled('limit')) {
+                $limitOffset = $request->get('limit');
+            } else {
+                $limitOffset = 7;
+            }
+
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
             $computers = Computer::select(DB::raw('DATE(updated_at) as date'), DB::raw('count(*) as total'))
-                ->groupBy('date')->orderBy('date', 'asc')->take(7)->get();
+                ->groupBy('date')->orderBy('date', 'asc')->take($limitOffset)->get();
 
 
             return response()->json($computers);
@@ -168,7 +228,7 @@ class ReportsController extends Controller
      *     ),
      *     security={{ "apiAuth": {} }}
      * )
-     */    
+     */
     public function getComputersList(Request $request) 
     {
         try {
