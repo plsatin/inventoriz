@@ -76,24 +76,21 @@ class HomeController extends Controller
                 $action0 =(isset($route['action']['uses'])) ? $route['action']['uses'] : '';
                 // separating controller and method
                 if (!($action0 == '')) {
+
                     $_action = explode('@',$action0);
                     $action = $_action[1];
                     $_action2 = explode('\\',$_action[0]);
                     $controller = $_action2[3];
-                    $method = $route['method'];
-                    $uri = $route['uri'];
    
                     $routeNew = new \stdClass;
-                    $routeNew->uri = $uri;
+                    $routeNew->uri = $route['uri'];
                     $routeNew->action = $action;
                     $routeNew->controller = $controller;
-                    $routeNew->method = $method;
+                    $routeNew->method = $route['method'];
 
                     array_push($routes, $routeNew);
                 }
             }
-    
-
 
             // $app = app();
             // $routes = $app->routes->getRoutes();
