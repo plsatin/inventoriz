@@ -26,6 +26,7 @@
     </thead>
     <tbody>
              @foreach ($routes as $route )
+             {{ dd($route) }}
                  <tr>
                      <td>{{ $route->uri }}</td>
                      <td>{{ $route->controller }}</td>
