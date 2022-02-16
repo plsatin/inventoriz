@@ -50,7 +50,7 @@ class HomeController extends Controller
     public function getApiVersion()
     {
         try {
-            $apiVersionTxt = 'API Version 0.9';
+            $apiVersionTxt = 'API Version 0.9.2';
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => $apiVersionTxt));
             return response()->json($responseObject, 200);

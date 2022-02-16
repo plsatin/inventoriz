@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
  * @package App\Http\Controllers
  * @OA\OpenApi(
  *     @OA\Info(
- *         version="0.0.2",
+ *         version="0.9.2",
  *         title="Computer inventory API",
  *         @OA\License(name="MIT"),
  *         @OA\Contact(

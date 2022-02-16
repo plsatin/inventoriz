@@ -33,14 +33,28 @@ class ComputerController extends Controller
      *     @OA\Parameter(
      *         name="name",
      *         in="query",
-     *         description="Имя компьютера",
+     *         description="Имя компьютера (можно частично)",
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
      *     @OA\Parameter(
      *         name="computertargetid",
      *         in="query",
-     *         description="GUID компьютера",
+     *         description="GUID компьютера (точное соответствие)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="start",
+     *         in="query",
+     *         description="Начало диапазона по ИД (по умолчанию 0)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Ограничение диапазона по ИД (по умолчанию 10 000)",
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
@@ -69,20 +83,36 @@ class ComputerController extends Controller
     public function showSomeComputers(Request $request) 
     {
         try {
+
+            // Ограничения выборки
+            if ($request->filled('start')) {
+                $startOffset = $request->get('start');
+            } else {
+                $startOffset = 0;
+            }
+
+            if ($request->filled('limit')) {
+                $limitOffset = $request->get('limit');
+            } else {
+                $limitOffset = 10000;
+            }
+
+            
+
             if ($request->filled('name')) {
                 $computerName = $request->get('name');
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('name', $computerName)->where('computertargetid', $computerTargetId)->orderBy('name')->get();
+                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
                 } else {
-                    $computers = Computer::where('name', $computerName)->orderBy('name')->get();
+                    $computers = Computer::where('name', 'like', '%' . $computerName . '%')->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
                 }
             } else {
                 if ($request->filled('computertargetid')) {
                     $computerTargetId = $request->get('computertargetid');
-                    $computers = Computer::where('computertargetid', $computerTargetId)->orderBy('name')->get();
+                    $computers = Computer::where('computertargetid', $computerTargetId)->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
                 } else {
-                    $computers = Computer::query()->orderBy('name')->get();
+                    $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('name')->get();
                 }
             }
 
