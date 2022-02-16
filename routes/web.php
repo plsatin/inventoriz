@@ -21,8 +21,12 @@
 $router->get('/',  ['uses' => 'HomeController@index']);
 $router->get('/tree',  ['uses' => 'HomeController@showComputerTree']);
 
+/** Информация о маршрутах */
+$router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
+
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
 
     /** Авторизация */
     $router->post('register', ['uses' => 'AuthController@register']);
@@ -34,9 +38,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     /** Информация о версии API */
     $router->get('v1/',  ['uses' => 'HomeController@getApiVersion']);
-
-    /** Информация о маршрутах */
-    $router->get('v1/routes', ['uses' => 'HomeController@getApiRoutes']);
 
 
     /** Запрос на скачивание json-файла с классами и их свойствами */
@@ -52,6 +53,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // $router->delete('v1/classes/{id}', ['uses' => 'WmiClassController@delete']);
     // $router->put('v1/classes/{id}', ['uses' => 'WmiClassController@update']);
 
+
     /** Работа со свойствами WMI классов */
     $router->get('v1/classes/{id}/properties', ['uses' => 'WmiPropertyController@showAllPropertiesOfWmiClass']);
     $router->get('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@showOnePropertyOfWmiClass']);
@@ -59,12 +61,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // $router->delete('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@delete']);
     // $router->put('v1/classes/{id}/properties/{property}', ['uses' => 'WmiPropertyController@update']);
 
+
     /** Работа с компьютерами  */
     $router->get('v1/computers',  ['uses' => 'ComputerController@showSomeComputers']);
     $router->get('v1/computers/{id}', ['uses' => 'ComputerController@showOneComputer']);
     $router->post('v1/computers', ['uses' => 'ComputerController@create']);
     $router->delete('v1/computers/{id}', ['uses' => 'ComputerController@delete']);
     $router->put('v1/computers/{id}', ['uses' => 'ComputerController@update']);
+
 
     /** Работа со свойствами компьютеров */
     $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerPropertiesController@showAllPropertiesOfComputer']);
@@ -87,7 +91,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/reports/properties/{property}', ['uses' => 'ReportsController@getComputersProperty']);
     $router->get('v1/reports/computers/last_updated', ['uses' => 'ReportsController@getComputersUpdatedAt']);
     $router->get('v1/reports/computers/list', ['uses' => 'ReportsController@getComputersList']);
-    
 
 
 });

@@ -31,10 +31,13 @@
                             <li><a href="/tree?computer=rzh01-pc83.rezhcable.ru">rzh01-pc83.rezhcable.ru</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="color-type-secondary" href="/api/documentation" >Rest API</a>
+                    <li class="dropdown">
+                        Rest API<i class="glyph glyph-chevron-down-2"></i>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="color-type-secondary" href="/api/documentation" >Документация</a></li>
+                            <li><a href="/routes">Маршруты</a></li>
+                        </ul>
                     </li>
-
                     <li>
                         <a class="color-type-secondary" href="#aboutdialog" data-toggle="modal">О проекте</a>
                     </li>
