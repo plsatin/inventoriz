@@ -65,11 +65,14 @@ class HomeController extends Controller
     {
         try {
 
+            // global $app;
+            // $routeCollection = property_exists($app, 'router') ? $app->router->getRoutes() : $app->getRoutes();
+    
             $app = app();
             $routes = $app->routes->getRoutes();
             $page_title = 'Маршруты';
            
-            return view ('routes');
+            return view ('routes')->with('page_title', $page_title)->with('routes', $routes);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
