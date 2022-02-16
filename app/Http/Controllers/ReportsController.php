@@ -64,6 +64,38 @@ class ReportsController extends Controller
 
 
 
+    /**
+     * @OA\Schema(
+     *      schema="ComputerWithBasicProperties",
+     *      type="object",
+     *      @OA\Property(
+     *          property="LinkWithName",
+     *          type="string",
+     *          description="Имя компьютера в виде ссылки",
+     *      ),
+     *      @OA\Property(
+     *          property="InventoryDate",
+     *          type="string",
+     *          description="Дата последней инвентаризации",
+     *      ),
+     *      @OA\Property(
+     *          property="OperatingSystem",
+     *          type="string",
+     *          description="Операционная система",
+     *      ),
+     *      @OA\Property(
+     *          property="Processor",
+     *          type="string",
+     *          description="Процессор",
+     *      ),
+     *      @OA\Property(
+     *          property="TotalMemory",
+     *          type="string",
+     *          description="Оперативная память",
+     *      ),
+     * )
+     */
+
 
 
     /**
@@ -88,32 +120,14 @@ class ReportsController extends Controller
      *      @OA\Property(
      *          property="data",
      *          type="object",
-     *          description="Объект со списком",
-     *          @OA\Property(
-     *              property="LinkWithName",
-     *              type="string",
-     *              description="Имя компьютера в виде ссылки",
-     *          ),
-     *          @OA\Property(
-     *              property="InventoryDate",
-     *              type="string",
-     *              description="Дата последней инвентаризации",
-     *          ),
-     *          @OA\Property(
-     *              property="OperatingSystem",
-     *              type="string",
-     *              description="Операционная система",
-     *          ),
-     *          @OA\Property(
-     *              property="Processor",
-     *              type="string",
-     *              description="Процессор",
-     *          ),
-     *          @OA\Property(
-     *              property="TotalMemory",
-     *              type="string",
-     *              description="Оперативная память",
-     *          ),
+     *          description="Компьютер со списком основных параметров",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/ComputerWithBasicProperties"),
+     *              ),
+     *          ), 
      *      ),
      * )
      */
@@ -124,7 +138,7 @@ class ReportsController extends Controller
      * @OA\Get(
      *     path="/api/v1/reports/computers/table",
      *     description="Получение списка компьютеров для статистической таблицы",
-     *     tags={"computers"},
+     *     tags={"reports"},
      *     @OA\Parameter(
      *         name="start",
      *         in="query",
