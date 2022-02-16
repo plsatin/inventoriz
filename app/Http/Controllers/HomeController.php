@@ -87,7 +87,6 @@ class HomeController extends Controller
                     $routeNew->action = $action;
                     $routeNew->controller = $controller;
                     $routeNew->method = $method;
-                    $routeNew->save();
 
                     $routes[] = $routeNew->id;
                 }
