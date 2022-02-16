@@ -69,7 +69,7 @@ class HomeController extends Controller
             // $routeCollection = property_exists($app, 'router') ? $app->router->getRoutes() : $app->getRoutes();
     
             $app = app();
-            $routes = $app->getRoutes();
+            $routes = $app->routes->getRoutes();
             $page_title = 'Маршруты';
            
             return view ('routes')->with('page_title', $page_title)->with('routes', $routes);
