@@ -34,7 +34,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     /** Информация о версии API */
     $router->get('v1/',  ['uses' => 'HomeController@getApiVersion']);
-   
+
+    /** Информация о маршрутах */
+    $router->get('v1/routes', ['uses' => 'HomeController@getApiRoutes']);
+
+
     /** Запрос на скачивание json-файла с классами и их свойствами */
     $router->get('v1/download/classes-json', ['uses' => 'JsonFileController@classesJsonFileDownload']);
     $router->get('v1/download/properties-json', ['uses' => 'JsonFileController@propertiesJsonFileDownload']);

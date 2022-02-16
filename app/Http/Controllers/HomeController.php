@@ -61,6 +61,24 @@ class HomeController extends Controller
     }
 
 
+    public function getApiRoutes()
+    {
+        try {
+
+            $app = app();
+            $routes = $app->routes->getRoutes();
+            $page_title = 'Маршруты';
+           
+            return view ('routes');
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+    }
+
+
+
+
     /**
      * Диспетчер устройств в виде дерева
      *
