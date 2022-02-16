@@ -53,7 +53,7 @@ class ReportsController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/reports/computers/{property}",
+     *     path="/api/v1/reports/properties/{property}",
      *     description="Выборка",
      *     tags={"reports"},
      *     @OA\Parameter(
