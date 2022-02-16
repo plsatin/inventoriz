@@ -295,7 +295,7 @@
 
     // $.ajax({
     //     type: "GET",
-    //     url: '/api/v1/reports/computers/table',
+    //     url: '/api/v1/reports/computers/list',
     //     success: function (data) {
     //         console.log(data);
     //     },
@@ -307,7 +307,7 @@
 
     setTimeout(function(){
         $('#tableComputers').DataTable( {
-            "ajax": '/api/v1/reports/computers/table',
+            "ajax": '/api/v1/reports/computers/list',
             "columns": [
                 { "width": "20%" },
                 { "width": "15%" },

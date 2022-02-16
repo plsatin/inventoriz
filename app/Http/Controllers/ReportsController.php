@@ -90,7 +90,7 @@ class ReportsController extends Controller
      *          type="array",
      *          @OA\Items(
      *              @OA\Property(
-     *                  property="LinkWithName",
+     *                  property="NameWithLink",
      *                  type="string",
      *                  description="Имя компьютера в виде ссылки",
      *              ),
@@ -121,9 +121,12 @@ class ReportsController extends Controller
 
 
 
+
+
+
     /**
      * @OA\Get(
-     *     path="/api/v1/reports/computers/table",
+     *     path="/api/v1/reports/computers/list",
      *     description="Получение списка компьютеров для статистической таблицы",
      *     tags={"reports"},
      *     @OA\Parameter(
@@ -166,7 +169,7 @@ class ReportsController extends Controller
      *     security={{ "apiAuth": {} }}
      * )
      */    
-    public function getComputersTable(Request $request) 
+    public function getComputersList(Request $request) 
     {
         try {
 
