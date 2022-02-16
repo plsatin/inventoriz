@@ -27,11 +27,108 @@ class ReportsController extends Controller
 
 
 
+    /**
+     * @OA\Schema(
+     *      schema="ComputersProperty",
+     *      type="array",
+     *      @OA\Items(
+     *          @OA\Property(
+     *              property="computer_id",
+     *              type="string",
+     *              description="ИД компьютера",
+     *          ),
+     *          @OA\Property(
+     *              property="value",
+     *              type="integer",
+     *              description="Значение",
+     *          ),
+     *      ),
+     * )
+     */
 
+
+
+
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/computers/{property}",
+     *     description="Выборка",
+     *     tags={"reports"},
+     *     @OA\Parameter(
+     *         name="property",
+     *         in="path",
+     *         description="ИД свойства",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="start",
+     *         in="query",
+     *         description="Начало диапазона по ИД (по умолчанию 0)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Ограничение диапазона по ИД (по умолчанию 10 000)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="order",
+     *         in="query",
+     *         description="Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает список компьютеров",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/ComputersProperty"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */
     public function getComputersProperty(Request $request, $property) 
     {
         try {
-            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->orderBy('value')->orderBy('computer_id')->get();
+
+            // Ограничения выборки и сортировка
+            if ($request->filled('start')) {
+                $startOffset = $request->get('start');
+                $orderBy = 'id';
+            } else {
+                $startOffset = 0;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('limit')) {
+                $limitOffset = $request->get('limit');
+                $orderBy = 'id';
+            } else {
+                $limitOffset = 10000;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('order')) {
+                $orderBy = $request->get('order');
+            }
+            
+            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->skip($startOffset)->take($limitOffset)->orderBy('value')->orderBy('computer_id')->get();
 
             return response()->json($property);
         } catch (\Exception $e) {
