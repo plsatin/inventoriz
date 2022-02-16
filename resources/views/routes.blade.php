@@ -19,19 +19,18 @@
     <thead>
              <tr>
                  <th>uri</th>
-                 <th>Name</th>
-                 <th>Type</th>
+                 <th>Controller</th>
+                 <th>Action</th>
                  <th>Method</th>
              </tr>
     </thead>
     <tbody>
              @foreach ($routes as $route )
-             {{ dd($route) }}
                  <tr>
                      <td>{{ $route->uri }}</td>
-                     <td>{{ $route->getName() }}</td>
-                     <td>{{ $route->getPrefix() }}</td>
-                     <td>{{ $route->getActionMethod() }}</td>
+                     <td>{{ $route->controller }}</td>
+                     <td>{{ $route->action }}</td>
+                     <td>{{ $route->method }}</td>
                  </tr>
              @endforeach
      </tbody>

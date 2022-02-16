@@ -66,8 +66,35 @@ class HomeController extends Controller
         try {
 
             global $app;
-            $routes = property_exists($app, 'router') ? $app->router->getRoutes() : $app->getRoutes();
+            $routeCollection = property_exists($app, 'router') ? $app->router->getRoutes() : $app->getRoutes();
     
+            $routes = [];
+
+            foreach ($routeCollection as $route)
+            {
+                // get route action
+                $action0 =(isset($route['action']['uses'])) ? $route['action']['uses'] : '';
+                // separating controller and method
+                if (!($action0 == '')) {
+                    $_action = explode('@',$action0);
+                    $action = $_action[1];
+                    $_action2 = explode('\\',$_action[0]);
+                    $controller = $_action2[3];
+                    $method = $route['method'];
+                    $uri = $route['uri'];
+   
+                    $routeNew = new StdClass();;
+                    $routeNew->action = $action;
+                    $routeNew->controller = $controller;
+                    $routeNew->method = $method;
+                    $routeNew->save();
+
+                    $routes[] = $routeNew->id;
+                }
+            }
+    
+
+
             // $app = app();
             // $routes = $app->routes->getRoutes();
             $page_title = 'Маршруты';
