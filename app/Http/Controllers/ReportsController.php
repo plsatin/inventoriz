@@ -195,7 +195,7 @@ class ReportsController extends Controller
             }
 
 
-
+            $totalComputers = Computer::count();
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
             $response = [];
@@ -227,7 +227,7 @@ class ReportsController extends Controller
 
 
             $response = ['draw' => 1,
-                'recordsTotal' =>  $countComputers,
+                'recordsTotal' =>  $totalComputers,
                 'recordsFiltered' => $countComputers,
                 'data' => $data
             ];
