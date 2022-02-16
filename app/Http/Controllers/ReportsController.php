@@ -119,6 +119,7 @@ class ReportsController extends Controller
      *      ),
      *      @OA\Property(
      *          property="data",
+     *          type="array",
      *          @OA\MediaType(
      *              mediaType="application/json",
      *              @OA\Schema(
