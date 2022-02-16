@@ -84,6 +84,7 @@ class HomeController extends Controller
                     $uri = $route['uri'];
    
                     $routeNew = new \stdClass;
+                    $routeNew->uri = $uri;
                     $routeNew->action = $action;
                     $routeNew->controller = $controller;
                     $routeNew->method = $method;
