@@ -26,11 +26,12 @@
     </thead>
     <tbody>
              @foreach ($routes as $route )
+             {{ dd($route) }}
                  <tr>
-                     <td></td>
-                     <td>{{$route->getName()}}</td>
-                     <td>{{$route->getPrefix()}}</td>
-                     <td>{{$route->getActionMethod()}}</td>
+                     <td>{{ $route->uri }}</td>
+                     <td>{{ $route->getName() }}</td>
+                     <td>{{ $route->getPrefix() }}</td>
+                     <td>{{ $route->getActionMethod() }}</td>
                  </tr>
              @endforeach
      </tbody>
