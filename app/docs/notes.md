@@ -76,7 +76,9 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
  - [Winstrap - примеры компонентов](http://itdesk.rezhcable.ru:8400/winstrap/index.html)
 
 
+### Дашбоард. Графики
 
+ - [https://sawtech.ru/tehno-blog/rabota-s-grafikami-i-diagrammami-google-chart/](Работа с графиками и диаграммами google chart)
 
 
 

@@ -107,8 +107,6 @@
 
 
 <script>
-// https://sawtech.ru/tehno-blog/rabota-s-grafikami-i-diagrammami-google-chart/
-
 
     $.ajaxSetup({ async: false });
 
