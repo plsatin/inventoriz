@@ -88,7 +88,7 @@ class HomeController extends Controller
                     $routeNew->controller = $controller;
                     $routeNew->method = $method;
 
-                    $routes[] = $routeNew->id;
+                    array_push($routes, $routeNew);
                 }
             }
     
