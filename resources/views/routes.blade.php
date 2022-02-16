@@ -27,7 +27,7 @@
     <tbody>
              @foreach ($routes as $route )
                  <tr>
-                     <td>{{$route->uri}}</td>
+                     <td></td>
                      <td>{{$route->getName()}}</td>
                      <td>{{$route->getPrefix()}}</td>
                      <td>{{$route->getActionMethod()}}</td>
