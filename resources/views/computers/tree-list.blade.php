@@ -15,7 +15,7 @@
 
 <style>
     .list-computers, .computer-tree {
-        height: 580px;
+        height: 560px;
         overflow-x: hidden;
         overflow-y: scroll;
     }
