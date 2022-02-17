@@ -57,6 +57,25 @@ class ComputerTreeController extends Controller
     }
 
 
+    public function showAllPropertiesOfComputerSoftwareTree($id)
+    {
+        try {
+            $computer = Computer::findOrFail($id);
+            $computerClasses = WmiClass::query()
+                ->where('name','LIKE', 'Win32_Product')
+                    ->get();
+
+            $computer->children = $this->getComputerTree($computerClasses, $computer);
+
+            return response()->json($computer, 200);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+    }
+
+
+
     public function showAllPropertiesOfComputerDeviceTree($id)
     {
         try {
