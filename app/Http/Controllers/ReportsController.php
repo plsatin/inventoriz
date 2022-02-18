@@ -582,7 +582,7 @@ class ReportsController extends Controller
 
                     $arrSoftwares = [$Name[$i]->value,
                         '-',
-                        '_'
+                        '_',
                         '_',
                         '_'
                     ];
