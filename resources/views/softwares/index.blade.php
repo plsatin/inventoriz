@@ -63,7 +63,7 @@
 
 
 <script>
-    setTimeout(function(){
+    // setTimeout(function(){
         $('#tableSoftwares').DataTable( {
             "ajax": '/api/v1/reports/softwares/list',
             "columns": [
@@ -77,7 +77,7 @@
                 url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
             }
         });
-    }, 500);
+    // }, 500);
 
 </script>
 
