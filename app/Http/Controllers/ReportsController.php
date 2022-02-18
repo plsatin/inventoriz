@@ -566,7 +566,7 @@ class ReportsController extends Controller
                 $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
                 
 
-                Log::info('Name_0', ['Name_0' => $Name[0]->value]);
+                
 
 
                 foreach ($Name as $soft) {
@@ -582,6 +582,8 @@ class ReportsController extends Controller
 
                     $countSoft ++;
                     $totalSoft ++;
+
+                    Log::info('Name: ', ['Name' => $Name[$countSoft]->value]);
                 }
 
 
