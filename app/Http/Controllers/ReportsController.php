@@ -540,7 +540,7 @@ class ReportsController extends Controller
 
 
             $totalComputers = Computer::count();
-            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
+            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
 
             $response = [];
             $data = [];
