@@ -568,6 +568,8 @@ class ReportsController extends Controller
 
                 $computerSoftCount = count($Name);
 
+                Log::info('Name: ', ['Name' => $Name[10]->value]);
+
                 for ($i = 1; $i <= $computerSoftCount; $i++) {
                     // echo $i;
                 // }
