@@ -547,17 +547,18 @@ class ReportsController extends Controller
             $countComputers = 0;
             $totalSoft = 0;
 
+            $wmiproperty901 = WmiProperty::query()->findOrFail(901);
+            $wmiproperty902 = WmiProperty::query()->findOrFail(902);
+            $wmiproperty903 = WmiProperty::query()->findOrFail(903);
+            $wmiproperty904 = WmiProperty::query()->findOrFail(904);
+            $wmiproperty905 = WmiProperty::query()->findOrFail(905);
+
+
             foreach ($computers as $computer) {
 
                 $computerR = Computer::findOrFail($computer->id);
 
                 $countSoft = 0;
-
-                $wmiproperty901 = WmiProperty::query()->findOrFail(901);
-                $wmiproperty902 = WmiProperty::query()->findOrFail(902);
-                $wmiproperty903 = WmiProperty::query()->findOrFail(903);
-                $wmiproperty904 = WmiProperty::query()->findOrFail(904);
-                $wmiproperty905 = WmiProperty::query()->findOrFail(905);
 
                 $Name = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty901)->get();
                 $Version = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty902)->get();
@@ -567,8 +568,6 @@ class ReportsController extends Controller
                 
 
                 $computerSoftCount = count($Name);
-
-                Log::info('Name: ', ['Name' => $Vendor[10]->value, 'Count' => $computerSoftCount]);
 
                 for ($i = 0; $i <= $computerSoftCount; $i++) {
                     // echo $i;
