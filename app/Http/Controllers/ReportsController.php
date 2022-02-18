@@ -566,24 +566,26 @@ class ReportsController extends Controller
                 $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
                 
 
-                
+                $computerSoftCount = count($Name);
 
-
-                foreach ($Name as $soft) {
+                for ($i = 1; $i <= $computerSoftCount; $i++) {
+                    // echo $i;
+                // }
+                // foreach ($Name as $soft) {
                     $arrSoftwares = [
-                        $Name[$countSoft]->value,
-                        $Version[$countSoft]->value,
-                        $Vendor[$countSoft]->value,
-                        $$InstallDate[$countSoft]->value,
-                        $IdentifyingNumber[$countSoft]->value
+                        $Name[$i]->value,
+                        $Version[$i]->value,
+                        $Vendor[$i]->value,
+                        $$InstallDate[$i]->value,
+                        $IdentifyingNumber[$i]->value
                     ];
                 
                     array_push($data, $arrSoftwares);
 
-                    $countSoft ++;
+                    // $countSoft ++;
                     $totalSoft ++;
 
-                    Log::info('Name: ', ['Name' => $Name[$countSoft]->value]);
+                    Log::info('Name: ', ['Name' => $Name[$i]->value]);
                 }
 
 
