@@ -575,7 +575,7 @@ class ReportsController extends Controller
                         $Version[$countSoft]->value,
                         $Vendor[$countSoft]->value,
                         $$InstallDate[$countSoft]->value,
-                        $IdentifyingNumber[$countSoft]->value,
+                        $IdentifyingNumber[$countSoft]->value
                     ];
                 
                     array_push($data, $arrSoftwares);
