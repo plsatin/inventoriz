@@ -62,18 +62,16 @@
 
 
 
-
-
 <script>
     setTimeout(function(){
         $('#tableSoftwares').DataTable( {
             "ajax": '/api/v1/reports/softwares/list',
             "columns": [
-                { "width": "24%" },
+                { "width": "30%" },
                 { "width": "15%", "className": "dt-body-right" },
-                { "width": "24%" },
-                { "width": "20%", "className": "dt-body-right" },
-                { "width": "17%" }
+                { "width": "20%" },
+                { "width": "15%", "className": "dt-body-right" },
+                { "width": "20%" }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
