@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\WmiClass;
 use App\Models\WmiProperty;
@@ -564,6 +565,10 @@ class ReportsController extends Controller
                 $InstallDate = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty904)->get();
                 $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
                 
+
+                Log::info('Name_0', ['Name_0' => $Name[0]->value]);
+
+
                 foreach ($Name as $soft) {
                     $arrSoftwares = [
                         $Name[$countSoft]->value,
