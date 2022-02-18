@@ -573,13 +573,20 @@ class ReportsController extends Controller
                     // echo $i;
                 // }
                 // foreach ($Name as $soft) {
+                    // $arrSoftwares = [$Name[$i]->value,
+                    //     $Version[$i]->value,
+                    //     $Vendor[$i]->value,
+                    //     $InstallDate[$i]->value,
+                    //     $IdentifyingNumber[$i]->value
+                    // ];
+
                     $arrSoftwares = [$Name[$i]->value,
-                        $Version[$i]->value,
-                        $Vendor[$i]->value,
-                        $InstallDate[$i]->value,
-                        $IdentifyingNumber[$i]->value
+                        '',
+                        ''
+                        '',
+                        ''
                     ];
-                
+
                     array_push($data, $arrSoftwares);
 
                     // $countSoft ++;
@@ -602,7 +609,7 @@ class ReportsController extends Controller
 
             return response()->json($response);
         } catch (\Exception $e) {
-            
+
             Log::info('Exception: ', ['Code' => $e->getCode(), 'Message' => $e->getMessage()]);
 
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
