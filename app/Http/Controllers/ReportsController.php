@@ -573,26 +573,27 @@ class ReportsController extends Controller
                     // echo $i;
                 // }
                 // foreach ($Name as $soft) {
-                    // $arrSoftwares = [$Name[$i]->value,
-                    //     $Version[$i]->value,
-                    //     $Vendor[$i]->value,
-                    //     $InstallDate[$i]->value,
-                    //     $IdentifyingNumber[$i]->value
-                    // ];
 
                     $arrSoftwares = [$Name[$i]->value,
-                        '-',
-                        '_',
-                        '_',
-                        '_'
+                        $Version[$i]->value,
+                        $Vendor[$i]->value,
+                        $InstallDate[$i]->value,
+                        $IdentifyingNumber[$i]->value
                     ];
+
+                    // $arrSoftwares = [$Name[$i]->value,
+                    //     '-',
+                    //     '_',
+                    //     '_',
+                    //     '_'
+                    // ];
 
                     array_push($data, $arrSoftwares);
 
                     // $countSoft ++;
                     $totalSoft ++;
 
-                    Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $totalSoft]);
+                    Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
                 }
 
 
