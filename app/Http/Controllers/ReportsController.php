@@ -586,7 +586,7 @@ class ReportsController extends Controller
                     // $countSoft ++;
                     $totalSoft ++;
 
-                    Log::info('Name: ', ['Name' => $Name[$i]->value]);
+                    Log::info('Name: ', ['Name' => $Name[$i]->value], 'totalSoft' => $totalSoft);
                 }
 
 
