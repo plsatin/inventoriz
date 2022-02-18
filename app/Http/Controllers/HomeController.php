@@ -131,6 +131,24 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * Список программного обеспечения
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showSoftwaresList(Request $request)
+    {
+        try {
+       
+            $page_title = 'Инвентаризация';
+            return view('softwares.index')->with('page_title', $page_title);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
+    }
+
 
 
 

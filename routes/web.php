@@ -20,6 +20,7 @@
 /** Отображение интерфейса пользователя */
 $router->get('/',  ['uses' => 'HomeController@index']);
 $router->get('/tree',  ['uses' => 'HomeController@showComputerTree']);
+$router->get('/software',  ['uses' => 'HomeController@showSoftwaresList']);
 
 /** Информация о маршрутах */
 $router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
