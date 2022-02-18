@@ -570,30 +570,25 @@ class ReportsController extends Controller
                 $computerSoftCount = count($Name);
 
                 for ($i = 0; $i < $computerSoftCount; $i++) {
-                    // echo $i;
-                // }
-                // foreach ($Name as $soft) {
 
-                    $arrSoftwares = [$Name[$i]->value,
-                        $Version[$i]->value,
-                        $Vendor[$i]->value,
-                        $InstallDate[$i]->value,
-                        $IdentifyingNumber[$i]->value
-                    ];
+                    if ($Name[$i]->value != '') {
+                        $arrSoftwares = [$Name[$i]->value,
+                            $Version[$i]->value,
+                            $Vendor[$i]->value,
+                            $InstallDate[$i]->value,
+                            $IdentifyingNumber[$i]->value
+                        ];
 
-                    // $arrSoftwares = [$Name[$i]->value,
-                    //     '-',
-                    //     '_',
-                    //     '_',
-                    //     '_'
-                    // ];
 
-                    array_push($data, $arrSoftwares);
+                        array_push($data, $arrSoftwares);
 
-                    // $countSoft ++;
-                    $totalSoft ++;
+                        // $countSoft ++;
+                        $totalSoft ++;
 
-                    Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
+                        Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
+
+
+                    }
                 }
 
 
