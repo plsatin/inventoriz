@@ -77,13 +77,6 @@ class ReportsController extends Controller
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
-     *     @OA\Parameter(
-     *         name="order",
-     *         in="query",
-     *         description="Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
-     *         required=false,
-     *         @OA\Schema(type="string"),
-     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Возвращает список компьютеров",
@@ -128,7 +121,7 @@ class ReportsController extends Controller
                 $orderBy = $request->get('order');
             }
             
-            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->skip($startOffset)->take($limitOffset)->orderBy('value')->orderBy('computer_id')->get();
+            $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->skip($startOffset)->take($limitOffset)->orderBy('computer_id')->get();
 
             return response()->json($property);
         } catch (\Exception $e) {
