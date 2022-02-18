@@ -544,33 +544,49 @@ class ReportsController extends Controller
             $response = [];
             $data = [];
             $countComputers = 0;
+            $totalSoft = 0;
 
             foreach ($computers as $computer) {
 
                 $computerR = Computer::findOrFail($computer->id);
 
-                $wmiproperty = WmiProperty::query()->findOrFail(4);
-                $propertyCPU = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
-                $wmiproperty = WmiProperty::query()->findOrFail(15);
-                $propertyOS = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
-                $wmiproperty = WmiProperty::query()->findOrFail(88);
-                $propertyRAM = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
-    
+                $countSoft = 0;
 
-                $arrComputer = ['<a href="/tree?computer=' . $computer->name . '">' . $computer->name . '</a>',
-                    $computer->last_inventory_end,
-                    $propertyOS[0]->value,
-                    $propertyCPU[0]->value,
-                    $propertyRAM[0]->value
-                ];
+                $wmiproperty901 = WmiProperty::query()->findOrFail(901);
+                $wmiproperty902 = WmiProperty::query()->findOrFail(902);
+                $wmiproperty903 = WmiProperty::query()->findOrFail(903);
+                $wmiproperty904 = WmiProperty::query()->findOrFail(904);
+                $wmiproperty905 = WmiProperty::query()->findOrFail(905);
 
-                array_push($data, $arrComputer);
+                $Name = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty901)->get();
+                $Version = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty902)->get();
+                $Vendor = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty903)->get();
+                $InstallDate = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty904)->get();
+                $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
+                
+                foreach ($Name as $soft) {
+                    $arrSoftwares = [
+                        $Name[$countSoft]->value,
+                        $Version[$countSoft]->value,
+                        $Vendor[$countSoft]->value,
+                        $$InstallDate[$countSoft]->value,
+                        $IdentifyingNumber[$countSoft]->value,
+                    ];
+                
+                    array_push($data, $arrSoftwares);
+
+                    $countSoft ++;
+                    $totalSoft ++;
+                }
+
+
+
                 $countComputers ++;
             }
 
 
             $response = ['draw' => 1,
-                'recordsTotal' =>  $totalComputers,
+                'recordsTotal' =>  $totalSoft,
                 'recordsFiltered' => $countComputers,
                 'data' => $data
             ];

@@ -140,7 +140,7 @@ class HomeController extends Controller
     {
         try {
        
-            $page_title = 'Инвентаризация';
+            $page_title = 'Список программного обеспечения';
             return view('softwares.index')->with('page_title', $page_title);
         } catch (\Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
