@@ -569,7 +569,7 @@ class ReportsController extends Controller
 
                 $computerSoftCount = count($Name);
 
-                for ($i = 0; $i <= $computerSoftCount; $i++) {
+                for ($i = 0; $i < $computerSoftCount; $i++) {
                     // echo $i;
                 // }
                 // foreach ($Name as $soft) {
