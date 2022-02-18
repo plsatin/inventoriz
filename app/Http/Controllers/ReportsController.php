@@ -413,4 +413,177 @@ class ReportsController extends Controller
 
 
 
+    /**
+     * @OA\Schema(
+     *      schema="SoftwaresList",
+     *      type="object",
+     *      @OA\Property(
+     *          property="draw",
+     *          type="string",
+     *          description="",
+     *      ),
+     *      @OA\Property(
+     *          property="recordsTotal",
+     *          type="string",
+     *          description="Всего записей",
+     *      ),
+     *      @OA\Property(
+     *          property="recordsFiltered",
+     *          type="string",
+     *          description="Выбрано записей",
+     *      ),
+     *      @OA\Property(
+     *          property="data",
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  property="Name",
+     *                  type="string",
+     *                  description="Наименование ПО",
+     *              ),
+     *              @OA\Property(
+     *                  property="Version",
+     *                  type="string",
+     *                  description="Версия ПО",
+     *              ),
+     *              @OA\Property(
+     *                  property="Vendor",
+     *                  type="string",
+     *                  description="Производитель",
+     *              ),
+     *              @OA\Property(
+     *                  property="InstallDate",
+     *                  type="string",
+     *                  description="Дата установки",
+     *              ),
+     *              @OA\Property(
+     *                  property="IdentifyingNumber",
+     *                  type="string",
+     *                  description="Идентификатор",
+     *              ),
+     *          ),
+     *      ),
+     * )
+     */
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/softwares/list",
+     *     description="Получение списка установленных программ",
+     *     tags={"reports"},
+     *     @OA\Parameter(
+     *         name="start",
+     *         in="query",
+     *         description="Начало диапазона по ИД (по умолчанию 0)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Ограничение диапазона по ИД (по умолчанию 10 000)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Parameter(
+     *         name="order",
+     *         in="query",
+     *         description="Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+     *         required=false,
+     *         @OA\Schema(type="string"),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает список программного обеспечения",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/SoftwaresList"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{ "apiAuth": {} }}
+     * )
+     */
+    public function getSoftwaresList(Request $request) 
+    {
+        try {
+
+            // Ограничения выборки и сортировка
+            if ($request->filled('start')) {
+                $startOffset = $request->get('start');
+                $orderBy = 'id';
+            } else {
+                $startOffset = 0;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('limit')) {
+                $limitOffset = $request->get('limit');
+                $orderBy = 'id';
+            } else {
+                $limitOffset = 10000;
+                $orderBy = 'name';
+            }
+
+            if ($request->filled('order')) {
+                $orderBy = $request->get('order');
+            }
+
+
+            $totalComputers = Computer::count();
+            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
+
+            $response = [];
+            $data = [];
+            $countComputers = 0;
+
+            foreach ($computers as $computer) {
+
+                $computerR = Computer::findOrFail($computer->id);
+
+                $wmiproperty = WmiProperty::query()->findOrFail(4);
+                $propertyCPU = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+                $wmiproperty = WmiProperty::query()->findOrFail(15);
+                $propertyOS = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+                $wmiproperty = WmiProperty::query()->findOrFail(88);
+                $propertyRAM = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
+    
+
+                $arrComputer = ['<a href="/tree?computer=' . $computer->name . '">' . $computer->name . '</a>',
+                    $computer->last_inventory_end,
+                    $propertyOS[0]->value,
+                    $propertyCPU[0]->value,
+                    $propertyRAM[0]->value
+                ];
+
+                array_push($data, $arrComputer);
+                $countComputers ++;
+            }
+
+
+            $response = ['draw' => 1,
+                'recordsTotal' =>  $totalComputers,
+                'recordsFiltered' => $countComputers,
+                'data' => $data
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject, 204);
+        }
+
+    }
+
+
+
+
 }

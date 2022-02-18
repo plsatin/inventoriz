@@ -95,7 +95,8 @@ SELECT cp.computer_id,
     MAX(CASE cp.wmiproperty_id WHEN '901' THEN Value ELSE NULL END) ProductName,
     MAX(CASE cp.wmiproperty_id WHEN '902' THEN Value ELSE NULL END) Version,
     MAX(CASE cp.wmiproperty_id WHEN '903' THEN Value ELSE NULL END) Vendor,
-    MAX(CASE cp.wmiproperty_id WHEN '904' THEN Value ELSE NULL END) InstallDate
+    MAX(CASE cp.wmiproperty_id WHEN '904' THEN Value ELSE NULL END) InstallDate,
+    MAX(CASE cp.wmiproperty_id WHEN '905' THEN Value ELSE NULL END) IdentifyingNumber
 FROM computer_properties AS cp
  JOIN computers AS c ON (c.id = cp.computer_id)
     WHERE c.name = 'rzh01-pc83.rezhcable.ru'
