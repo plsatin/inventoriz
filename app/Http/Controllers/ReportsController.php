@@ -602,6 +602,9 @@ class ReportsController extends Controller
 
             return response()->json($response);
         } catch (\Exception $e) {
+            
+            Log::info('Exception: ', ['Code' => $e->getCode(), 'Message' => $e->getMessage()]);
+
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
