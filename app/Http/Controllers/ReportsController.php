@@ -568,14 +568,13 @@ class ReportsController extends Controller
 
                 $computerSoftCount = count($Name);
 
-                Log::info('Name: ', ['Name' => $Name[10]->value, 'Count' => $computerSoftCount]);
+                Log::info('Name: ', ['Name' => $Vendor[10]->value, 'Count' => $computerSoftCount]);
 
                 for ($i = 1; $i <= $computerSoftCount; $i++) {
                     // echo $i;
                 // }
                 // foreach ($Name as $soft) {
-                    $arrSoftwares = [
-                        $Name[$i]->value,
+                    $arrSoftwares = [$Name[$i]->value,
                         $Version[$i]->value,
                         $Vendor[$i]->value,
                         $$InstallDate[$i]->value,
