@@ -26,9 +26,9 @@
                     <li class="dropdown">
                         <a href="/tree" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Инвентаризация<i class="glyph glyph-chevron-down-2"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/tree">Все узлы</a></li>
+                            <li><a href="/tree">Аппаратное обеспечение</a></li>
                             <li class="divider"></li>
-                            <li><a href="/tree?computer=rzh01-pc83.rezhcable.ru">rzh01-pc83.rezhcable.ru</a></li>
+                            <li><a href="/softwares">Программное обеспечение</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
