@@ -37,6 +37,7 @@
                             <table class="table" id="tableSoftwares">
                                 <thead>
                                 <tr>
+                                    <th>Компьютер</th>
                                     <th>Наименование</th>
                                     <th>Версия</th>
                                     <th>Производитель</th>
@@ -67,11 +68,12 @@
         $('#tableSoftwares').DataTable( {
             "ajax": '/api/v1/reports/softwares/list',
             "columns": [
-                { "width": "30%" },
-                { "width": "15%", "className": "dt-body-right" },
-                { "width": "20%" },
-                { "width": "15%", "className": "dt-body-right" },
-                { "width": "20%" }
+                { "width": "18%" },
+                { "width": "25%" },
+                { "width": "12%", "className": "dt-body-right" },
+                { "width": "16%" },
+                { "width": "12%", "className": "dt-body-right" },
+                { "width": "17%" }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
