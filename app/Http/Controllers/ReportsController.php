@@ -572,7 +572,8 @@ class ReportsController extends Controller
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
                     if ($Name[$i]->value != '') {
-                        $arrSoftwares = [$Name[$i]->value,
+                        $arrSoftwares = [$computerR->name,
+                            $Name[$i]->value,
                             $Version[$i]->value,
                             $Vendor[$i]->value,
                             $InstallDate[$i]->value,
@@ -585,7 +586,7 @@ class ReportsController extends Controller
                         // $countSoft ++;
                         $totalSoft ++;
 
-                        Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
+                        // Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
 
 
                     }
