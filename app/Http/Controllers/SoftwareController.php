@@ -128,7 +128,7 @@ class SoftwareController extends Controller
 
             $_format = CarbonInterval::seconds($time)->cascade()->forHumans();
 
-            return response()->json('Response' => 'OK', 'data' => array('Code' => '0x00000', 'Message' => 'Time elapsed: ' . $_format)), 200);
+            return response()->json(array('Response' => 'OK', 'data' => array('Code' => '0x00000', 'Message' => 'Time elapsed: ' . $_format)), 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
