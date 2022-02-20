@@ -112,14 +112,16 @@ var computerId;
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
+            // lazyLoad: function(event, data) {
+            //     data.result = {
+            //         url: '/api/v1/computers/'+computerId+'/properties'
+            //     };
+            // },
             loadChildren: function(event, data) {
                 var children = data.node.getChildren();
-
                 for (var i = 0; i < children.length; i++) {
-                    if (!children[i].isFolder()) {
                         children[i].data.icon = '/assets/img/icons/' + children[i].data.icon;
                         children[i].renderTitle();
-                    }
                 }
             }
             
