@@ -38,6 +38,10 @@ class SoftwareController extends Controller
     {
         try {
 
+
+            $start = now();
+
+
             Schema::dropIfExists('tmp_softwares');
 
             Schema::create('tmp_softwares', function($table)
@@ -117,8 +121,11 @@ class SoftwareController extends Controller
                 $countComputers ++;
             }
 
+            $time = $start->diffInSeconds(now());
 
-            return response()->json($data, 200);
+            $_format = \Carbon\CarbonInterval::seconds($time)->cascade()->forHumans();
+
+            return response()->json('Time elapsed: ' . $_format, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
