@@ -122,8 +122,8 @@ var computerId;
             //     });
             // },
             icon: function(event, data) {
-                console.log(data);
-                return '/assets/img/icons/' + data.icon;
+                // console.log(data);
+                return '/assets/img/icons/' + data.node.icon;
             },
 
         });
