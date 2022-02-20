@@ -56,14 +56,14 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception) // Для 404
     {
-        if($exception instanceof NotFoundHttpException) {
-            return response(view("errors.404"), 404);
-        }
+        // if($exception instanceof NotFoundHttpException) {
+        //     return response(view("errors.404"), 404);
+        // }
 
-        // $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
-        // return response()->json($responseObject);
+        $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
+        return response()->json($responseObject);
 
-        return parent::render($request, $exception);
+        // return parent::render($request, $exception);
     }
 
 
