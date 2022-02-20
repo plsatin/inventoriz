@@ -119,7 +119,7 @@ class SoftwareController extends Controller
             $elapsedTime = CarbonInterval::seconds($endTime)->cascade()->forHumans();
 
             $response = array('Response' => 'OK', 'data' => array('Code' => '0x00000',
-                'Message' => 'Создана временная таблица [tmp_softwares]. Вставлено записей: ' . $totalSoft,  'TimeElapsed' => $elapsedTime);
+                'Message' => 'Создана временная таблица [tmp_softwares]. Вставлено записей: ' . $totalSoft,  'TimeElapsed' => $elapsedTime));
        
             return response()->json($response), 200);
         } catch (Exception $e) {
