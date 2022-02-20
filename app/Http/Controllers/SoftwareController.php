@@ -38,6 +38,8 @@ class SoftwareController extends Controller
     {
         try {
 
+            Schema::dropIfExists('tmp_softwares');
+
             Schema::create('tmp_softwares', function($table)
             {
                 $table->increments('id');
