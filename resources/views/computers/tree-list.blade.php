@@ -115,7 +115,7 @@ var computerId;
             icon: function(event, data){
                 var node = data.node;
                 node.icon = '/assets/img/icons/' + node.icon;
-                node.renderTitle();
+                // node.renderTitle();
             },
 
         });
