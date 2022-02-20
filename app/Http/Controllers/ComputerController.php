@@ -9,6 +9,8 @@ use App\Models\WmiProperty;
 use App\Models\Computer;
 use App\Models\ComputerProperties;
 
+use Exception;
+
 
 class ComputerController extends Controller
 {

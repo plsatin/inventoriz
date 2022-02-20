@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\User;
 
+use Exception;
+
+
 class UserController extends Controller
 {
      /**

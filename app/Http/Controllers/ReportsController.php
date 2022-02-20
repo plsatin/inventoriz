@@ -11,6 +11,8 @@ use App\Models\Computer;
 use App\Models\ComputerProperties;
 
 use DB;
+use Exception;
+
 
 class ReportsController extends Controller
 {

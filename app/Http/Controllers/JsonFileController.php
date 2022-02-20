@@ -9,6 +9,8 @@ use View;
 use App\Models\WmiClass;
 use App\Models\WmiProperty;
 
+use Exception;
+
 
 
 class JsonFileController extends Controller
