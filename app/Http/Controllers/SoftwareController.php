@@ -121,7 +121,7 @@ class SoftwareController extends Controller
             $response = array('Response' => 'OK', 'data' => array('Code' => '0x00000',
                 'Message' => 'Создана временная таблица [tmp_softwares]. Вставлено записей: ' . $totalSoft,  'TimeElapsed' => $elapsedTime));
        
-            return response()->json($response), 200);
+            return response()->json($response, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
