@@ -93,6 +93,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/reports/computers/properties/{property}', ['uses' => 'ReportsController@getComputersProperty']);
     $router->get('v1/reports/computers/last_updated', ['uses' => 'ReportsController@getComputersUpdatedAt']);
     $router->get('v1/reports/computers/list', ['uses' => 'ReportsController@getComputersList']);
+
     $router->get('v1/reports/softwares/list', ['uses' => 'ReportsController@getSoftwaresList']);
 
     $router->get('v1/reports/softwares/table', ['uses' => 'SoftwareController@createSoftwaresTable']);
