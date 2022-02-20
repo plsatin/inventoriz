@@ -50,7 +50,7 @@ class SoftwareController extends Controller
             Schema::create('tmp_softwares', function($table)
             {
                 $table->increments('id');
-                $table->integer('computer_id');
+                $table->unsignedInteger('computer_id');
                 $table->string('name');
                 $table->string('version');
                 $table->string('vendor');
