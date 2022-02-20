@@ -56,7 +56,8 @@ class SoftwareController extends Controller
                 $table->string('vendor');
                 $table->string('install_date');
                 $table->string('identifying_number');
-                $table->timestamps();
+                $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
                 $table->foreign('computer_id')->references('id')->on('computers')->onDelete('cascade')->onUpdate('cascade');
             });
