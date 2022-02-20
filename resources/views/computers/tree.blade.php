@@ -59,14 +59,22 @@
 
         function renderComputerTree(computerId){
             $('#tree').fancytree({
+                source: {url: '/api/v1/computers/'+computerId+'/properties'},
                 tooltip: true,
                 iconTooltip: function(event, data) {
                     return data.typeInfo.iconTooltip;
                 },
-                icon: function(event, data) {
-                    return '/assets/img/icons/' + data.icon;
-                },
-                source: {url: '/api/v1/computers/'+computerId+'/properties'},
+                loadChildren: function(event, data) {
+                    var children = data.node.getChildren();
+
+                    for (var i = 0; i < children.length; i++) {
+                        if (!children[i].isFolder()) {
+                            children[i].data.icon = '/assets/img/icons/' + children[i].data.icon;
+                            children[i].renderTitle();
+                        }
+                    }
+                }
+               
             });
         }
 

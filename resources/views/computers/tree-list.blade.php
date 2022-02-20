@@ -63,7 +63,7 @@ var computerId;
         type: "GET",
         url: '/api/v1/computers-list',
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             var htmlComputerList = '<div class="entity-list">';
 
             for (var computer in data) {
@@ -105,31 +105,25 @@ var computerId;
 
 
 
-    function renderComputerTree(computerName){
-        // $('#tree').html('');
-        $('#tree').fancytree();
+    function renderComputerTree(computerId){
         $('#tree').fancytree({
+            source: {url: '/api/v1/computers/'+computerId+'/properties'},
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            icon: function(event, data) {
-                return '/assets/img/icons/' + data.icon;
-            },
-            source: {url: '/api/v1/computers/'+computerName+'/hardware'},
+            loadChildren: function(event, data) {
+                var children = data.node.getChildren();
+
+                for (var i = 0; i < children.length; i++) {
+                    if (!children[i].isFolder()) {
+                        children[i].data.icon = '/assets/img/icons/' + children[i].data.icon;
+                        children[i].renderTitle();
+                    }
+                }
+            }
+            
         });
-
-        // var newSourceOption = {
-        //     tooltip: true,
-        //     iconTooltip: function(event, data) {
-        //         return data.typeInfo.iconTooltip;
-        //     },
-        //     source: {url: '/api/v1/computers/'+computerName+'/hardware'},
-        // };
-
-        // var tree = $('#tree').fancytree('getTree');
-        // tree.reload(newSourceOption);
-
     }
   
 
