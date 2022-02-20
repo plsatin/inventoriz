@@ -107,7 +107,7 @@ var computerId;
 
     function renderComputerTree(computerId){
         $('#tree').fancytree({
-            source: {url: '/api/v1/computers/'+computerId+'/properties'},
+            source: {url: '/api/v1/computers/'+computerId+'/hardware'},
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
