@@ -10,6 +10,10 @@ use App\Models\WmiProperty;
 use App\Models\Computer;
 use App\Models\ComputerProperties;
 
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
 use DB;
 use Exception;
 
