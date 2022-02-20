@@ -113,7 +113,7 @@ var computerId;
                 return data.typeInfo.iconTooltip;
             },
             icon: function(event, data) {
-                return '/assets/img/icons/' + data.typeInfo.icon;
+                return '/assets/img/icons/' + data.icon;
             }
             
         });
