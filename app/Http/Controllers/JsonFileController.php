@@ -64,7 +64,7 @@ class JsonFileController extends Controller
             return response()->download($this->public_path('uploads/'.$jsonFile));
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -108,7 +108,7 @@ class JsonFileController extends Controller
 
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 

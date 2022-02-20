@@ -127,7 +127,7 @@ class ReportsController extends Controller
             return response()->json($property);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }
@@ -228,7 +228,7 @@ class ReportsController extends Controller
             return response()->json($computers);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }
@@ -406,7 +406,7 @@ class ReportsController extends Controller
             return response()->json($response);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }
@@ -610,7 +610,7 @@ class ReportsController extends Controller
             Log::info('Exception: ', ['Code' => $e->getCode(), 'Message' => $e->getMessage()]);
 
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }

@@ -69,7 +69,7 @@ class WmiPropertyController extends Controller
             return response()->json($classProperties, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -121,7 +121,7 @@ class WmiPropertyController extends Controller
             return response()->json($classProperty, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -138,7 +138,7 @@ class WmiPropertyController extends Controller
             return response()->json($wmiProperty, 201);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -152,7 +152,7 @@ class WmiPropertyController extends Controller
             return response()->json($wmiProperty, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -167,7 +167,7 @@ class WmiPropertyController extends Controller
             return response()->json($responseObject, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 

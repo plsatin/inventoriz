@@ -133,7 +133,7 @@ class ComputerController extends Controller
             return response()->json($computers);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }
@@ -177,7 +177,7 @@ class ComputerController extends Controller
             return response()->json(Computer::findOrFail($id));
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -224,7 +224,7 @@ class ComputerController extends Controller
             return response()->json($computer, 201);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -282,7 +282,7 @@ class ComputerController extends Controller
             return response()->json($computer, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
@@ -329,7 +329,7 @@ class ComputerController extends Controller
             return response()->json($responseObject, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
     }
 
