@@ -160,7 +160,7 @@ class ComputerTreeController extends Controller
 
                 $classProperties[$instanceId]['id'] = $instance->instance_id;
                 $classProperties[$instanceId]['parent_id'] =  $class->id;
-                $classProperties[$instanceId]['icon'] = 'assets/img/icons/' . $computerClasses[$classCount]['icon'];
+                $classProperties[$instanceId]['icon'] = $computerClasses[$classCount]['icon'];
                 if($classPropertiesInstanceName) {
                     $classProperties[$instanceId]['title'] =  $classPropertiesInstanceName->value;
                 }
@@ -169,7 +169,7 @@ class ComputerTreeController extends Controller
             }
 
             $computerClasses[$classCount]->iconTooltip = $computerClasses[$classCount]['description'];
-            $computerClasses[$classCount]->icon = 'assets/img/icons/' . $computerClasses[$classCount]['icon'];
+            $computerClasses[$classCount]->icon = $computerClasses[$classCount]['icon'];
             $computerClasses[$classCount]->children = $classProperties;
             $classCount ++;
         }

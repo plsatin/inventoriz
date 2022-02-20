@@ -113,6 +113,9 @@ var computerId;
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
+            icon: function(event, data) {
+                return '/assets/img/icons/' + data.typeInfo.icon;
+            },
             source: {url: '/api/v1/computers/'+computerName+'/hardware'},
         });
 
