@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
         //     return response(view("errors.404"), 404);
         // }
 
-        $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
+        $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getStatusCode(), 'Message' => $exception->getMessage()));
         return response()->json($responseObject);
 
         // return parent::render($request, $exception);
