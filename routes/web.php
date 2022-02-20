@@ -82,6 +82,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     /** Для построение дерева */
+    $router->get('v1/computer-name',  ['uses' => 'ComputerTreeController@getComputerName']);
     $router->get('v1/computers-list',  ['uses' => 'ComputerTreeController@showSomeComputers']);
     $router->get('v1/computers/{id}/hardware',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerDeviceTree']);
     $router->get('v1/computers/{id}/properties',  ['uses' => 'ComputerTreeController@showAllPropertiesOfComputerTree']);
