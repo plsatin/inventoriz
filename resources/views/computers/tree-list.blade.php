@@ -112,7 +112,7 @@ var computerId;
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            activate: function(event, data){
+            icon: function(event, data){
                 var node = data.node;
                 node.icon = '/assets/img/icons/' + node.icon;
                 node.renderTitle();
@@ -121,7 +121,6 @@ var computerId;
         });
     }
   
-
 
 
 });
