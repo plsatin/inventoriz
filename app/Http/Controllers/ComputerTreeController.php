@@ -30,7 +30,7 @@ class ComputerTreeController extends Controller
     {
         try {
             $computerName = $request->get('name');
-            $computer = Computer::where('name', $computerName)->firstOrFail();
+            $computer = Computer::where('name', $computerName)->first();
 
             return response()->json($computer);
         } catch (\Exception $e) {
