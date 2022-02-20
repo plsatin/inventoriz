@@ -13,6 +13,9 @@ use App\Models\ComputerProperties;
 // use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use DB;
+use Exception;
+
+
 
 class ComputerTreeController extends Controller
 {
