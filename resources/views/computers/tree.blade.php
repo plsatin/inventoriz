@@ -64,11 +64,11 @@
                 iconTooltip: function(event, data) {
                     return data.typeInfo.iconTooltip;
                 },
-                // lazyLoad: function(event, data) {
-                //     data.result = {
-                //         url: '/api/v1/computers/'+computerId+'/properties'
-                //     };
-                // },
+                lazyLoad: function(event, data) {
+                    data.result = {
+                        url: '/api/v1/computers/'+computerId+'/properties'
+                    };
+                },
                 loadChildren: function(event, data) {
                     var children = data.node.getChildren();
                     for (var i = 0; i < children.length; i++) {
