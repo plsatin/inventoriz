@@ -112,10 +112,14 @@ var computerId;
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
             },
-            icon: function(event, data){
-                var node = data.node;
-                node.icon = '/assets/img/icons/' + node.icon;
-                // node.renderTitle();
+            postProcess: function(event, data) {
+                // var node = data.node;
+                // node.icon = '/assets/img/icons/' + node.icon;
+                data.result = data.response.map((v) => {
+                    return {
+                        icon: { text: v.icon } || true,
+                    }
+                });
             },
 
         });
