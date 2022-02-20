@@ -42,7 +42,7 @@ class SoftwareController extends Controller
         try {
 
 
-            $start = Carbon::now();
+            $startTime = Carbon::now();
 
 
             Schema::dropIfExists('tmp_softwares');
@@ -67,7 +67,6 @@ class SoftwareController extends Controller
             $computers = Computer::query()->orderBy('id')->get();
 
             $response = [];
-            $data = [];
             $countComputers = 0;
             $totalSoft = 0;
 
@@ -81,7 +80,6 @@ class SoftwareController extends Controller
             foreach ($computers as $computer) {
 
                 $computerR = Computer::findOrFail($computer->id);
-
                 $countSoft = 0;
 
                 $Name = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty901)->get();
@@ -96,15 +94,6 @@ class SoftwareController extends Controller
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
                     if ($Name[$i]->value != '') {
-                    //     $arrSoftwares = [$computerR->name,
-                    //         $Name[$i]->value,
-                    //         $Version[$i]->value,
-                    //         $Vendor[$i]->value,
-                    //         $InstallDate[$i]->value,
-                    //         $IdentifyingNumber[$i]->value
-                    //     ];
-
-                    //     array_push($data, $arrSoftwares);
 
                         $dataToTable = array(
                             'computer_id' => $computerR->id,
@@ -126,11 +115,13 @@ class SoftwareController extends Controller
                 $countComputers ++;
             }
 
-            $time = $start->diffInSeconds(Carbon::now());
+            $endTime = $startTime->diffInSeconds(Carbon::now());
+            $elapsedTime = CarbonInterval::seconds($endTime)->cascade()->forHumans();
 
-            $_format = CarbonInterval::seconds($time)->cascade()->forHumans();
-
-            return response()->json(array('Response' => 'OK', 'data' => array('Code' => '0x00000', 'Message' => 'Time elapsed: ' . $_format)), 200);
+            $response = array('Response' => 'OK', 'data' => array('Code' => '0x00000',
+                'Message' => 'Создана временная таблица [tmp_softwares]. Вставлено записей: ' . $totalSoft,  'TimeElapsed' => $elapsedTime);
+       
+            return response()->json($response), 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
