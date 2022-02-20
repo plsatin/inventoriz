@@ -53,7 +53,7 @@ class SoftwareController extends Controller
 
 
             $totalComputers = Computer::count();
-            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
+            $computers = Computer::query()->orderBy('id')->get();
 
             $response = [];
             $data = [];
