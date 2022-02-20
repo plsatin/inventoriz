@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Schema;
 use DB;
 use Exception;
 
+use Carbon\Carbon;
+
+
 
 class SoftwareController extends Controller
 {
@@ -39,7 +42,7 @@ class SoftwareController extends Controller
         try {
 
 
-            $start = now();
+            $start = Carbon::now();
 
 
             Schema::dropIfExists('tmp_softwares');
@@ -121,9 +124,9 @@ class SoftwareController extends Controller
                 $countComputers ++;
             }
 
-            $time = $start->diffInSeconds(now());
+            $time = $start->diffInSeconds(Carbon::now());
 
-            $_format = \Carbon\CarbonInterval::seconds($time)->cascade()->forHumans();
+            $_format = CarbonInterval::seconds($time)->cascade()->forHumans();
 
             return response()->json('Time elapsed: ' . $_format, 200);
         } catch (Exception $e) {
