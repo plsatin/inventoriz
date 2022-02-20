@@ -57,6 +57,8 @@ class SoftwareController extends Controller
                 $table->string('install_date');
                 $table->string('identifying_number');
                 $table->timestamps();
+
+                $table->foreign('computer_id')->references('id')->on('computers')->onDelete('cascade')->onUpdate('cascade');
             });
 
 
@@ -94,15 +96,15 @@ class SoftwareController extends Controller
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
                     if ($Name[$i]->value != '') {
-                        $arrSoftwares = [$computerR->name,
-                            $Name[$i]->value,
-                            $Version[$i]->value,
-                            $Vendor[$i]->value,
-                            $InstallDate[$i]->value,
-                            $IdentifyingNumber[$i]->value
-                        ];
+                    //     $arrSoftwares = [$computerR->name,
+                    //         $Name[$i]->value,
+                    //         $Version[$i]->value,
+                    //         $Vendor[$i]->value,
+                    //         $InstallDate[$i]->value,
+                    //         $IdentifyingNumber[$i]->value
+                    //     ];
 
-                        array_push($data, $arrSoftwares);
+                    //     array_push($data, $arrSoftwares);
 
                         $dataToTable = array(
                             'computer_id' => $computerR->id,
