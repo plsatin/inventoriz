@@ -38,7 +38,7 @@ class ComputerTreeController extends Controller
             $computerName = $request->get('name');
             $computer = Computer::where('name', $computerName)->firstOrFail();
 
-            return response()->json($computer, 200);
+            return response()->json($computer);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 201);
