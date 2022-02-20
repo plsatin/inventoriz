@@ -18,10 +18,10 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
+        // AuthorizationException::class,
+        // HttpException::class,
+        // ModelNotFoundException::class,
+        // ValidationException::class,
     ];
 
     /**
@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Throwable  $exception
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response\Illuminate\Http\JsonResponse
      *
      * @throws \Throwable
      */
@@ -54,12 +54,16 @@ class Handler extends ExceptionHandler
     // }
 
 
-    public function render($request, Throwable $e) // Для 404
+    public function render($request, Throwable $exception) // Для 404
     {
-        if($e instanceof NotFoundHttpException) {
+        if($exception instanceof NotFoundHttpException) {
             return response(view("errors.404"), 404);
         }
-        return parent::render($request, $e);
+
+        $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
+        return response()->json($responseObject, 204);
+
+        // return parent::render($request, $exception);
     }
 
 
