@@ -13,7 +13,7 @@ use App\Models\ComputerProperties;
 // use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use DB;
-// use Exception;
+use Exception;
 
 
 
@@ -38,10 +38,10 @@ class ComputerTreeController extends Controller
             $computerName = $request->get('name');
             $computer = Computer::where('name', $computerName)->firstOrFail();
 
-            return response()->json($computer);
+            return response()->json($computer, 200);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
-            return response()->json($responseObject, 204);
+            return response()->json($responseObject);
         }
 
     }
