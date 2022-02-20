@@ -61,7 +61,7 @@ class Handler extends ExceptionHandler
         }
 
         $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
-        return response()->json($responseObject);
+        return response()->json($responseObject, 205);
 
         // return parent::render($request, $exception);
     }
