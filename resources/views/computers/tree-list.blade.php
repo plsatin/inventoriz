@@ -114,7 +114,7 @@ var computerId;
             },
             activate: function(event, data){
                 var node = data.node;
-                node.icon = '/assets/img/icons/' + data.icon;
+                node.icon = '/assets/img/icons/' + node.icon;
                 node.renderTitle();
             },
 
