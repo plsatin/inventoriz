@@ -131,7 +131,7 @@ class ComputerController extends Controller
             }
 
             return response()->json($computers);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -175,7 +175,7 @@ class ComputerController extends Controller
     {
         try {
             return response()->json(Computer::findOrFail($id));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -222,7 +222,7 @@ class ComputerController extends Controller
             $computer = Computer::create($request->all());
 
             return response()->json($computer, 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -280,7 +280,7 @@ class ComputerController extends Controller
             ]);
 
             return response()->json($computer, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -327,7 +327,7 @@ class ComputerController extends Controller
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Computer ' . $computerName . ' deleted successfully'));
             return response()->json($responseObject, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }

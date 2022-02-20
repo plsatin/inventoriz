@@ -84,7 +84,7 @@ class AuthController extends Controller
             //return successful response
             return response()->json($user, 201);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //return error message
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => '0x00409', 'Message' => 'User Registration Failed!'));
             return response()->json($responseObject, 409);

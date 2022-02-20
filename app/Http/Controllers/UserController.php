@@ -53,7 +53,7 @@ class UserController extends Controller
         try {
             
             return response()->json(['user' => Auth::user()], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -94,7 +94,7 @@ class UserController extends Controller
             $users = User::all();
 
             return response()->json($users, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -139,7 +139,7 @@ class UserController extends Controller
 
             return response()->json($user, 200);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }

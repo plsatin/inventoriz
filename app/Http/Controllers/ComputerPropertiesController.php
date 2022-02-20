@@ -67,7 +67,7 @@ class ComputerPropertiesController extends Controller
             $computerProperties = $computer->properties()->get();
 
             return response()->json($computerProperties, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -136,7 +136,7 @@ class ComputerPropertiesController extends Controller
                     ->whereBelongsTo($wmiproperty)->get();
 
             return response()->json($property, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -197,7 +197,7 @@ class ComputerPropertiesController extends Controller
                 ->whereBelongsTo($wmiclass)->get();
 
             return response()->json($property, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -277,7 +277,7 @@ class ComputerPropertiesController extends Controller
 
 
             return response()->json($property, 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -346,7 +346,7 @@ class ComputerPropertiesController extends Controller
             // dd($property);
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Computer property ' . $wmiproperty->name . ' of WMI Class ' . $wmiclass->name . ' updated successfully'));
             return response()->json($responseObject, 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -414,7 +414,7 @@ class ComputerPropertiesController extends Controller
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Computer property ' . $wmiproperty->name . ' of WMI Class ' . $wmiclass->name . ' deleted Successfully'));
             return response()->json($responseObject, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -473,7 +473,7 @@ class ComputerPropertiesController extends Controller
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Computer properties of WMI Class ' . $wmiclass->name . ' deleted successfully'));
             return response()->json($responseObject, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }

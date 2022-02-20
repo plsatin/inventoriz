@@ -39,7 +39,7 @@ class HomeController extends Controller
         try {
             $page_title = 'Статистика';
             return view('index')->with('page_title', $page_title);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -54,7 +54,7 @@ class HomeController extends Controller
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => $apiVersionTxt));
             return response()->json($responseObject, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -97,7 +97,7 @@ class HomeController extends Controller
             $page_title = 'Маршруты';
            
             return view('routes')->with('page_title', $page_title)->with('routes', $routes);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -124,7 +124,7 @@ class HomeController extends Controller
                 $page_title = 'Инвентаризация';
                 return view('computers.tree-list')->with('page_title', $page_title);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -142,7 +142,7 @@ class HomeController extends Controller
        
             $page_title = 'Список программного обеспечения';
             return view('softwares.index')->with('page_title', $page_title);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }

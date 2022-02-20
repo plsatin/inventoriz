@@ -125,7 +125,7 @@ class ReportsController extends Controller
             $property = ComputerProperties::select('computer_id', 'value')->where('wmiproperty_id', $property)->skip($startOffset)->take($limitOffset)->orderBy('computer_id')->get();
 
             return response()->json($property);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -226,7 +226,7 @@ class ReportsController extends Controller
 
 
             return response()->json($computers);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -404,7 +404,7 @@ class ReportsController extends Controller
             ];
 
             return response()->json($response);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -605,7 +605,7 @@ class ReportsController extends Controller
             ];
 
             return response()->json($response);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             Log::info('Exception: ', ['Code' => $e->getCode(), 'Message' => $e->getMessage()]);
 

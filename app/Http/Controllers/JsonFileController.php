@@ -62,7 +62,7 @@ class JsonFileController extends Controller
             $jsonFile = time() . '-classes.json';
             File::put($this->public_path('uploads/'.$jsonFile), $wmiClasses);
             return response()->download($this->public_path('uploads/'.$jsonFile));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -106,7 +106,7 @@ class JsonFileController extends Controller
             File::put($this->public_path('uploads/'.$jsonFile), $wmiProperties);
             return response()->download($this->public_path('uploads/'.$jsonFile));
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }

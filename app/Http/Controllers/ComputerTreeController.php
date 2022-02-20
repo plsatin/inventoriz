@@ -64,7 +64,7 @@ class ComputerTreeController extends Controller
             }
 
             return response()->json($computers);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -83,7 +83,7 @@ class ComputerTreeController extends Controller
             $computer->children = $this->getComputerTree($computerClasses, $computer);
 
             return response()->json($computer, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -104,7 +104,7 @@ class ComputerTreeController extends Controller
             $computer->children = $this->getComputerTree($computerClasses, $computer);
 
             return response()->json($computer, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -120,7 +120,7 @@ class ComputerTreeController extends Controller
             $computer->children = $this->getComputerTree($computerClasses, $computer);
 
             return response()->json($computer, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($responseObject, 204);
         }

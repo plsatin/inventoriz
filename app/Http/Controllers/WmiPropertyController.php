@@ -67,7 +67,7 @@ class WmiPropertyController extends Controller
 
 
             return response()->json($classProperties, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -119,7 +119,7 @@ class WmiPropertyController extends Controller
             $classProperty = WmiProperty::where('wmiclass_id', $wmiClass->id)->findOrFail($property);
 
             return response()->json($classProperty, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' =>$e->getCode(),"Message"=>$e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -136,7 +136,7 @@ class WmiPropertyController extends Controller
             $wmiProperty = $wmiClass->properties()->create($request->all());
 
             return response()->json($wmiProperty, 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -150,7 +150,7 @@ class WmiPropertyController extends Controller
             $wmiProperty->update($request->all());
 
             return response()->json($wmiProperty, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
@@ -165,7 +165,7 @@ class WmiPropertyController extends Controller
 
             $responseObject = array('Response' => 'OK', 'data' => array('Code' => '0x00200', 'Message' => 'Deleted Successfully'));
             return response()->json($responseObject, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject, 204);
         }
