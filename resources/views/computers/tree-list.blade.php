@@ -113,7 +113,6 @@ var computerId;
                 return data.typeInfo.iconTooltip;
             },
             icon: function(event, data) {
-                // console.log(data);
                 if (data.node.icon) {
                     return '/assets/img/icons/' + data.node.icon;
                 }
