@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Exception;
 // use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use DB;
-use Exception;
+// use Exception;
 
 
 
