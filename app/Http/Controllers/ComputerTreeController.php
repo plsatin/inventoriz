@@ -9,7 +9,7 @@ use App\Models\WmiProperty;
 use App\Models\Computer;
 use App\Models\ComputerProperties;
 
-// use Illuminate\Database\Eloquent\Exception;
+use Illuminate\Database\Eloquent\Exception;
 // use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use DB;
