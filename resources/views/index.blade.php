@@ -108,31 +108,50 @@
 
 <script>
 
-    $.ajaxSetup({ async: false });
 
-    var dataManufacturer = [];
-    var dataOS = [];
+    $(document).ready(function () {
+        $.ajaxSetup({ async: false });
 
-    // $(document).ready(function () {
+        var dataManufacturer = [];
+        var dataOS = [];
 
-        dataManufacturer = getDataFromInventoriz('/api/v1/reports/computers/properties/113'); //86
-        dataOS = getDataFromInventoriz('/api/v1/reports/computers/properties/15');
-        dataCPU = getDataFromInventoriz('/api/v1/reports/computers/properties/4');
-        // dataRAM = getDataFromInventoriz('/api/v1/reports/computers/properties/88');
-        dataUpdated = getDataFromInventorizUpdated('/api/v1/reports/computers/last_updated');
+        if (localStorage.token) {
 
-        // console.log(dataUpdated);
+            /* Получаем объект пользователь из localStorage */
+            objUser = JSON.parse(localStorage.getItem('objUser'));
+            role_id = objUser.role_id;
 
-
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChartManufacturers);
-        google.charts.setOnLoadCallback(drawChartOS);
-        google.charts.setOnLoadCallback(drawChartCPU);
-
-        google.charts.setOnLoadCallback(drawChartUpdated);
+            // localStorage.token
 
 
-    // });
+            dataManufacturer = getDataFromInventoriz('/api/v1/reports/computers/properties/113'); //86
+            dataOS = getDataFromInventoriz('/api/v1/reports/computers/properties/15');
+            dataCPU = getDataFromInventoriz('/api/v1/reports/computers/properties/4');
+            // dataRAM = getDataFromInventoriz('/api/v1/reports/computers/properties/88');
+            dataUpdated = getDataFromInventorizUpdated('/api/v1/reports/computers/last_updated');
+
+            // console.log(dataUpdated);
+
+
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChartManufacturers);
+            google.charts.setOnLoadCallback(drawChartOS);
+            google.charts.setOnLoadCallback(drawChartCPU);
+
+            google.charts.setOnLoadCallback(drawChartUpdated);
+
+
+        } else {
+
+        localStorage.clear();
+        $('#msgs').html('<p>Вы не авторизованы! Пройдите процедуру авторизации!</p>');
+
+
+
+        } // if token
+
+
+    });
 
     function drawChartManufacturers() {
         var data = google.visualization.arrayToDataTable(dataManufacturer);
