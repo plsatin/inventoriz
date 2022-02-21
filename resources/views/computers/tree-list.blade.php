@@ -58,6 +58,11 @@
             $.ajax({
                 type: "GET",
                 url: '/api/v1/computers-list',
+                beforeSend: function (xhr) {
+                    if (localStorage.token) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                    }
+                },
                 success: function (data) {
                     // console.log(data);
                     var htmlComputerList = '<div class="entity-list">';
@@ -128,6 +133,7 @@
 
     function renderComputerTree(computerId){
         $('#tree').fancytree({
+            ajax: { type: 'GET', Authorization: 'Bearer ' + localStorage.token },
             source: {url: '/api/v1/computers/'+computerId+'/hardware'},
             tooltip: true,
             iconTooltip: function(event, data) {
@@ -141,9 +147,6 @@
 
         });
     }
-  
-
-
 
 
 </script>

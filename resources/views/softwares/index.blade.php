@@ -60,14 +60,21 @@
 
 
             $('#tableSoftwares').DataTable( {
-                "ajax": '/api/v1/reports/softwares/list',
-                "columns": [
-                    { "width": "18%" },
-                    { "width": "25%" },
-                    { "width": "12%", "className": "dt-body-right" },
-                    { "width": "16%" },
-                    { "width": "12%", "className": "dt-body-right" },
-                    { "width": "17%" }
+                'ajax': {
+                    'url': '/api/v1/reports/softwares/list',
+                    'dataType': 'json',
+                    'type': 'GET',
+                    'headers': {
+                        'Authorization': 'Bearer: ' + localStorage.token,
+                    },
+                },
+                'columns': [
+                    { 'width': '18%' },
+                    { 'width': '25%' },
+                    { 'width': '12%', 'className': 'dt-body-right' },
+                    { 'width': '16%' },
+                    { 'width': '12%', 'className': 'dt-body-right' },
+                    { 'width': '17%' }
                 ],
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'

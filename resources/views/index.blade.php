@@ -120,13 +120,20 @@
 
 
             $('#tableComputers').DataTable( {
-                "ajax": '/api/v1/reports/computers/list',
-                "columns": [
-                    { "width": "20%" },
-                    { "width": "15%" },
-                    { "width": "28%" },
-                    { "width": "27%" },
-                    { "width": "10%", "className": "dt-body-right" }
+                'ajax': {
+                    'url': '/api/v1/reports/computers/list',
+                    'dataType': 'json',
+                    'type': 'GET',
+                    'headers': {
+                        'Authorization': 'Bearer: ' + localStorage.token,
+                    },
+                },
+                'columns': [
+                    { 'width': '20%' },
+                    { 'width': '15%' },
+                    { 'width': '28%' },
+                    { 'width': '27%' },
+                    { 'width': '10%', 'className': 'dt-body-right' }
                 ],
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
@@ -271,6 +278,11 @@
         $.ajax({
             type: "GET",
             url: dataUrl,
+            beforeSend: function (xhr) {
+                if (localStorage.token) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                }
+            },
             success: function (data) {
                 // console.log(data);
                 var result = [];
@@ -301,6 +313,11 @@
         $.ajax({
             type: "GET",
             url: dataUrl,
+            beforeSend: function (xhr) {
+                if (localStorage.token) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                }
+            },
             success: function (data) {
                 // console.log(data);
                 var result = [];

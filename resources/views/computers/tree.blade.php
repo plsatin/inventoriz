@@ -18,8 +18,6 @@
 
             /* Получаем объект пользователь из localStorage */
             objUser = JSON.parse(localStorage.getItem('objUser'));
-            role_id = objUser.role_id;
-
 
             main_container_html = '' +
                 '<div class="row">' +
@@ -45,8 +43,6 @@
 
             var computerName;
             var computerId;
-
-
 
             var computerName = "{{ $computer->name }}";
             var computerId = "{{ $computer->id }}";
@@ -86,6 +82,7 @@
 
     function renderComputerTree(computerId){
         $('#tree').fancytree({
+            ajax: { type: 'GET', Authorization: 'Bearer ' + localStorage.token },
             source: {url: '/api/v1/computers/'+computerId+'/hardware'},
             tooltip: true,
             iconTooltip: function(event, data) {

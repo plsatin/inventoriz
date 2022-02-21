@@ -26,8 +26,8 @@ class ComputerTreeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
-        // $this->middleware('roles');
+        $this->middleware('auth');
+        $this->middleware('roles');
     }
 
 
