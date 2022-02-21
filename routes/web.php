@@ -26,6 +26,11 @@ $router->get('/softwares',  ['uses' => 'HomeController@showSoftwaresList']);
 $router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
 
 
+
+
+
+
+
 $router->group(['prefix' => 'api'], function () use ($router) {
 
 
