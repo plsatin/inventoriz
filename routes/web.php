@@ -31,13 +31,6 @@ $router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
 
 
 
-$router->get('/logout', function () use ($router) {
-    Auth::logout();
-
-    return redirect()->to('/');
-});
-
-
 $router->group(['prefix' => 'api'], function () use ($router) {
 
 
