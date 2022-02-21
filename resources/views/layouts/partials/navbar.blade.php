@@ -53,3 +53,6 @@
         </div>
     </div>
 </nav>
+
+<div class="alert-stack" id="header-alert-stack">
+</div>

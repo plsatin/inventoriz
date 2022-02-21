@@ -143,9 +143,24 @@
 
         } else {
 
-        localStorage.clear();
-        $('#msgs').html('<p>Вы не авторизованы! Пройдите процедуру авторизации!</p>');
+            localStorage.clear();
 
+            alerts_msg = '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true"><i class="glyph glyph-cancel"></i></span>' +
+                '</button>' +
+                '<div class="container">' +
+                    '<div class="row">' +
+                        '<div class="col-md-20">' +
+                            '<p>' +
+                                'Вы не авторизованы! Пройдите процедуру авторизации!' +
+                            '</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+
+            $('#header-alert-stack').html(alerts_msg);
 
 
         } // if token
