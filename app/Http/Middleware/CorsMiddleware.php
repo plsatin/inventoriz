@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Response;
+
 
 class CorsMiddleware
 {
@@ -36,6 +38,7 @@ class CorsMiddleware
             'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Headers'=> 'Content-Type, Authorization, Origin'
         ];
+
         if($request->getMethod() == "OPTIONS") {
             // The client-side application can set only headers allowed in Access-Control-Allow-Headers
             return Response::make('OK', 200, $headers);
