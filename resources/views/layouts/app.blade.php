@@ -61,7 +61,7 @@
                         loginFormAfterLogin = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + objUser.name + '<i class="glyph glyph-chevron-down-2"></i></a>' +
                                         '<ul class="dropdown-menu" role="menu">' +
                                         '<li><a href="/profile" data-toggle="modal">Профиль</a></li>' +
-                                        '<li><a href="#" data-toggle="modal">Выход</a></li></ul>';
+                                        '<li><a href="#" data-toggle="modal" id="logout-btn">Выход</a></li></ul>';
 
                         $('#header-login').html(loginFormAfterLogin);
                     } else {
@@ -80,7 +80,7 @@
                                 loginFormAfterLogin = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + data.user.name + '<i class="glyph glyph-chevron-down-2"></i></a>' +
                                         '<ul class="dropdown-menu" role="menu">' +
                                         '<li><a href="/profile" data-toggle="modal">Профиль</a></li>' +
-                                        '<li><a href="#" data-toggle="modal">Выход</a></li></ul>';
+                                        '<li><a href="#" data-toggle="modal" id="logout-btn">Выход</a></li></ul>';
                                 $('#header-login').html(loginFormAfterLogin);
                             },
                             error: function (jqXHR, text, error) {
@@ -144,6 +144,36 @@
                     });
                     return false;
                 });
+
+
+                $("#logout-btn").click(function () {
+                    var json_url_logout = '/api/logout';
+                    $.ajax({
+                        type: "POST",
+                        url: json_url_logout,
+                        beforeSend: function (xhr) {
+                            if (localStorage.token) {
+                                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                            }
+
+                            
+
+                        },
+                        success: function (data) {
+                            localStorage.clear();
+                            window.location.href='/';
+                        },
+                        error: function (jqXHR, text, error) {
+                            console.log(error);
+                            console.log('Не удалось деавторизоваться на сервере!');
+                        }
+                    });
+                    return false;
+                });
+
+
+
+
             });
         </script>
 

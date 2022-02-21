@@ -37,7 +37,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     /** Авторизация */
     $router->post('register', ['uses' => 'AuthController@register']);
     $router->post('login', ['uses' => 'AuthController@login']);
-    $router->get('logout', ['uses' => 'AuthController@logout']);
+    $router->post('logout', ['uses' => 'AuthController@logout']);
     $router->get('profile', 'UserController@profile');
     $router->get('users/{id}', 'UserController@singleUser');
     $router->get('users', 'UserController@allUsers');
