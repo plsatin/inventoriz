@@ -58,7 +58,11 @@
                         objUser = JSON.parse(localStorage.getItem('objUser'));
                         console.log('При загрузке страницы обнаружен сохраненный объект пользователя');
                         // console.log(objUser);
-                        loginFormAfterLogin = '<div class="header-profile-form"><a href="/profile" >' + objUser.name + '</a></div>';
+                        loginFormAfterLogin = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + objUser.name + '<i class="glyph glyph-chevron-down-2"></i></a>' +
+                                        '<ul class="dropdown-menu" role="menu">' +
+                                        '<li><a href="/profile" data-toggle="modal">Профиль</a></li>' +
+                                        '<li><a href="/logout" data-toggle="modal">Выход</a></li></ul>';
+
                         $('#header-login').html(loginFormAfterLogin);
                     } else {
                         var json_url_profile = '/api/profile';
