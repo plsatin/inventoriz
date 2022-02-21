@@ -27,80 +27,7 @@
 
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-24">
-            <section class="section">
-                <header class="section-header">
-                    <h1 class="section-title">
-                        {{ $page_title ?? '' }}
-                    </h1>
-                </header>
-    
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="chart_wrap">
-                            <div id="chartManufacturers" style="width: 100%; height: 360px;"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="chart_wrap">
-                            <div id="chartOS" style="width: 100%; height: 360px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="chart_wrap">
-                            <div id="chartCPU" style="width: 100%; height: 360px;"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="chart_wrap">
-                            <div id="chartUpdated" style="width: 100%; height: 360px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-xs-24">
-            <section class="section">
-                <header class="section-header">
-                    <h1 class="section-title">
-                        Компьютеры
-                    </h1>
-                </header>
-
-                <div class="row">
-                    <div class="col-md-24">
-                        <div class="table-responsive">
-                            <table class="table" id="tableComputers">
-                                <thead>
-                                <tr>
-                                    <th>Имя</th>
-                                    <th>Последний опрос</th>
-                                    <th>Операционная система</th>
-                                    <th>Процессор</th>
-                                    <th>Оперативная память</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-    </div>
-
-</div>
+<div class="container" id="main-container"></div>
 
 
 
@@ -122,6 +49,85 @@
             role_id = objUser.role_id;
 
             // localStorage.token
+
+            main_container_html = '' +
+
+            '<div class="row">' +
+                '<div class="col-xs-24">' +
+                    '<section class="section">' +
+                        '<header class="section-header">' +
+                            '<h1 class="section-title">' +
+                                'Статистика' +
+                            '</h1>' +
+                        '</header>' +
+            
+                        '<div class="row">' +
+                            '<div class="col-md-12">' +
+                                '<div class="chart_wrap">' +
+                                    '<div id="chartManufacturers" style="width: 100%; height: 360px;"></div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-md-12">' +
+                                '<div class="chart_wrap">' +
+                                    '<div id="chartOS" style="width: 100%; height: 360px;"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                            '<div class="col-md-12">' +
+                                '<div class="chart_wrap">' +
+                                    '<div id="chartCPU" style="width: 100%; height: 360px;"></div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-md-12">' +
+                                '<div class="chart_wrap">' +
+                                    '<div id="chartUpdated" style="width: 100%; height: 360px;"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+
+                    '</section>' +
+                '</div>' +
+            '</div>' +
+
+
+            '<div class="row">' +
+                '<div class="col-xs-24">' +
+                    '<section class="section">' +
+                        '<header class="section-header">' +
+                            '<h1 class="section-title">' +
+                                'Компьютеры' +
+                            '</h1>' +
+                        '</header>' +
+
+                        '<div class="row">' +
+                            '<div class="col-md-24">' +
+                                '<div class="table-responsive">' +
+                                    '<table class="table" id="tableComputers">' +
+                                        '<thead>' +
+                                        '<tr>' +
+                                            '<th>Имя</th>' +
+                                            '<th>Последний опрос</th>' +
+                                            '<th>Операционная система</th>' +
+                                            '<th>Процессор</th>' +
+                                            '<th>Оперативная память</th>' +
+                                        '</tr>' +
+                                        '</thead>' +
+                                        '<tbody>' +
+                                        '</tbody>' +
+                                    '</table>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+
+                    '</section>' +
+                '</div>' +
+            '</div>';
+
+            $('#main-container').html(main_container_html);
+
+
+
 
 
             dataManufacturer = getDataFromInventoriz('/api/v1/reports/computers/properties/113'); //86
