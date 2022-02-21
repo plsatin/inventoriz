@@ -64,8 +64,10 @@
                     'url': '/api/v1/reports/softwares/list',
                     'dataType': 'json',
                     'type': 'GET',
-                    'headers': {
-                        'Authorization': 'Bearer: ' + localStorage.token,
+                    'beforeSend': function (xhr) {
+                        if (localStorage.token) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                        }
                     },
                 },
                 'columns': [
