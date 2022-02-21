@@ -134,7 +134,7 @@
     function renderComputerTree(computerId){
         $('#tree').fancytree({
             ajax: { type: 'GET', Authorization: 'Bearer ' + localStorage.token },
-            source: {url: '/api/v1/computers/'+computerId+'/hardware'},
+            source: { url: '/api/v1/computers/'+computerId+'/hardware' },
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
