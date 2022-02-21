@@ -22,39 +22,14 @@
 </style>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-24">
-            <section class="section">
-                <header class="section-header">
-                    <h1 class="section-title">
-                        {{ $page_title ?? '' }}
-                    </h1>
-                </header>
+<div class="container" id="main-container"></div>
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5>Список компьютеров</h5>
-                        <div class="list-computers" id="list-computers"></div>
-                    </div>
-                    <div class="col-md-16">
-                        <h5 id="header-devmng"></h5>
-                        <div class="computer-tree" id="tree" ></div>
-                        <div id="statusline"></div>
-                    </div>
-                </div>
-
-
-            </section>
-        </div>
-    </div>
-</div>
 
 
 
 
 <script>
-    
+
     $(document).ready(function () {
 
         if (localStorage.token) {
@@ -62,6 +37,36 @@
             /* Получаем объект пользователь из localStorage */
             objUser = JSON.parse(localStorage.getItem('objUser'));
             role_id = objUser.role_id;
+
+
+            main_container_html = '' +
+                '<div class="row">' +
+                    '<div class="col-xs-24">' +
+                        '<section class="section">' +
+                            '<header class="section-header">' +
+                                '<h1 class="section-title">' +
+                                    'Инвентаризация' +
+                                '</h1>' +
+                            '</header>' +
+                            '<div class="row">' +
+                                '<div class="col-md-8">' +
+                                    '<h5>Список компьютеров</h5>' +
+                                    '<div class="list-computers" id="list-computers"></div>' +
+                                '</div>' +
+                                '<div class="col-md-16">' +
+                                    '<h5 id="header-devmng"></h5>' +
+                                    '<div class="computer-tree" id="tree" ></div>' +
+                                    '<div id="statusline"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</section>' +
+                    '</div>' +
+                '</div>';
+
+            $('#main-container').html(main_container_html);
+
+
+
 
             var computerName;
             var computerId;
@@ -112,27 +117,25 @@
 
         } else {
 
-        localStorage.clear();
+            localStorage.clear();
 
-        alerts_msg = '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                '<span aria-hidden="true"><i class="glyph glyph-cancel"></i></span>' +
-            '</button>' +
-            '<div class="container">' +
-                '<div class="row">' +
-                    '<div class="col-md-20">' +
-                        '<p>' +
-                            'Вы не авторизованы! Пройдите процедуру авторизации!' +
-                        '</p>' +
+            alerts_msg = '' +
+                '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true"><i class="glyph glyph-cancel"></i></span>' +
+                    '</button>' +
+                    '<div class="container">' +
+                        '<div class="row">' +
+                            '<div class="col-md-20">' +
+                                '<p>' +
+                                    'Вы не авторизованы! Пройдите процедуру авторизации!' +
+                                '</p>' +
+                            '</div>' +
+                        '</div>' +
                     '</div>' +
-                '</div>' +
-            '</div>' +
-        '</div>';
+                '</div>';
 
-        $('#header-alert-stack').html(alerts_msg);
-
-
-
+            $('#header-alert-stack').html(alerts_msg);
 
         } // if token
 

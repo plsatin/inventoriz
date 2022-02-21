@@ -22,29 +22,7 @@
 </style>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-24">
-            <section class="section">
-                <header class="section-header">
-                    <h1 class="section-title">
-                        {{ $page_title ?? '' }}
-                    </h1>
-                </header>
-    
-                <div class="row">
-                    <div class="col-md-24">
-                        <div class="computer-tree" id="tree"></div>
-                        <div id="statusline"></div>
-                    </div>
-                </div>
-
-
-
-            </section>
-        </div>
-    </div>
-</div>
+<div class="container" id="main-container"></div>
 
 
 
@@ -58,6 +36,29 @@
             /* Получаем объект пользователь из localStorage */
             objUser = JSON.parse(localStorage.getItem('objUser'));
             role_id = objUser.role_id;
+
+
+            main_container_html = '' +
+                '<div class="row">' +
+                    '<div class="col-xs-24">' +
+                        '<section class="section">' +
+                            '<header class="section-header">' +
+                                '<h1 class="section-title">' +
+                                    'Инвентаризация' +
+                                '</h1>' +
+                            '</header>' +
+                            '<div class="row">' +
+                                '<div class="col-md-24">' +
+                                    '<div class="computer-tree" id="tree"></div>' +
+                                    '<div id="statusline"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</section>' +
+                    '</div>' +
+                '</div>';
+            $('#main-container').html(main_container_html);
+
+
 
             var computerName;
             var computerId;
@@ -91,10 +92,7 @@
 
             $('#header-alert-stack').html(alerts_msg);
 
-
-
-
-            } // if token
+        } // if token
 
     });
 

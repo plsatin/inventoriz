@@ -51,78 +51,73 @@
             // localStorage.token
 
             main_container_html = '' +
+                '<div class="row">' +
+                    '<div class="col-xs-24">' +
+                        '<section class="section">' +
+                            '<header class="section-header">' +
+                                '<h1 class="section-title">' +
+                                    'Статистика' +
+                                '</h1>' +
+                            '</header>' +
+                            '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                    '<div class="chart_wrap">' +
+                                        '<div id="chartManufacturers" style="width: 100%; height: 360px;"></div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="col-md-12">' +
+                                    '<div class="chart_wrap">' +
+                                        '<div id="chartOS" style="width: 100%; height: 360px;"></div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                    '<div class="chart_wrap">' +
+                                        '<div id="chartCPU" style="width: 100%; height: 360px;"></div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="col-md-12">' +
+                                    '<div class="chart_wrap">' +
+                                        '<div id="chartUpdated" style="width: 100%; height: 360px;"></div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
 
-            '<div class="row">' +
-                '<div class="col-xs-24">' +
-                    '<section class="section">' +
-                        '<header class="section-header">' +
-                            '<h1 class="section-title">' +
-                                'Статистика' +
-                            '</h1>' +
-                        '</header>' +
-            
-                        '<div class="row">' +
-                            '<div class="col-md-12">' +
-                                '<div class="chart_wrap">' +
-                                    '<div id="chartManufacturers" style="width: 100%; height: 360px;"></div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="col-md-12">' +
-                                '<div class="chart_wrap">' +
-                                    '<div id="chartOS" style="width: 100%; height: 360px;"></div>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="row">' +
-                            '<div class="col-md-12">' +
-                                '<div class="chart_wrap">' +
-                                    '<div id="chartCPU" style="width: 100%; height: 360px;"></div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="col-md-12">' +
-                                '<div class="chart_wrap">' +
-                                    '<div id="chartUpdated" style="width: 100%; height: 360px;"></div>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-
-                    '</section>' +
+                        '</section>' +
+                    '</div>' +
                 '</div>' +
-            '</div>' +
+                '<div class="row">' +
+                    '<div class="col-xs-24">' +
+                        '<section class="section">' +
+                            '<header class="section-header">' +
+                                '<h1 class="section-title">' +
+                                    'Компьютеры' +
+                                '</h1>' +
+                            '</header>' +
 
-
-            '<div class="row">' +
-                '<div class="col-xs-24">' +
-                    '<section class="section">' +
-                        '<header class="section-header">' +
-                            '<h1 class="section-title">' +
-                                'Компьютеры' +
-                            '</h1>' +
-                        '</header>' +
-
-                        '<div class="row">' +
-                            '<div class="col-md-24">' +
-                                '<div class="table-responsive">' +
-                                    '<table class="table" id="tableComputers">' +
-                                        '<thead>' +
-                                        '<tr>' +
-                                            '<th>Имя</th>' +
-                                            '<th>Последний опрос</th>' +
-                                            '<th>Операционная система</th>' +
-                                            '<th>Процессор</th>' +
-                                            '<th>Оперативная память</th>' +
-                                        '</tr>' +
-                                        '</thead>' +
-                                        '<tbody>' +
-                                        '</tbody>' +
-                                    '</table>' +
+                            '<div class="row">' +
+                                '<div class="col-md-24">' +
+                                    '<div class="table-responsive">' +
+                                        '<table class="table" id="tableComputers">' +
+                                            '<thead>' +
+                                            '<tr>' +
+                                                '<th>Имя</th>' +
+                                                '<th>Последний опрос</th>' +
+                                                '<th>Операционная система</th>' +
+                                                '<th>Процессор</th>' +
+                                                '<th>Оперативная память</th>' +
+                                            '</tr>' +
+                                            '</thead>' +
+                                            '<tbody>' +
+                                            '</tbody>' +
+                                        '</table>' +
+                                    '</div>' +
                                 '</div>' +
                             '</div>' +
-                        '</div>' +
-
-                    '</section>' +
-                '</div>' +
-            '</div>';
+                        '</section>' +
+                    '</div>' +
+                '</div>';
 
             $('#main-container').html(main_container_html);
 
@@ -147,24 +142,40 @@
             google.charts.setOnLoadCallback(drawChartUpdated);
 
 
+            $('#tableComputers').DataTable( {
+                "ajax": '/api/v1/reports/computers/list',
+                "columns": [
+                    { "width": "20%" },
+                    { "width": "15%" },
+                    { "width": "28%" },
+                    { "width": "27%" },
+                    { "width": "10%", "className": "dt-body-right" }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
+                }
+            });
+
+
         } else {
 
             localStorage.clear();
 
-            alerts_msg = '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
-                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                    '<span aria-hidden="true"><i class="glyph glyph-cancel"></i></span>' +
-                '</button>' +
-                '<div class="container">' +
-                    '<div class="row">' +
-                        '<div class="col-md-20">' +
-                            '<p>' +
-                                'Вы не авторизованы! Пройдите процедуру авторизации!' +
-                            '</p>' +
+            alerts_msg = '' +
+                '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true"><i class="glyph glyph-cancel"></i></span>' +
+                    '</button>' +
+                    '<div class="container">' +
+                        '<div class="row">' +
+                            '<div class="col-md-20">' +
+                                '<p>' +
+                                    'Вы не авторизованы! Пройдите процедуру авторизации!' +
+                                '</p>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
-                '</div>' +
-            '</div>';
+                '</div>';
 
             $('#header-alert-stack').html(alerts_msg);
 
@@ -330,34 +341,6 @@
         return arrValues;
     }
 
-
-    // $.ajax({
-    //     type: "GET",
-    //     url: '/api/v1/reports/computers/list',
-    //     success: function (data) {
-    //         console.log(data);
-    //     },
-    //     error: function (jqXHR, text, error) {
-    //         console.log(error);
-    //     }
-    // });
-
-
-    setTimeout(function(){
-        $('#tableComputers').DataTable( {
-            "ajax": '/api/v1/reports/computers/list',
-            "columns": [
-                { "width": "20%" },
-                { "width": "15%" },
-                { "width": "28%" },
-                { "width": "27%" },
-                { "width": "10%", "className": "dt-body-right" }
-            ],
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
-            }
-        });
-    }, 1000);
 
 </script>
 
