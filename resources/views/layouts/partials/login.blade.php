@@ -10,12 +10,12 @@
                 <form id="login-form">
                     <div class="form-group">
                         <label for="email">Имя пользователя</label>
-                        <input type="email" class="form-control" id="email" placeholder="Имя пользователя">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Имя пользователя" required>
                     </div>
                 
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" class="form-control" id="password" placeholder="Пароль">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                
+
             </div>
         </div>
     </div>
