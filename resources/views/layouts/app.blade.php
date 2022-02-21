@@ -42,7 +42,7 @@
 
 
         @include('layouts.partials.login')
-        @include('layouts.partials.about')
+
         @include('layouts.partials.backtop')
 
         <script src="{{ url('/assets/js/vendor/bootstrap.min.js') }}"></script>

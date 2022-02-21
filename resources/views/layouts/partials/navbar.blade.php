@@ -38,13 +38,13 @@
                             <li><a class="color-type-secondary" href="/api/documentation" >Документация</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="color-type-secondary" href="#about-dialog" data-toggle="modal">О проекте</a>
-                    </li>
-                    <li>
-                        <div class="header-login" id="header-login">
-                            <a class="color-type-secondary" href="#login-form" data-toggle="modal">Вход</a>
-                        </div>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="header-login">Вход<i class="glyph glyph-chevron-down-2"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="#login-form" data-toggle="modal">Вход</a></li>
+                        </ul>
                     </li>
 
                 </ul>
