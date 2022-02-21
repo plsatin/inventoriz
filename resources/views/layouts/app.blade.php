@@ -58,10 +58,10 @@
                         objUser = JSON.parse(localStorage.getItem('objUser'));
                         console.log('При загрузке страницы обнаружен сохраненный объект пользователя');
                         // console.log(objUser);
-                        loginFormAfterLogin = '<div class="header-profile-form"><a href="{{ @BASE }}/profile" >' + objUser.name + '</a></div>';
+                        loginFormAfterLogin = '<div class="header-profile-form"><a href="/profile" >' + objUser.name + '</a></div>';
                         $('#header-login').html(loginFormAfterLogin);
                     } else {
-                        var json_url_profile = 'http://portal.rezhcable.ru:8383/api/profile';
+                        var json_url_profile = '/api/profile';
                         $.ajax({
                             type: "GET",
                             url: json_url_profile,
@@ -73,7 +73,7 @@
                             success: function (data) {
                                 localStorage.setItem('objUser', JSON.stringify(data.user));
                                 console.log('Получен и сохранен объект пользователь');
-                                loginFormAfterLogin = '<div class="header-profile-form"><a href="{{ @BASE }}/profile" >' + data.user.name + '</a></div>';
+                                loginFormAfterLogin = '<div class="header-profile-form"><a href="/profile" >' + data.user.name + '</a></div>';
                                 $('#header-login').html(loginFormAfterLogin);
                             },
                             error: function (jqXHR, text, error) {
@@ -92,7 +92,7 @@
                 }
         
                 $("#login-form").submit(function () {
-                    var json_url_login = 'http://portal.rezhcable.ru:8383/api/login';
+                    var json_url_login = '/api/login';
                     $.ajax({
                         type: "POST",
                         url: json_url_login,
@@ -108,7 +108,7 @@
                                 console.log(token_date_exp.toString());
                                 localStorage.token_date_exp =  token_date_exp.toString();
                                 // console.log(localStorage.token_date_exp);
-                                var json_url_profile = 'http://portal.rezhcable.ru:8383/api/profile';
+                                var json_url_profile = '/api/profile';
                                 $.ajax({
                                     type: "GET",
                                     url: json_url_profile,
@@ -118,10 +118,10 @@
                                         }
                                     },
                                     success: function (data) {
-                                        loginFormAfterLogin = '<div class="header-profile-form"><a href="{{ @BASE }}/profile" >' + data.user.name + '</a></div>';
+                                        loginFormAfterLogin = '<div class="header-profile-form"><a href="/profile" >' + data.user.name + '</a></div>';
                                         $('#header-login').html(loginFormAfterLogin);
 
-                                        window.location.href='{{ @BASE }}/';
+                                        window.location.href='/';
                                     },
                                     error: function (jqXHR, text, error) {
                                         console.log(error);
