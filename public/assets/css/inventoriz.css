@@ -1,0 +1,16 @@
+/**
+ *
+ */
+
+
+.chart_wrap {
+    position: relative;
+    margin: 2px;
+}
+
+.list-computers, .computer-tree {
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+

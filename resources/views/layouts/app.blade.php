@@ -30,14 +30,20 @@
         <script type="text/javascript" src="{{ url('/assets/js/jquery.fancytree.js') }}"></script>
 
         <!-- Скрипты приложения Inventoriz -->
+        <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/inventoriz.css') }}">
         <script type="text/javascript" src="{{ url('/assets/js/inventoriz-auth.js') }}"></script>
 
 
+
+        <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+
+        <script type="text/javascript" src="//www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+        
     </head>
     <body>
 
         @include('layouts.partials.navbar')
-
 
 
         @yield('title')
@@ -45,16 +51,11 @@
         @yield('content')
 
 
-
         @include('layouts.partials.login')
-
         @include('layouts.partials.backtop')
 
         <script src="{{ url('/assets/js/vendor/bootstrap.min.js') }}"></script>
         <script src="{{ url('/assets/js/app.js') }}"></script>
-
-
-
 
     </body>
 </html>

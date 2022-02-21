@@ -12,7 +12,6 @@
                         <label for="email">Имя пользователя</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Имя пользователя" required>
                     </div>
-                
                     <div class="form-group">
                         <label for="password">Пароль</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
@@ -27,9 +26,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-
-            </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
 </div>

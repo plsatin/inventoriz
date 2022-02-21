@@ -5,15 +5,6 @@
 @section('content')
 
 
-<style>
-    .list-computers, .computer-tree {
-        height: 600px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-</style>
-
-
 <div class="container" id="main-container"></div>
 
 
