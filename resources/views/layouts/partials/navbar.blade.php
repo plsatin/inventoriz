@@ -1,13 +1,4 @@
 <nav class="navbar navbar-default">
-    {{-- <div class="navbar-global theme-default">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="http://www.microsoft.com" class="navbar-brand">
-                    <img src="https://assets.onestore.ms/cdnfiles/onestorerolling-1511-11008/shell/v3/images/logo/microsoft.png" alt="Microsoft" height="23" />
-                </a>
-            </div>
-        </div>
-    </div> --}}
     <div class="navbar-local color-accent theme-dark">
         <div class="container">
             <div class="navbar-header">
