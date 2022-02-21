@@ -1,4 +1,4 @@
-<div class="modal" id="login-form" tabindex="-1" role="dialog" aria-labelledby="login-form-label" aria-hidden="true">
+<div class="modal" id="login-form-dialog" tabindex="-1" role="dialog" aria-labelledby="login-form-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
