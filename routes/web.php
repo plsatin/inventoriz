@@ -22,13 +22,20 @@ $router->get('/',  ['uses' => 'HomeController@index']);
 $router->get('/tree',  ['uses' => 'HomeController@showComputerTree']);
 $router->get('/softwares',  ['uses' => 'HomeController@showSoftwaresList']);
 
+
+
+
+
 /** Информация о маршрутах */
 $router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
 
 
 
+$router->get('/logout', function () use ($router) {
+    Auth::logout();
 
-
+    return redirect()->to('/');
+});
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
@@ -37,9 +44,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     /** Авторизация */
     $router->post('register', ['uses' => 'AuthController@register']);
     $router->post('login', ['uses' => 'AuthController@login']);
+    $router->get('logout', ['uses' => 'AuthController@logout']);
     $router->get('profile', 'UserController@profile');
     $router->get('users/{id}', 'UserController@singleUser');
     $router->get('users', 'UserController@allUsers');
+
 
 
     /** Информация о версии API */
