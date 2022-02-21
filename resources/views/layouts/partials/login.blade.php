@@ -7,7 +7,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form >
+                <form id="login-form">
                     <div class="form-group">
                         <label for="email">Имя пользователя</label>
                         <input type="email" class="form-control" id="email" placeholder="Имя пользователя">
