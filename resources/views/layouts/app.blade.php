@@ -41,6 +41,7 @@
 
 
 
+        @include('layouts.partials.login')
         @include('layouts.partials.about')
         @include('layouts.partials.backtop')
 

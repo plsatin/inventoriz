@@ -39,7 +39,12 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="color-type-secondary" href="#aboutdialog" data-toggle="modal">О проекте</a>
+                        <a class="color-type-secondary" href="#about-dialog" data-toggle="modal">О проекте</a>
+                    </li>
+                    <li>
+                        <div class="header-login" id="header-login">
+                            <a class="color-type-secondary" href="#login-form" data-toggle="modal">Вход</a>
+                        </div>
                     </li>
 
                 </ul>
