@@ -108,12 +108,12 @@
 
 <script>
 
+    $.ajaxSetup({ async: false });
+
+    var dataManufacturer = [];
+    var dataOS = [];
 
     $(document).ready(function () {
-        $.ajaxSetup({ async: false });
-
-        var dataManufacturer = [];
-        var dataOS = [];
 
         if (localStorage.token) {
 
