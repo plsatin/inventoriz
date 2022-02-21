@@ -96,7 +96,7 @@ class ReportsController extends Controller
      *              @OA\Schema(ref="#/components/schemas/Response"),
      *          ),
      *     ),
-     *     //security={{ "apiAuth": {} }}
+     *     security={{  }}
      * )
      */
     public function getComputersProperty(Request $request, $property) 
@@ -194,7 +194,7 @@ class ReportsController extends Controller
      *              @OA\Schema(ref="#/components/schemas/Response"),
      *          ),
      *     ),
-     *     //security={{ "apiAuth": {} }}
+     *     security={{  }}
      * )
      */
     public function getComputersUpdatedAt(Request $request) 
@@ -339,7 +339,7 @@ class ReportsController extends Controller
      *              @OA\Schema(ref="#/components/schemas/Response"),
      *          ),
      *     ),
-     *     //security={{ "apiAuth": {} }}
+     *     security={{  }}
      * )
      */
     public function getComputersList(Request $request) 
@@ -512,7 +512,7 @@ class ReportsController extends Controller
      *              @OA\Schema(ref="#/components/schemas/Response"),
      *          ),
      *     ),
-     *     //security={{ "apiAuth": {} }}
+     *     security={{  }}
      * )
      */
     public function getSoftwaresList(Request $request) 
