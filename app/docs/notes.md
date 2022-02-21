@@ -81,6 +81,20 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
  - [https://sawtech.ru/tehno-blog/rabota-s-grafikami-i-diagrammami-google-chart/](Работа с графиками и диаграммами google chart)
 
 
+Ссылка на компьютер в Windows Admin Center:
+
+[https://192.168.0.231:4434/computerManagement/connections/computer/rzh01-pc83.rezhcable.ru](Windows Admin Center - rzh01-pc83.rezhcable.ru)
+
+Для серверов:
+
+[https://192.168.0.231:4434/servermanager/connections/server/rzh01-rds-01.rezhcable.ru](Windows Admin Center - rzh01-rds-01.rezhcable.ru)
+
+
+
+
+
+
+
 
 ## Отчеты
 

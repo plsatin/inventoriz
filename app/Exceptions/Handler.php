@@ -61,10 +61,11 @@ class Handler extends ExceptionHandler
         }
 
         // dd($exception);
-        $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
-        return response()->json($responseObject);
 
-        // return parent::render($request, $exception);
+        // $responseObject = array('Response' => 'Error', 'data' => array('Code' => $exception->getCode(), 'Message' => $exception->getMessage()));
+        // return response()->json($responseObject);
+
+        return parent::render($request, $exception);
     }
 
 
