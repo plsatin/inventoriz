@@ -31,13 +31,13 @@ class CorsMiddleware
 
 
         // Версия 0.2
-        header("Access-Control-Allow-Origin: *");
-
-        // ALLOW OPTIONS METHOD
         $headers = [
+            'Access-Control-Allow-Origin' => '*',
             'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Headers'=> 'Content-Type, Authorization, Origin',
-            'Cache-Control' => 'nocache, no-store, max-age=0, must-revalidate'
+            'Cache-Control' => 'nocache, no-store, max-age=0, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => 'Sun, 02 Jan 1990 00:00:00 GMT'
         ];
 
         if($request->getMethod() == "OPTIONS") {
@@ -47,7 +47,7 @@ class CorsMiddleware
 
         $response = $next($request);
         foreach($headers as $key => $value)
-            $response->header($key, $value);
+            $response->headers->set($key, $value);
         return $response;
 
     }
