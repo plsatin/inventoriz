@@ -133,7 +133,13 @@
 
     function renderComputerTree(computerId){
         $('#tree').fancytree({
-            ajax: { type: 'GET', Authorization: 'Bearer ' + localStorage.token },
+            ajax: { type: 'GET',
+                beforeSend: function (xhr) {
+                    if (localStorage.token) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
+                    }
+                }
+            },
             source: { url: '/api/v1/computers/'+computerId+'/hardware' },
             tooltip: true,
             iconTooltip: function(event, data) {
