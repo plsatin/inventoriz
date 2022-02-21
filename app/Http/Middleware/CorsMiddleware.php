@@ -40,8 +40,6 @@ class CorsMiddleware
             'Cache-Control' => 'nocache, no-store, max-age=0, must-revalidate'
         ];
 
-        'Cache-Control' => 'nocache, no-store, max-age=0, must-revalidate',
-    'Pragma','no-cache',
         if($request->getMethod() == "OPTIONS") {
             // The client-side application can set only headers allowed in Access-Control-Allow-Headers
             return response()->make('OK', 200, $headers);
