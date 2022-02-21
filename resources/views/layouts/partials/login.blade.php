@@ -17,15 +17,18 @@
                         <label for="password">Пароль</label>
                         <input type="password" class="form-control" id="password" placeholder="Пароль">
                     </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            Вход
+                        </button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">
+                            Отмена
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">
-                    Вход
-                </button>
-                <button type="button" class="btn btn-info" data-dismiss="modal">
-                    Отмена
-                </button>
+                
             </div>
         </div>
     </div>
