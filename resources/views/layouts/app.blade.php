@@ -33,7 +33,7 @@
         <script>
             var loginFormBefore = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Вход<i class="glyph glyph-chevron-down-2"></i></a>' +
                 '<ul class="dropdown-menu" role="menu">' +
-                '<li><a href="#login-form" data-toggle="modal">Вход</a></li></ul>';
+                '<li><a href="#login-form-dialog" data-toggle="modal">Вход</a></li></ul>';
 
             var loginFormAfterLogin = '';
             var objUser;
