@@ -219,17 +219,17 @@ class ReportsController extends Controller
                 $order = $request->get('order');
                 if ($order == 'desc') {
                     $order = 'desc';
-                    $computers = $computers->orderBy('date', 'desc');
+                    $computers = $computers->SortByDesc('date');
                 } else if ($order == 'asc') {
                     $order = 'asc';
-                    $computers = $computers->orderBy('date', 'asc');
+                    $computers = $computers->SortBy('date');
                 } else {
                     $order = 'desc';
-                    $computers = $computers->orderBy('date', 'desc');
+                    $computers = $computers->SortByDesc('date');
                 }
             } else {
                 $order = 'asc';
-                $computers = $computers->orderBy('date', 'asc');
+                $computers = $computers->SortBy('date');
             }
             
 
