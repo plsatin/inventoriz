@@ -321,7 +321,7 @@
                 }
             },
             success: function (data) {
-                // console.log(data);
+                console.log(data);
                 var result = [];
 
                 arrValues.push(['Дата', 'Компьютеры']);
