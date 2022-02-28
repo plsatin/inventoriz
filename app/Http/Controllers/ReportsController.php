@@ -208,24 +208,30 @@ class ReportsController extends Controller
                 $limitOffset = 7;
             }
 
-            if ($request->filled('order')) {
-                $order = $request->get('order');
-                if ($order == 'desc') {
-                    $order = 'desc';
-                } else if ($order == 'asc') {
-                    $order = 'asc';
-                } else {
-                    $order = 'desc';
-                }
-            } else {
-                $order = 'asc';
-            }
 
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
             $computers = Computer::select(DB::raw('DATE(updated_at) as date'), DB::raw('count(*) as total'))
-                ->groupBy('date')->take($limitOffset)->orderBy('date', $order)->get();
+                ->groupBy('date')->orderBy('date', 'desc')->take($limitOffset)->get();
 
+
+            if ($request->filled('order')) {
+                $order = $request->get('order');
+                if ($order == 'desc') {
+                    $order = 'desc';
+                    $computers = array_reverse($computers, true);
+                } else if ($order == 'asc') {
+                    $order = 'asc';
+                    $computers = array_reverse($computers, false);
+                } else {
+                    $order = 'desc';
+                    $computers = array_reverse($computers, true);
+                }
+            } else {
+                $order = 'asc';
+                $computers = array_reverse($computers, false);
+            }
+            
 
             return response()->json($computers);
         } catch (Exception $e) {
