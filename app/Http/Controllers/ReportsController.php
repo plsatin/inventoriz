@@ -222,7 +222,7 @@ class ReportsController extends Controller
                     $computers = array_reverse($computers);
                 } else if ($order == 'asc') {
                     $order = 'asc';
-                    $computers = array_reverse($computers);
+                    // $computers = array_reverse($computers);
                 } else {
                     $order = 'desc';
                     $computers = array_reverse($computers);

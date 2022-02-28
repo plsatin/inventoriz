@@ -315,6 +315,7 @@
         $.ajax({
             type: "GET",
             url: dataUrl,
+            data: jQuery.param({ 'limit': '5', 'order': 'desc', }),
             beforeSend: function (xhr) {
                 if (localStorage.token) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
