@@ -219,17 +219,17 @@ class ReportsController extends Controller
                 $order = $request->get('order');
                 if ($order == 'desc') {
                     $order = 'desc';
-                    $computers = array_reverse($computers, true);
+                    $computers = array_reverse($computers);
                 } else if ($order == 'asc') {
                     $order = 'asc';
-                    $computers = array_reverse($computers, false);
+                    $computers = array_reverse($computers);
                 } else {
                     $order = 'desc';
-                    $computers = array_reverse($computers, true);
+                    $computers = array_reverse($computers);
                 }
             } else {
                 $order = 'asc';
-                $computers = array_reverse($computers, false);
+                // $computers = array_reverse($computers);
             }
             
 
