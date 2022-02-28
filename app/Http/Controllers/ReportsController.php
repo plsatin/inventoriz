@@ -219,21 +219,21 @@ class ReportsController extends Controller
                 $order = $request->get('order');
                 if ($order == 'desc') {
                     $order = 'desc';
-                    $computers = $computers->SortByDesc('date');
+                    $computersSorted = $computers->SortByDesc('date');
                 } else if ($order == 'asc') {
                     $order = 'asc';
-                    $computers = $computers->SortBy('date');
+                    $computersSorted = $computers->SortBy('date');
                 } else {
                     $order = 'desc';
-                    $computers = $computers->SortByDesc('date');
+                    $computersSorted = $computers->SortByDesc('date');
                 }
             } else {
                 $order = 'asc';
-                $computers = $computers->SortByDesc('date');
+                $computersSorted = $computers->SortBy('date');
             }
             
 
-            return response()->json($computers);
+            return response()->json($computersSorted);
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
