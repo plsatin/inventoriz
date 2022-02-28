@@ -65,7 +65,34 @@ $Searcher.QueryHistory(0, $historyCount) | Select-Object Date,@{name="Operation"
 
 ```
 
+### Программное обеспечение
 
+```powershell
+
+$ComputerName = "rzh01-pc84"
+$list = @()
+$InstalledSoftwareKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall"
+$InstalledSoftware = [microsoft.win32.registrykey]::OpenRemoteBaseKey('LocalMachine', $ComputerName)
+$RegistryKey = $InstalledSoftware.OpenSubKey($InstalledSoftwareKey)
+$SubKeys = $RegistryKey.GetSubKeyNames()
+
+Foreach ($key in $SubKeys){
+    $thisKey = $InstalledSoftwareKey + "\\" + $key
+    $thisSubKey = $InstalledSoftware.OpenSubKey($thisKey)
+    $obj = New-Object PSObject
+    # $obj | Add-Member -MemberType NoteProperty -Name "ComputerName" -Value $ComputerName
+    $obj | Add-Member -MemberType NoteProperty -Name "DisplayName" -Value $($thisSubKey.GetValue("DisplayName"))
+    $obj | Add-Member -MemberType NoteProperty -Name "DisplayVersion" -Value $($thisSubKey.GetValue("DisplayVersion"))
+    $obj | Add-Member -MemberType NoteProperty -Name "Publisher" -Value $($thisSubKey.GetValue("Publisher"))
+    $obj | Add-Member -MemberType NoteProperty -Name "InstallDate" -Value $($thisSubKey.GetValue("InstallDate"))
+    $obj | Add-Member -MemberType NoteProperty -Name "UninstallString" -Value $($thisSubKey.GetValue("UninstallString"))
+    $list += $obj
+}
+$list | Out-GridView
+
+
+
+```
 
 
 

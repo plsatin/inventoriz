@@ -140,7 +140,7 @@
                     }
                 }
             },
-            source: { url: '/api/v1/computers/'+computerId+'/hardware' },
+            source: { url: '/api/v1/computers/' + computerId + '/hardware' },
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;

@@ -233,20 +233,22 @@ if ($result) {
 
                         }
 
-                            $Value = $computerClass.$PropertyName | Out-String
-                            try {
-                                if (!($Null -eq $Value) -And ($Value.ToString() -like '*\*')) {
-                                    Write-Verbose $Value.ToString()
-                                    $Value = ($Value.ToString()).Replace("\", "\\")
-                                    $Value = ($Value.ToString()).Trim()
-                                    $Value = ($Value.ToString()).Replace("`r|`n","")
+                        $Value = $computerClass.$PropertyName | Out-String
+                        try {
+                            if (!($Null -eq $Value) -And ($Value.ToString() -like '*\*')) {
+                                Write-Verbose $Value.ToString()
+                                $Value = ($Value.ToString()).Replace("\", "\\")
+                                $Value = ($Value.ToString()).Trim()
+                                $Value = ($Value.ToString()).Replace("`r|`n","")
 
-                                } else {
-                                }
-                            } catch [Exception] {
-                                Write-Verbose $_.Exception.ToString()
+                            } else {
+
                             }
+                        } catch [Exception] {
+                            Write-Verbose $_.Exception.ToString()
+                        }
 
+                        if (!($Value -eq "")) {
                             $headers = @{}
                             $headers = @{"Content-Type" = "application/x-www-form-urlencoded"; "Authorization" = "Bearer $api_key"}
                             $postParams = @{}
@@ -254,6 +256,7 @@ if ($result) {
                             $ComputerTarget  = Invoke-RestMethod -Method POST -Headers $headers -Uri "$apiUrl/api/v1/computers/$ComputerTargetId/properties/$wmiClassId/$PropertyId" -Body $postParams
 
                             $recordCount ++
+                        }
                     }
                 }
             }

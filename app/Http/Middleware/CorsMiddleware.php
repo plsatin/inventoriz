@@ -33,8 +33,9 @@ class CorsMiddleware
         // Версия 0.2
         $headers = [
             'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
-            'Access-Control-Allow-Headers'=> 'Content-Type, Authorization, Origin',
+            'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers' => 'Content-Type, Authorization, Origin',
+            'Access-Control-Max-Age' => '3600',
             'Cache-Control' => 'nocache, no-store, max-age=0, must-revalidate',
             'Pragma' => 'no-cache',
             'Expires' => 'Sun, 02 Jan 1990 00:00:00 GMT'

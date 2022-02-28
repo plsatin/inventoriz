@@ -5,7 +5,7 @@
  .DESCRIPTION
  
  .EXAMPLE
-.\Invoke-ADInventory.ps1 -SearchBase "OU=PC,OU=RZH,DC=rezhcable,DC=ru"
+.\Invoke-ADInventory.ps1 -SearchBase "OU=PC,OU=RZH,DC=rezhcable,DC=ru" -SearchOnlyNew $false
 
 
  .LINK

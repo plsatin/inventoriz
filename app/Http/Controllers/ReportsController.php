@@ -224,7 +224,7 @@ class ReportsController extends Controller
             /** SELECT updated_at, COUNT(id) AS qty  FROM computers GROUP BY DATE_FORMAT(updated_at , "%d-%m-%y") */
 
             $computers = Computer::select(DB::raw('DATE(updated_at) as date'), DB::raw('count(*) as total'))
-                ->groupBy('date')->orderBy('date', $order)->take($limitOffset)->get();
+                ->groupBy('date')->take($limitOffset)->orderBy('date', $order)->get();
 
 
             return response()->json($computers);
