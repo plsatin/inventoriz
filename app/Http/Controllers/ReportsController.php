@@ -229,7 +229,7 @@ class ReportsController extends Controller
                 }
             } else {
                 $order = 'asc';
-                $computers = $computers->SortBy('date');
+                $computers = $computers->SortByDesc('date');
             }
             
 
