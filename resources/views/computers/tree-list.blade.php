@@ -54,6 +54,8 @@
             var computerName;
             var computerId;
 
+            var treeFirstRender = true;
+
 
             $.ajax({
                 type: "GET",
@@ -134,7 +136,12 @@
 
     function renderComputerTree(computerId){
 
-        $("#tree").fancytree("destroy");
+        if (treeFirstRender) {
+            
+        } else {
+            $("#tree").fancytree("destroy");
+        }
+        
 
         treeUrl = '/api/v1/computers/' + computerId + '/hardware';
         console.log(treeUrl);
@@ -163,6 +170,8 @@
             },
 
         });
+
+        treeFirstRender = false;
     }
 
 
