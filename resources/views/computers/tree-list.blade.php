@@ -136,7 +136,7 @@
 
         treeUrl = '/api/v1/computers/' + computerId + '/hardware';
         console.log(treeUrl);
-        
+
         $('#tree').fancytree({
             ajax: { type: 'GET',
                 beforeSend: function (xhr) {
@@ -154,6 +154,10 @@
                 if (data.node.icon) {
                     return '/assets/img/icons/' + data.node.icon;
                 }
+            },
+            postProcess: function(event, data)
+            {
+                console.log(data);
             },
 
         });
