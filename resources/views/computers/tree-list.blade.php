@@ -12,10 +12,10 @@
 
 
 <script>
+    var treeFirstRender = true;
 
     $(document).ready(function () {
 
-        var treeFirstRender = true;
 
         if (localStorage.token) {
 
