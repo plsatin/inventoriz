@@ -134,6 +134,8 @@
 
     function renderComputerTree(computerId){
 
+        $("#tree").fancytree("destroy");
+
         treeUrl = '/api/v1/computers/' + computerId + '/hardware';
         console.log(treeUrl);
 
