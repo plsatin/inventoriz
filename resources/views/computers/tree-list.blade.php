@@ -155,6 +155,7 @@
                     return '/assets/img/icons/' + data.node.icon;
                 }
             },
+            cache: false,
             postProcess: function(event, data)
             {
                 console.log(data);
