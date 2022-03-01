@@ -91,6 +91,7 @@
                         console.log(computerName);
                         computerId = (objData[0].id).replace('computer-id_', '');
                         console.log(computerId);
+                        $('#tree').html('');
                         $('#header-devmng').html('Диспетчер устройств: ' + computerName);
                         renderComputerTree(computerId);
                     });
