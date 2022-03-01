@@ -133,6 +133,10 @@
 
 
     function renderComputerTree(computerId){
+
+        treeUrl = '/api/v1/computers/' + computerId + '/hardware';
+        console.log(treeUrl);
+        
         $('#tree').fancytree({
             ajax: { type: 'GET',
                 beforeSend: function (xhr) {
@@ -141,7 +145,7 @@
                     }
                 }
             },
-            source: { url: '/api/v1/computers/' + computerId + '/hardware' },
+            source: { url: treeUrl},
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
