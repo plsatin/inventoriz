@@ -145,7 +145,7 @@
                     }
                 }
             },
-            source: { url: treeUrl},
+            source: { url: treeUrl, cache: false },
             tooltip: true,
             iconTooltip: function(event, data) {
                 return data.typeInfo.iconTooltip;
@@ -155,7 +155,6 @@
                     return '/assets/img/icons/' + data.node.icon;
                 }
             },
-            cache: false,
             postProcess: function(event, data)
             {
                 console.log(data);
