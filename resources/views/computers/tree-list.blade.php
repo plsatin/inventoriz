@@ -15,6 +15,8 @@
 
     $(document).ready(function () {
 
+        var treeFirstRender = true;
+
         if (localStorage.token) {
 
             /* Получаем объект пользователь из localStorage */
@@ -54,7 +56,6 @@
             var computerName;
             var computerId;
 
-            var treeFirstRender = true;
 
 
             $.ajax({
