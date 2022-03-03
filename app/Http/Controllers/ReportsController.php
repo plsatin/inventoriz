@@ -525,7 +525,7 @@ class ReportsController extends Controller
     {
         try {
 
-            $limitOffset = 10000;
+            // $limitOffset = 10000;
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
