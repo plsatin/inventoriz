@@ -582,11 +582,11 @@ class ReportsController extends Controller
 
                     if ($Name[$i]->value != '') {
                         $arrSoftwares = [$computerR->name,
-                            isset($Name[$i]->value),
-                            isset($Version[$i]->value),
-                            isset($Vendor[$i]->value),
-                            isset($InstallDate[$i]->value),
-                            isset($IdentifyingNumber[$i]->value)
+                            (isset($Name[$i]->value)) ? $Name[$i]->value : '',
+                            (isset($Version[$i]->value)) ? $Version[$i]->value : '',
+                            (isset($Vendor[$i]->value)) ? $Vendor[$i]->value : '',
+                            (isset($InstallDate[$i]->value)) ? $InstallDate[$i]->value : '',
+                            (isset($IdentifyingNumber[$i]->value)) ? $IdentifyingNumber[$i]->value : ''
                         ];
 
                         array_push($data, $arrSoftwares);
