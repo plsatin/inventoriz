@@ -117,6 +117,7 @@ $(document).ready(function () {
             error: function (jqXHR, text, error) {
                 console.log(error);
                 console.log('Не удалось авторизоваться на сервере!');
+                alert('Не удалось авторизоваться на сервере!');
             }
         });
         return false;
