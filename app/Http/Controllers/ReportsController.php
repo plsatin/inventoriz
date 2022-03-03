@@ -525,7 +525,6 @@ class ReportsController extends Controller
     {
         try {
 
-            // $limitOffset = 10000;
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
@@ -551,7 +550,6 @@ class ReportsController extends Controller
             $totalComputers = Computer::count();
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
 
-            dd($computers);
             
             $response = [];
             $data = [];
@@ -584,13 +582,12 @@ class ReportsController extends Controller
 
                     if ($Name[$i]->value != '') {
                         $arrSoftwares = [$computerR->name,
-                            $Name[$i]->value,
-                            $Version[$i]->value,
-                            $Vendor[$i]->value,
-                            $InstallDate[$i]->value,
-                            $IdentifyingNumber[$i]->value
+                            isset($Name[$i]->value),
+                            isset($Version[$i]->value),
+                            isset($Vendor[$i]->value),
+                            isset($InstallDate[$i]->value),
+                            isset($IdentifyingNumber[$i]->value)
                         ];
-
 
                         array_push($data, $arrSoftwares);
 
@@ -598,7 +595,6 @@ class ReportsController extends Controller
                         $totalSoft ++;
 
                         // Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
-
 
                     }
                 }
