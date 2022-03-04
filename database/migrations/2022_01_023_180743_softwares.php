@@ -16,6 +16,7 @@ class Softwares extends Migration {
             $table->string('vendor')->nullable();
             $table->dateTime('install_date')->nullable();
             $table->string('identifying_number')->nullable();
+            $table->string('uninstall_string')->nullable();
             $table->timestamps();
 
             $table->foreign('computer_id')->references('id')->on('computers')->onDelete('cascade')->onUpdate('cascade');

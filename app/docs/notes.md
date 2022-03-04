@@ -79,15 +79,22 @@ $SubKeys = $RegistryKey.GetSubKeyNames()
 Foreach ($key in $SubKeys){
     $thisKey = $InstalledSoftwareKey + "\\" + $key
     $thisSubKey = $InstalledSoftware.OpenSubKey($thisKey)
-    $obj = New-Object PSObject
-    # $obj | Add-Member -MemberType NoteProperty -Name "ComputerName" -Value $ComputerName
-    $obj | Add-Member -MemberType NoteProperty -Name "DisplayName" -Value $($thisSubKey.GetValue("DisplayName"))
-    $obj | Add-Member -MemberType NoteProperty -Name "DisplayVersion" -Value $($thisSubKey.GetValue("DisplayVersion"))
-    $obj | Add-Member -MemberType NoteProperty -Name "Publisher" -Value $($thisSubKey.GetValue("Publisher"))
-    $obj | Add-Member -MemberType NoteProperty -Name "InstallDate" -Value $($thisSubKey.GetValue("InstallDate"))
-    $obj | Add-Member -MemberType NoteProperty -Name "UninstallString" -Value $($thisSubKey.GetValue("UninstallString"))
-    $list += $obj
+
+    if (!($thisSubKey.GetValue("DisplayName") -eq $Null)) {
+        $obj = New-Object PSObject
+        # $obj | Add-Member -MemberType NoteProperty -Name "ComputerName" -Value $ComputerName
+        $obj | Add-Member -MemberType NoteProperty -Name "name" -Value $($thisSubKey.GetValue("DisplayName"))
+        $obj | Add-Member -MemberType NoteProperty -Name "version" -Value $($thisSubKey.GetValue("DisplayVersion"))
+        $obj | Add-Member -MemberType NoteProperty -Name "vendor" -Value $($thisSubKey.GetValue("Publisher"))
+        $obj | Add-Member -MemberType NoteProperty -Name "install_date" -Value $($thisSubKey.GetValue("InstallDate"))
+        $obj | Add-Member -MemberType NoteProperty -Name "identifying_number" -Value $key
+
+        $obj | Add-Member -MemberType NoteProperty -Name "uninstall_string" -Value $($thisSubKey.GetValue("UninstallString"))
+
+        $list += $obj
+    }
 }
+
 $list | Out-GridView
 
 

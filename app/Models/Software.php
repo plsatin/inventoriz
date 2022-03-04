@@ -40,6 +40,11 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string",
  *          description="Уникальный идентификатор",
  *      ),
+ *      @OA\Property(
+ *          property="uninstall_string",
+ *          type="string",
+ *          description="Строка команды на удаление",
+ *      ),
  * )
  */
 class Software extends Model
@@ -52,7 +57,7 @@ class Software extends Model
      * @var array
      */
     protected $fillable = [
-        'computer_id', 'name', 'version', 'vendor', 'install_date', 'identifying_number',
+        'computer_id', 'name', 'version', 'vendor', 'install_date', 'identifying_number', 'uninstall_string'
     ];
 
 
