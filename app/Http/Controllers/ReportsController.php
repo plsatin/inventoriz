@@ -408,6 +408,8 @@ class ReportsController extends Controller
                     $propertyRAM[0]->value
                 ];
 
+                var_dump($arrComputer);
+                
                 array_push($data, $arrComputer);
                 $countComputers ++;
             }
