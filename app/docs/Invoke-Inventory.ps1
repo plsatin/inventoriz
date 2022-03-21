@@ -206,7 +206,7 @@ if ($result) {
                     break
                 }
                 default {
-                    $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction stop
+                    $computerClassI = Get-WMIObject -Namespace $Win32Namespace -Class $Win32ClassName -ComputerName $ComputerName -ErrorAction SilentlyContinue
                     break
                 }
             }

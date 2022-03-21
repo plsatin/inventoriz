@@ -352,6 +352,8 @@ class ReportsController extends Controller
     {
         try {
 
+            $totalComputers = Computer::count();
+
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
@@ -365,7 +367,7 @@ class ReportsController extends Controller
                 $limitOffset = $request->get('limit');
                 $orderBy = 'id';
             } else {
-                $limitOffset = 10000;
+                $limitOffset = $totalComputers - $startOffset;
                 $orderBy = 'name';
             }
 
@@ -374,7 +376,6 @@ class ReportsController extends Controller
             }
 
 
-            $totalComputers = Computer::count();
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
             $response = [];
