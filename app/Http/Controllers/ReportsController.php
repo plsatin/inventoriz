@@ -364,7 +364,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('limit')) {
-                $limitOffset = $request->get('limit');
+                $limitOffset = (int)$request->get('limit');
                 $orderBy = 'id';
             } else {
                 $limitOffset = $totalComputers - (int)$startOffset;
