@@ -318,7 +318,7 @@ class ReportsController extends Controller
      *     @OA\Parameter(
      *         name="limit",
      *         in="query",
-     *         description="Ограничение диапазона по ИД (по умолчанию 10 000)",
+     *         description="Ограничение диапазона по ИД (по умолчанию 1000)",
      *         required=false,
      *         @OA\Schema(type="string"),
      *     ),
@@ -377,6 +377,7 @@ class ReportsController extends Controller
                 $orderBy = $request->get('order');
             }
 
+            dd($startOffset, $orderBy, $limitOffset);
 
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
