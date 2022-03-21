@@ -377,7 +377,7 @@ class ReportsController extends Controller
                 $orderBy = $request->get('order');
             }
 
-            dd($startOffset, $orderBy, $limitOffset);
+            // dd($startOffset, $orderBy, $limitOffset);
 
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
