@@ -401,15 +401,16 @@ class ReportsController extends Controller
                 $propertyRAM = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty)->get();
     
 
-                $arrComputer = ['<a href="/tree?computer=' . $computer->name . '">' . $computer->name . '</a>',
+                $arrComputer = [
+                    '<a href="/tree?computer=' . $computer->name . '">' . $computer->name . '</a>',
                     $computer->last_inventory_end,
-                    $propertyOS[0]->value,
-                    $propertyCPU[0]->value,
-                    $propertyRAM[0]->value
+                    isset($propertyOS[0]->value) ? $propertyOS[0]->value : '',
+                    isset($propertyCPU[0]->value) ? $propertyCPU[0]->value : '',
+                    isset($propertyRAM[0]->value) ? $propertyRAM[0]->value : ''
                 ];
 
                 var_dump($arrComputer);
-                
+
                 array_push($data, $arrComputer);
                 $countComputers ++;
             }
