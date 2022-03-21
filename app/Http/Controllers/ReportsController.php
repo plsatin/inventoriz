@@ -379,8 +379,8 @@ class ReportsController extends Controller
 
             // dd($startOffset, $orderBy, $limitOffset);
 
-            // $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
-            $computers = Computer::query()->orderBy($orderBy)->get();
+            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
+            // $computers = Computer::query()->orderBy($orderBy)->get();
 
             // dd($computers);
 
@@ -409,7 +409,7 @@ class ReportsController extends Controller
                     isset($propertyRAM[0]->value) ? $propertyRAM[0]->value : ''
                 ];
 
-                var_dump($arrComputer);
+                // var_dump($arrComputer);
 
                 array_push($data, $arrComputer);
                 $countComputers ++;
