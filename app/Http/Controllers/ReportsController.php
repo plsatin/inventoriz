@@ -360,12 +360,12 @@ class ReportsController extends Controller
 
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
-                $startOffset = $request->get('start');
+                $startOffset = (int)$request->get('start');
                 $orderBy = 'id';
             }
 
             if ($request->filled('limit')) {
-                $limitOffset = $request->get('limit');
+                $limitOffset = (int)$request->get('limit');
                 $orderBy = 'id';
             }
             // else {
