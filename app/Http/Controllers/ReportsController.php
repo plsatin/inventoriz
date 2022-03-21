@@ -361,28 +361,20 @@ class ReportsController extends Controller
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = (int)$request->get('start');
-                // $orderBy = 'id';
+                $orderBy = 'id';
             }
 
             if ($request->filled('limit')) {
                 $limitOffset = (int)$request->get('limit');
-                // $orderBy = 'id';
+                $orderBy = 'id';
             }
-            // else {
-            //     $limitOffset = $totalComputers - (int)$startOffset;
-            //     $orderBy = 'name';
-            // }
 
             if ($request->filled('order')) {
                 $orderBy = $request->get('order');
             }
 
-            // dd($startOffset, $orderBy, $limitOffset);
 
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
-            // $computers = Computer::query()->orderBy($orderBy)->get();
-
-            // dd($computers);
 
 
             $response = [];
@@ -408,8 +400,6 @@ class ReportsController extends Controller
                     isset($propertyCPU[0]->value) ? $propertyCPU[0]->value : '',
                     isset($propertyRAM[0]->value) ? $propertyRAM[0]->value : ''
                 ];
-
-                // var_dump($arrComputer);
 
                 array_push($data, $arrComputer);
                 $countComputers ++;
