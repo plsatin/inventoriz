@@ -350,6 +350,10 @@ class ReportsController extends Controller
      */
     public function getComputersList(Request $request) 
     {
+        $startOffset = 0;
+        $orderBy = 'name';
+        $limitOffset = 1000;
+
         try {
 
             $totalComputers = Computer::count();
@@ -358,18 +362,16 @@ class ReportsController extends Controller
             if ($request->filled('start')) {
                 $startOffset = $request->get('start');
                 $orderBy = 'id';
-            } else {
-                $startOffset = 0;
-                $orderBy = 'name';
             }
 
             if ($request->filled('limit')) {
                 $limitOffset = (int)$request->get('limit');
                 $orderBy = 'id';
-            } else {
-                $limitOffset = $totalComputers - (int)$startOffset;
-                $orderBy = 'name';
             }
+            // else {
+            //     $limitOffset = $totalComputers - (int)$startOffset;
+            //     $orderBy = 'name';
+            // }
 
             if ($request->filled('order')) {
                 $orderBy = $request->get('order');
