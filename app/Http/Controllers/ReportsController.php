@@ -355,9 +355,6 @@ class ReportsController extends Controller
         $limitOffset = 1000;
 
         try {
-
-            $totalComputers = Computer::count();
-
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
                 $startOffset = (int)$request->get('start');
@@ -374,6 +371,7 @@ class ReportsController extends Controller
             }
 
 
+            $totalComputers = Computer::count();
             $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
 
 
@@ -524,23 +522,20 @@ class ReportsController extends Controller
      */
     public function getSoftwaresList(Request $request) 
     {
-        try {
+        $startOffset = 0;
+        $orderBy = 'name';
+        $limitOffset = 1000;
 
+        try {
             // Ограничения выборки и сортировка
             if ($request->filled('start')) {
-                $startOffset = $request->get('start');
+                $startOffset = (int)$request->get('start');
                 $orderBy = 'id';
-            } else {
-                $startOffset = 0;
-                $orderBy = 'name';
             }
 
             if ($request->filled('limit')) {
-                $limitOffset = $request->get('limit');
+                $limitOffset = (int)$request->get('limit');
                 $orderBy = 'id';
-            } else {
-                $limitOffset = 10000;
-                $orderBy = 'name';
             }
 
             if ($request->filled('order')) {
