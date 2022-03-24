@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.0.2"
+        "version": "0.9.2"
     },
     "paths": {
         "/api/register": {
@@ -139,7 +139,7 @@
                     {
                         "name": "name",
                         "in": "query",
-                        "description": "Имя компьютера",
+                        "description": "Имя компьютера (можно частично)",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -148,7 +148,34 @@
                     {
                         "name": "computertargetid",
                         "in": "query",
-                        "description": "GUID компьютера",
+                        "description": "GUID компьютера (точное соответствие)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Начало диапазона по ИД (по умолчанию 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Ограничение диапазона по ИД (по умолчанию 10 000)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -801,6 +828,307 @@
                 ]
             }
         },
+        "/api/v1/downloads/classes-json": {
+            "get": {
+                "tags": [
+                    "json-files"
+                ],
+                "description": "Возвращает json-файл с описанием классов",
+                "operationId": "87f3eb4820dc07bbe73307940d04f9ce",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает json-файл с описанием классов"
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/downloads/properties-json": {
+            "get": {
+                "tags": [
+                    "json-files"
+                ],
+                "description": "Возвращает json-файл с описанием свойств классов",
+                "operationId": "35494dc93e46832bcdc112f7dcac6105",
+                "responses": {
+                    "200": {
+                        "description": "Возвращает json-файл с описанием свойств классов"
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/reports/computers/properties/{property}": {
+            "get": {
+                "tags": [
+                    "reports"
+                ],
+                "description": "Выборка",
+                "operationId": "b68d6df529702ced1ffc312597dec194",
+                "parameters": [
+                    {
+                        "name": "property",
+                        "in": "path",
+                        "description": "ИД свойства",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Начало диапазона по ИД (по умолчанию 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Ограничение диапазона по ИД (по умолчанию 10 000)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список компьютеров",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ComputersProperty"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            }
+        },
+        "/api/v1/reports/computers/last_updated": {
+            "get": {
+                "tags": [
+                    "reports"
+                ],
+                "description": "Получение количества инвентаризированных компьютеров с группировкой по дням",
+                "operationId": "f184b9e91dce313679922f8a4fc0fb77",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Ограничение диапазона дней (по умолчанию 7)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Сортировка дат (по умолчанию ASC)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список компьютеров",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ComputersInventoryByDate"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            }
+        },
+        "/api/v1/reports/computers/list": {
+            "get": {
+                "tags": [
+                    "reports"
+                ],
+                "description": "Получение списка компьютеров для статистической таблицы",
+                "operationId": "0adb2d34c6c05de516ccbb2a103e6bc6",
+                "parameters": [
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Начало диапазона по ИД (по умолчанию 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Ограничение диапазона по ИД (по умолчанию 10 000)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список компьютеров",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ComputersList"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            }
+        },
+        "/api/v1/reports/softwares/list": {
+            "get": {
+                "tags": [
+                    "reports"
+                ],
+                "description": "Получение списка установленных программ",
+                "operationId": "1e088ab45dbdd4dceb00e227506f369e",
+                "parameters": [
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Начало диапазона по ИД (по умолчанию 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Ограничение диапазона по ИД (по умолчанию 10 000)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Варианты сортировка: id, name (по умолчанию, если задан диапазон то по id, если нет то по name)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Возвращает список программного обеспечения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SoftwaresList"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Ответ если что-то пошло не так",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            }
+        },
         "/api/profile": {
             "get": {
                 "tags": [
@@ -1146,6 +1474,128 @@
                 },
                 "type": "object"
             },
+            "ComputersProperty": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "computer_id": {
+                            "description": "ИД компьютера",
+                            "type": "string"
+                        },
+                        "value": {
+                            "description": "Значение",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "ComputersInventoryByDate": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "date": {
+                            "description": "Дата",
+                            "type": "string"
+                        },
+                        "total": {
+                            "description": "Количество компьютеров",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "ComputersList": {
+                "properties": {
+                    "draw": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "recordsTotal": {
+                        "description": "Всего записей",
+                        "type": "string"
+                    },
+                    "recordsFiltered": {
+                        "description": "Выбрано записей",
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "NameWithLink": {
+                                    "description": "Имя компьютера в виде ссылки",
+                                    "type": "string"
+                                },
+                                "InventoryDate": {
+                                    "description": "Дата последней инвентаризации",
+                                    "type": "string"
+                                },
+                                "OperatingSystem": {
+                                    "description": "Операционная система",
+                                    "type": "string"
+                                },
+                                "Processor": {
+                                    "description": "Процессор",
+                                    "type": "string"
+                                },
+                                "TotalMemory": {
+                                    "description": "Оперативная память",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SoftwaresList": {
+                "properties": {
+                    "draw": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "recordsTotal": {
+                        "description": "Всего записей",
+                        "type": "string"
+                    },
+                    "recordsFiltered": {
+                        "description": "Выбрано записей",
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "Name": {
+                                    "description": "Наименование ПО",
+                                    "type": "string"
+                                },
+                                "Version": {
+                                    "description": "Версия ПО",
+                                    "type": "string"
+                                },
+                                "Vendor": {
+                                    "description": "Производитель",
+                                    "type": "string"
+                                },
+                                "InstallDate": {
+                                    "description": "Дата установки",
+                                    "type": "string"
+                                },
+                                "IdentifyingNumber": {
+                                    "description": "Идентификатор",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "Computer": {
                 "properties": {
                     "computertargetid": {
@@ -1231,6 +1681,36 @@
                     },
                     "description": {
                         "description": "Описание роли",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Software": {
+                "properties": {
+                    "computer_id": {
+                        "description": "ИД компьютера",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Наименование ПО",
+                        "type": "string"
+                    },
+                    "version": {
+                        "description": "Версия ПО",
+                        "type": "string"
+                    },
+                    "vendor": {
+                        "description": "Производитель ПО",
+                        "type": "string"
+                    },
+                    "install_date": {
+                        "description": "Дата установки",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "identifying_number": {
+                        "description": "Уникальный идентификатор",
                         "type": "string"
                     }
                 },
