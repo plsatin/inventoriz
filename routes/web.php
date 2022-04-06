@@ -21,13 +21,13 @@
 $router->get('/',  ['uses' => 'HomeController@index']);
 $router->get('/tree',  ['uses' => 'HomeController@showComputerTree']);
 $router->get('/softwares',  ['uses' => 'HomeController@showSoftwaresList']);
-
-
-
+$router->get('/computers',  ['uses' => 'HomeController@showComputersList']);
 
 
 /** Информация о маршрутах */
 $router->get('/routes', ['uses' => 'HomeController@getApiRoutes']);
+
+
 
 
 
@@ -41,7 +41,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('profile', 'UserController@profile');
     $router->get('users/{id}', 'UserController@singleUser');
     $router->get('users', 'UserController@allUsers');
-
 
 
     /** Информация о версии API */
@@ -100,9 +99,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('v1/reports/computers/properties/{property}', ['uses' => 'ReportsController@getComputersProperty']);
     $router->get('v1/reports/computers/last_updated', ['uses' => 'ReportsController@getComputersUpdatedAt']);
     $router->get('v1/reports/computers/list', ['uses' => 'ReportsController@getComputersList']);
-
     $router->get('v1/reports/softwares/list', ['uses' => 'ReportsController@getSoftwaresList']);
 
+    /** Создание временной таблицы [tmp_softwares] */
     $router->get('v1/reports/softwares/table', ['uses' => 'SoftwareController@createSoftwaresTable']);
 
     

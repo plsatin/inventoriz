@@ -9,20 +9,6 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.jqueryui.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.jqueryui.min.css"/>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.jqueryui.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.jqueryui.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 
 
 <script>
@@ -38,7 +24,7 @@
 
 
             main_container_html = '' +
-                '<div class="row">' +
+            '<div class="row">' +
                     '<div class="col-xs-24">' +
                         '<section class="section">' +
                             '<header class="section-header">' +
@@ -49,15 +35,14 @@
                             '<div class="row">' +
                                 '<div class="col-md-24">' +
                                     '<div class="table-responsive">' +
-                                        '<table class="table" id="tableSoftwares">' +
+                                        '<table class="table" id="tableComputers">' +
                                             '<thead>' +
                                             '<tr>' +
-                                                '<th>Компьютер</th>' +
-                                                '<th>Наименование</th>' +
-                                                '<th>Версия</th>' +
-                                                '<th>Производитель</th>' +
-                                                '<th>Дата установки</th>' +
-                                                '<th>Индентификатор</th>' +
+                                                '<th>Имя</th>' +
+                                                '<th>Последний опрос</th>' +
+                                                '<th>Операционная система</th>' +
+                                                '<th>Процессор</th>' +
+                                                '<th>Оперативная память</th>' +
                                             '</tr>' +
                                             '</thead>' +
                                             '<tbody>' +
@@ -73,24 +58,11 @@
             $('#main-container').html(main_container_html);
 
 
-            $('#tableSoftwares').DataTable( {
-                dom: 'Bfrtlip',
-                buttons: [
-                    {
-                        extend: 'pdfHtml5',
-                        orientation: 'landscape',
-                        pageSize: 'A4',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    'excel',
-                    'colvis'
-                ],
+            $('#tableComputers').DataTable( {
                 processing: true,
                 serverSide: true,
                 'ajax': {
-                    'url': '/api/v1/reports/softwares/list',
+                    'url': '/api/v1/reports/computers/list',
                     'dataType': 'json',
                     'type': 'GET',
                     'beforeSend': function (xhr) {
@@ -100,12 +72,11 @@
                     },
                 },
                 'columns': [
-                    { 'width': '18%' },
-                    { 'width': '25%' },
-                    { 'width': '12%', 'className': 'dt-body-right' },
-                    { 'width': '16%' },
-                    { 'width': '12%', 'className': 'dt-body-right' },
-                    { 'width': '17%' }
+                    { 'width': '20%' },
+                    { 'width': '15%' },
+                    { 'width': '28%' },
+                    { 'width': '27%' },
+                    { 'width': '10%', 'className': 'dt-body-right' }
                 ],
                 language: {
                     url: '/assets/js/datatables/ru.json'

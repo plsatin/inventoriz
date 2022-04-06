@@ -133,6 +133,8 @@ class HomeController extends Controller
 
     }
 
+
+
     /**
      * Список программного обеспечения
      *
@@ -150,7 +152,26 @@ class HomeController extends Controller
         }
 
     }
+    
 
+
+    /**
+     * Список компьютеров
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showComputersList(Request $request)
+    {
+        try {
+       
+            $page_title = 'Список компьютеров';
+            return view('computers.index')->with('page_title', $page_title);
+        } catch (Exception $e) {
+            $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
+            return response()->json($responseObject);
+        }
+
+    }
 
 
 

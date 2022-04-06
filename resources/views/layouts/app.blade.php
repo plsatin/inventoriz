@@ -35,11 +35,14 @@
 
 
 
-        <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" href="{{ url('/assets/css/jquery.dataTables.min.css') }}" />
 
         <script type="text/javascript" src="//www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="{{ url('/assets/js/datatables/jquery.dataTables.min.js') }}"></script>
+    
         
+
+ 
     </head>
     <body>
 

@@ -12,7 +12,7 @@ use App\Models\ComputerProperties;
 
 use DB;
 use Exception;
-
+use DataTables;
 
 class ReportsController extends Controller
 {
@@ -47,14 +47,11 @@ class ReportsController extends Controller
      *          ),
      *      ),
      * )
-     */
-
-
-
-
-
-
-    /**
+     *
+     * 
+     * 
+     * 
+     * 
      * @OA\Get(
      *     path="/api/v1/reports/computers/properties/{property}",
      *     description="Выборка",
@@ -154,12 +151,9 @@ class ReportsController extends Controller
      *          ),
      *      ),
      * )
-     */
-
-
-
-
-    /**
+     *
+     * 
+     * 
      * @OA\Get(
      *     path="/api/v1/reports/computers/last_updated",
      *     description="Получение количества инвентаризированных компьютеров с группировкой по дням",
@@ -296,14 +290,10 @@ class ReportsController extends Controller
      *          ),
      *      ),
      * )
-     */
-
-
-
-
-
-
-    /**
+     *
+     * 
+     * 
+     * 
      * @OA\Get(
      *     path="/api/v1/reports/computers/list",
      *     description="Получение списка компьютеров для статистической таблицы",
@@ -350,31 +340,30 @@ class ReportsController extends Controller
      */
     public function getComputersList(Request $request) 
     {
-        $startOffset = 0;
-        $orderBy = 'name';
-        $limitOffset = 1000;
+        // $startOffset = 0;
+        // $orderBy = 'name';
+        // $limitOffset = 1000;
 
         try {
+        //     // Ограничения выборки и сортировка
+        //     if ($request->filled('start')) {
+        //         $startOffset = (int)$request->get('start');
+        //         $orderBy = 'id';
+        //     }
+
+        //     if ($request->filled('limit')) {
+        //         $limitOffset = (int)$request->get('limit');
+        //         $orderBy = 'id';
+        //     }
+
+        //     if ($request->filled('order')) {
+        //         $orderBy = $request->get('order');
+        //     }
+
 
             $totalComputers = Computer::count();
-
-            // Ограничения выборки и сортировка
-            if ($request->filled('start')) {
-                $startOffset = (int)$request->get('start');
-                $orderBy = 'id';
-            }
-
-            if ($request->filled('limit')) {
-                $limitOffset = (int)$request->get('limit');
-                $orderBy = 'id';
-            }
-
-            if ($request->filled('order')) {
-                $orderBy = $request->get('order');
-            }
-
-
-            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
+            // $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy($orderBy)->get();
+            $computers = Computer::query()->get();
 
 
             $response = [];
@@ -394,11 +383,11 @@ class ReportsController extends Controller
     
 
                 $arrComputer = [
-                    '<a href="/tree?computer=' . $computer->name . '">' . $computer->name . '</a>',
-                    $computer->last_inventory_end,
-                    isset($propertyOS[0]->value) ? $propertyOS[0]->value : '',
-                    isset($propertyCPU[0]->value) ? $propertyCPU[0]->value : '',
-                    isset($propertyRAM[0]->value) ? $propertyRAM[0]->value : ''
+                    '<a href="/tree?computer=' . $computerR->name . '">' . $computerR->name . '</a>',
+                    (isset($computerR->last_inventory_end)) ? $computerR->last_inventory_end : '',
+                    (isset($propertyOS[0]->value)) ? $propertyOS[0]->value : '',
+                    (isset($propertyCPU[0]->value)) ? $propertyCPU[0]->value : '',
+                    (isset($propertyRAM[0]->value)) ? $propertyRAM[0]->value : ''
                 ];
 
                 array_push($data, $arrComputer);
@@ -406,13 +395,18 @@ class ReportsController extends Controller
             }
 
 
-            $response = ['draw' => 1,
-                'recordsTotal' =>  $totalComputers,
-                'recordsFiltered' => $countComputers,
-                'data' => $data
-            ];
+            // $response = ['draw' => 1,
+            //     'recordsTotal' =>  $totalComputers,
+            //     'recordsFiltered' => $countComputers,
+            //     'data' => $data
+            // ];
+            // return response()->json($response);
 
-            return response()->json($response);
+            
+            $response = Datatables::of($data)->rawColumns([0])->toJson();
+            return $response;
+
+
         } catch (Exception $e) {
             $responseObject = array('Response' => 'Error', 'data' => array('Code' => $e->getCode(), 'Message' => $e->getMessage()));
             return response()->json($responseObject);
@@ -474,10 +468,10 @@ class ReportsController extends Controller
      *          ),
      *      ),
      * )
-     */
-
-
-    /**
+     *
+     * 
+     * 
+     * 
      * @OA\Get(
      *     path="/api/v1/reports/softwares/list",
      *     description="Получение списка установленных программ",
@@ -524,32 +518,30 @@ class ReportsController extends Controller
      */
     public function getSoftwaresList(Request $request) 
     {
+        // $startOffset = 0;
+        // $orderBy = 'name';
+        // $limitOffset = 10000;
+
         try {
+        //     // Ограничения выборки и сортировка
+        //     if ($request->filled('start')) {
+        //         $startOffset = (int)$request->get('start');
+        //         $orderBy = 'id';
+        //     } 
 
-            // Ограничения выборки и сортировка
-            if ($request->filled('start')) {
-                $startOffset = $request->get('start');
-                $orderBy = 'id';
-            } else {
-                $startOffset = 0;
-                $orderBy = 'name';
-            }
+        //     if ($request->filled('limit')) {
+        //         $limitOffset = (int)$request->get('limit');
+        //         $orderBy = 'id';
+        //     } 
 
-            if ($request->filled('limit')) {
-                $limitOffset = $request->get('limit');
-                $orderBy = 'id';
-            } else {
-                $limitOffset = 10000;
-                $orderBy = 'name';
-            }
-
-            if ($request->filled('order')) {
-                $orderBy = $request->get('order');
-            }
+        //     if ($request->filled('order')) {
+        //         $orderBy = $request->get('order');
+        //     }
 
 
             $totalComputers = Computer::count();
-            $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
+            // $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
+            $computers = Computer::query()->get();
 
             
             $response = [];
@@ -582,7 +574,8 @@ class ReportsController extends Controller
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
                     if ($Name[$i]->value != '') {
-                        $arrSoftwares = [$computerR->name,
+                        $arrSoftwares = [
+                            $computerR->name,
                             (isset($Name[$i]->value)) ? $Name[$i]->value : '',
                             (isset($Version[$i]->value)) ? $Version[$i]->value : '',
                             (isset($Vendor[$i]->value)) ? $Vendor[$i]->value : '',
@@ -606,13 +599,17 @@ class ReportsController extends Controller
             }
 
 
-            $response = ['draw' => 1,
-                'recordsTotal' =>  $totalSoft,
-                'recordsFiltered' => $countComputers,
-                'data' => $data
-            ];
+            // $response = ['draw' => 1,
+            //     'recordsTotal' =>  $totalSoft,
+            //     'recordsFiltered' => $countComputers,
+            //     'data' => $data
+            // ];
 
-            return response()->json($response);
+            // dd($data);
+
+            $response = Datatables::of($data)->toJson();
+            return $response;
+
         } catch (Exception $e) {
 
             Log::info('Exception: ', ['Code' => $e->getCode(), 'Message' => $e->getMessage()]);

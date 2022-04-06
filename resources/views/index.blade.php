@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 
+
 <div class="container" id="main-container"></div>
 
 
@@ -12,7 +13,7 @@
 
 <script>
 
-    $.ajaxSetup({ async: false });
+    // $.ajaxSetup({ async: false });
 
     var dataManufacturer = [];
     var dataOS = [];
@@ -120,6 +121,8 @@
 
 
             $('#tableComputers').DataTable( {
+                processing: true,
+                // serverSide: true,
                 'ajax': {
                     'url': '/api/v1/reports/computers/list',
                     'dataType': 'json',
@@ -138,7 +141,7 @@
                     { 'width': '10%', 'className': 'dt-body-right' }
                 ],
                 language: {
-                    url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/ru.json'
+                    url: '/assets/js/datatables/ru.json'
                 }
             });
 

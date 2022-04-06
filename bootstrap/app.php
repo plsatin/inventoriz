@@ -65,6 +65,10 @@ $app->singleton(
 
 $app->configure('app');
 
+
+class_alias('Yajra\DataTables\DataTables', 'Datatables');
+$app->configure('datatables');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -110,6 +114,9 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 $app->register(\SwaggerLume\ServiceProvider::class);
+
+$app->register(Yajra\DataTables\DataTablesServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------

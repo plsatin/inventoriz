@@ -18,6 +18,50 @@
 
 
 
+## Apace2 config
+
+```conf
+Listen 8400
+
+
+<VirtualHost *:8400>
+    DocumentRoot "/var/www/html/inventory/public"
+    ServerName itdesk.rezhcable.ru
+
+    <Directory "/var/www/html/inventory/public">
+        # Ignore the .htaccess file in this directory
+        AllowOverride None
+
+        # Make pretty URLs
+        <IfModule mod_rewrite.c>
+            <IfModule mod_negotiation.c>
+                Options -MultiViews -Indexes
+            </IfModule>
+
+            RewriteEngine On
+
+
+            RewriteCond %{HTTP:Authorization} ^(.*)
+            RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+            # Redirect Trailing Slashes...
+            RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+            # Handle Front Controller...
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^ index.php [L]
+
+        </IfModule>
+    </Directory>
+    ErrorLog /var/log/apache2/inventory_api_error.log
+    CustomLog /var/log/apache2/inventory_api_access.log combined
+</VirtualHost>
+
+```
+
+
+
+
 
 
 ## License
