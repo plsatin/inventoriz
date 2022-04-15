@@ -118,23 +118,24 @@ class SoftwareController extends Controller
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
 
+                    if ($Name[$i]->value) {
+                        if ($Name[$i]->value != '') {
 
-                    if ($Name[$i]->value && $Name[$i]->value != '') {
+                            $dataToTable = array(
+                                'computer_id' => $computerR->id,
+                                'name' => $Name[$i]->value,
+                                'version' => $Version[$i]->value,
+                                'vendor' => $Vendor[$i]->value,
+                                'install_date' => $InstallDate[$i]->value,
+                                'identifying_number' => $IdentifyingNumber[$i]->value
+                            );
+                
+                            DB::table('tmp_softwares')->insert($dataToTable);        
 
-                        $dataToTable = array(
-                            'computer_id' => $computerR->id,
-                            'name' => $Name[$i]->value,
-                            'version' => $Version[$i]->value,
-                            'vendor' => $Vendor[$i]->value,
-                            'install_date' => $InstallDate[$i]->value,
-                            'identifying_number' => $IdentifyingNumber[$i]->value
-                        );
-            
-                        DB::table('tmp_softwares')->insert($dataToTable);        
+                            // $countSoft ++;
+                            $totalSoft ++;
 
-                        // $countSoft ++;
-                        $totalSoft ++;
-
+                        }
                     }
                 }
 
