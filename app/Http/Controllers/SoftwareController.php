@@ -117,7 +117,9 @@ class SoftwareController extends Controller
 
                 for ($i = 0; $i < $computerSoftCount; $i++) {
 
-                    if ($Name[$i]->value != '') {
+
+
+                    if ($Name[$i]->value && $Name[$i]->value != '') {
 
                         $dataToTable = array(
                             'computer_id' => $computerR->id,
