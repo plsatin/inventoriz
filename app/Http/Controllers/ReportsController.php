@@ -594,7 +594,7 @@ class ReportsController extends Controller
             // $data = DB::select( DB::raw("SELECT * FROM some_table WHERE some_col = :somevariable" ), array(
             //         'somevariable' => $someVariable,
             //     ));
-            $data = DB::select( DB::raw("SELECT c.name AS name, t.version, t.vendor, t.install_date, t.identifying_number FROM tmp_softwares AS t JOIN computers ON (tmp_softwares.id = computers.id) AS c" ));
+            $data = DB::select( DB::raw("SELECT c.name AS name, t.version, t.vendor, t.install_date, t.identifying_number FROM tmp_softwares AS t JOIN computers AS c ON (tmp_softwares.id = computers.id)" ));
 
             $response = Datatables::of($data)->toJson();
             return $response;
