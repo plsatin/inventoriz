@@ -36,7 +36,30 @@ class SoftwareController extends Controller
 
 
 
-
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/softwares/table",
+     *     description="Создание временной таблицы со списком программного обеспечения",
+     *     tags={"reports"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Возвращает ответ об успешном создании таблицы с указанием занятого времени и общего количества записей",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *               @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="Ответ если что-то пошло не так",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/Response"),
+     *          ),
+     *     ),
+     *     security={{  }}
+     * )
+     */
     public function createSoftwaresTable(Request $request)
     {
         try {
