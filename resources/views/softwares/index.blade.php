@@ -100,12 +100,12 @@
                     },
                 },
                 'columns': [
-                    { 'width': '18%' },
-                    { 'width': '25%' },
-                    { 'width': '12%', 'className': 'dt-body-right' },
-                    { 'width': '16%' },
-                    { 'width': '12%', 'className': 'dt-body-right' },
-                    { 'width': '17%' }
+                    { data: 'computer', 'width': '18%' },
+                    { data: 'name', 'width': '25%' },
+                    { data: 'version', 'width': '12%', 'className': 'dt-body-right' },
+                    { data: 'vendor', 'width': '16%' },
+                    { data: 'install_date', 'width': '12%', 'className': 'dt-body-right' },
+                    { data: 'identifying_number', 'width': '17%' }
                 ],
                 language: {
                     url: '/assets/js/datatables/ru.json'
