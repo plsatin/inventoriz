@@ -518,94 +518,83 @@ class ReportsController extends Controller
      */
     public function getSoftwaresList(Request $request) 
     {
-        // $startOffset = 0;
-        // $orderBy = 'name';
-        // $limitOffset = 10000;
-
         try {
-        //     // Ограничения выборки и сортировка
-        //     if ($request->filled('start')) {
-        //         $startOffset = (int)$request->get('start');
-        //         $orderBy = 'id';
-        //     } 
 
-        //     if ($request->filled('limit')) {
-        //         $limitOffset = (int)$request->get('limit');
-        //         $orderBy = 'id';
-        //     } 
-
-        //     if ($request->filled('order')) {
-        //         $orderBy = $request->get('order');
-        //     }
-
-
-            $totalComputers = Computer::count();
-            // $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
-            $computers = Computer::query()->get();
+            // $totalComputers = Computer::count();
+            // // $computers = Computer::query()->skip($startOffset)->take($limitOffset)->orderBy('id')->get();
+            // $computers = Computer::query()->get();
 
             
-            $response = [];
-            $data = [];
-            $countComputers = 0;
-            $totalSoft = 0;
+            // $response = [];
+            // $data = [];
+            // $countComputers = 0;
+            // $totalSoft = 0;
 
-            $wmiproperty901 = WmiProperty::query()->findOrFail(901);
-            $wmiproperty902 = WmiProperty::query()->findOrFail(902);
-            $wmiproperty903 = WmiProperty::query()->findOrFail(903);
-            $wmiproperty904 = WmiProperty::query()->findOrFail(904);
-            $wmiproperty905 = WmiProperty::query()->findOrFail(905);
+            // $wmiproperty901 = WmiProperty::query()->findOrFail(901);
+            // $wmiproperty902 = WmiProperty::query()->findOrFail(902);
+            // $wmiproperty903 = WmiProperty::query()->findOrFail(903);
+            // $wmiproperty904 = WmiProperty::query()->findOrFail(904);
+            // $wmiproperty905 = WmiProperty::query()->findOrFail(905);
 
 
-            foreach ($computers as $computer) {
+            // foreach ($computers as $computer) {
 
-                $computerR = Computer::findOrFail($computer->id);
+            //     $computerR = Computer::findOrFail($computer->id);
 
-                $countSoft = 0;
+            //     $countSoft = 0;
 
-                $Name = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty901)->get();
-                $Version = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty902)->get();
-                $Vendor = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty903)->get();
-                $InstallDate = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty904)->get();
-                $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
+            //     $Name = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty901)->get();
+            //     $Version = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty902)->get();
+            //     $Vendor = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty903)->get();
+            //     $InstallDate = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty904)->get();
+            //     $IdentifyingNumber = ComputerProperties::query()->whereBelongsTo($computerR)->whereBelongsTo($wmiproperty905)->get();
                 
 
-                $computerSoftCount = count($Name);
+            //     $computerSoftCount = count($Name);
 
-                for ($i = 0; $i < $computerSoftCount; $i++) {
+            //     for ($i = 0; $i < $computerSoftCount; $i++) {
 
-                    if ($Name[$i]->value != '') {
-                        $arrSoftwares = [
-                            $computerR->name,
-                            (isset($Name[$i]->value)) ? $Name[$i]->value : '',
-                            (isset($Version[$i]->value)) ? $Version[$i]->value : '',
-                            (isset($Vendor[$i]->value)) ? $Vendor[$i]->value : '',
-                            (isset($InstallDate[$i]->value)) ? $InstallDate[$i]->value : '',
-                            (isset($IdentifyingNumber[$i]->value)) ? $IdentifyingNumber[$i]->value : ''
-                        ];
+            //         if ($Name[$i]->value != '') {
+            //             $arrSoftwares = [
+            //                 $computerR->name,
+            //                 (isset($Name[$i]->value)) ? $Name[$i]->value : '',
+            //                 (isset($Version[$i]->value)) ? $Version[$i]->value : '',
+            //                 (isset($Vendor[$i]->value)) ? $Vendor[$i]->value : '',
+            //                 (isset($InstallDate[$i]->value)) ? $InstallDate[$i]->value : '',
+            //                 (isset($IdentifyingNumber[$i]->value)) ? $IdentifyingNumber[$i]->value : ''
+            //             ];
 
-                        array_push($data, $arrSoftwares);
+            //             array_push($data, $arrSoftwares);
 
-                        // $countSoft ++;
-                        $totalSoft ++;
+            //             // $countSoft ++;
+            //             $totalSoft ++;
 
-                        // Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
+            //             // Log::info('Name: ', ['Name' => $Name[$i]->value, 'totalSoft' => $computerSoftCount]);
 
-                    }
-                }
-
-
-
-                $countComputers ++;
-            }
+            //         }
+            //     }
 
 
-            // $response = ['draw' => 1,
-            //     'recordsTotal' =>  $totalSoft,
-            //     'recordsFiltered' => $countComputers,
-            //     'data' => $data
-            // ];
 
-            // dd($data);
+            //     $countComputers ++;
+            // }
+
+
+            // // $response = ['draw' => 1,
+            // //     'recordsTotal' =>  $totalSoft,
+            // //     'recordsFiltered' => $countComputers,
+            // //     'data' => $data
+            // // ];
+
+            // // dd($data);
+
+
+
+            // Делаем сырую выборку из временной таблицы
+            // $data = DB::select( DB::raw("SELECT * FROM some_table WHERE some_col = :somevariable" ), array(
+            //         'somevariable' => $someVariable,
+            //     ));
+            $data = DB::select( DB::raw("SELECT c.name AS name, t.version, t.vendor, t.install_date, t.identifying_number FROM tmp_softwares AS t JOIN computers ON (tmp_softwares.id = computers.id) AS c" )));
 
             $response = Datatables::of($data)->toJson();
             return $response;
