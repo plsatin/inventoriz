@@ -87,6 +87,10 @@
                     'excel',
                     'colvis'
                 ],
+                lengthMenu: [
+                    [ 10, 25, 50, -1 ],
+                    [ '10 строк', '25 строк', '50 строк', 'Все' ]
+                ],
                 processing: true,
                 serverSide: true,
                 'ajax': {
