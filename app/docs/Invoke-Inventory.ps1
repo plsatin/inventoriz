@@ -5,9 +5,9 @@
  .DESCRIPTION
  
  .EXAMPLE
-.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.rezhcable.ru -apiUrl "http://192.168.0.235:8000" -Verbose
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc83.inventoriz.local -apiUrl "http://192.168.0.235:8400" -Verbose
 
-.\Invoke-Inventory.ps1 -ComputerName rzh01-pc88.rezhcable.ru -Verbose
+.\Invoke-Inventory.ps1 -ComputerName rzh01-pc88.inventoriz.local -Verbose
 
  .LINK
   https://webnote.satin-pl.com
@@ -26,11 +26,11 @@ Param(
     [Parameter(Mandatory = $true)]
     [string]$ComputerName,
     [Parameter(Mandatory = $false)]
-    [string]$apiUrl = "http://itdesk.rezhcable.ru:8400",
+    [string]$apiUrl = "http://itdesk.inventoriz.local:8400",
     [Parameter(Mandatory = $false)]
-    [string]$UserName = "tech@rezhcable.ru",
+    [string]$UserName = "tech@inventoriz.local",
     [Parameter(Mandatory = $false)]
-    [string]$UserPassword = "Z123456z"
+    [string]$UserPassword = "password"
 )
 
 

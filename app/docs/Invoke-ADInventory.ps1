@@ -5,7 +5,7 @@
  .DESCRIPTION
  
  .EXAMPLE
-.\Invoke-ADInventory.ps1 -SearchBase "OU=PC,OU=RZH,DC=rezhcable,DC=ru" -SearchOnlyNew $false
+.\Invoke-ADInventory.ps1 -SearchBase "OU=PC,DC=inventoriz,DC=local" -SearchOnlyNew $false
 
 
  .LINK
@@ -23,15 +23,15 @@
 #>
 Param(
     [Parameter(Mandatory = $false)]
-    [string]$SearchBase = "OU=PC,OU=RZH,DC=rezhcable,DC=ru",
+    [string]$SearchBase = "OU=PC,DC=inventoriz,DC=local",
     [Parameter(Mandatory = $false)]
     [bool]$SearchOnlyNew = $true,
     [Parameter(Mandatory = $false)]
-    [string]$apiUrl = "http://itdesk.rezhcable.ru:8400",
+    [string]$apiUrl = "http://itdesk.inventoriz.local:8400",
     [Parameter(Mandatory = $false)]
-    [string]$UserName = "tech@rezhcable.ru",
+    [string]$UserName = "tech@inventoriz.local",
     [Parameter(Mandatory = $false)]
-    [string]$UserPassword = "Z123456z"
+    [string]$UserPassword = "password"
 )
 
 
