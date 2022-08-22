@@ -152,7 +152,3 @@ foreach ($ComputerName in (Get-ADComputer -filter * -SearchBase $SearchBase | So
 $watch.Stop() ## Остановка таймера
 Write-Host "The script ran in: $($watch.Elapsed)" ## Время выполнения
 Write-Host "[OK] All computers are inventoried"
-
-
-
-
